@@ -13,7 +13,7 @@
     
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
-  1.0.0   K Hoang      31/03/2022 Initial porting and coding to support many more boards, using WiFi or Ethernet
+  1.0.0   K Hoang      11/05/2022 Initial porting and coding to support many more boards, using WiFi or Ethernet
  *****************************************************************************************************************************/
 
 #pragma once
@@ -94,5 +94,6 @@ const char FTP_LINE[]  = "========================================\n";
 #define FTP_LOGDEBUG3(x,y,z,w)  if(_FTP_LOGLEVEL_>3) { FTP_PRINT_MARK; FTP_PRINT(x); FTP_PRINT_SP; FTP_PRINT(y); FTP_PRINT_SP; FTP_PRINT(z); FTP_PRINT_SP; FTP_PRINTLN(w); }
 #define FTP_LOGDEBUG5(x,y,z,w, xx, yy)  if(_FTP_LOGLEVEL_>3) { FTP_PRINT_MARK; FTP_PRINT(x); FTP_PRINT_SP; FTP_PRINT(y); FTP_PRINT_SP; FTP_PRINT(z); FTP_PRINT_SP; FTP_PRINT(w); FTP_PRINT_SP; FTP_PRINT(xx); FTP_PRINT_SP; FTP_PRINTLN(yy);}
 
+/////////////////////////////////////////////
 
 #endif		// FTPCLIENT_GENERIC_DEBUG_H

@@ -13,7 +13,7 @@
     
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
-  1.0.0   K Hoang      31/03/2022 Initial porting and coding to support many more boards, using WiFi or Ethernet
+  1.0.0   K Hoang      11/05/2022 Initial porting and coding to support many more boards, using WiFi or Ethernet
  *****************************************************************************************************************************/
 
 #pragma once
@@ -22,6 +22,8 @@
 #define FTPCLIENT_GENERIC_IMPL_H
 
 #include "FTPClient_Generic.hpp"
+
+/////////////////////////////////////////////
 
 FTPClient_Generic::FTPClient_Generic(char* _serverAdress, uint16_t _port, char* _userName, char* _passWord, uint16_t _timeout)
 {
@@ -32,6 +34,8 @@ FTPClient_Generic::FTPClient_Generic(char* _serverAdress, uint16_t _port, char* 
   timeout 			= _timeout;
 }
 
+/////////////////////////////////////////////
+
 FTPClient_Generic::FTPClient_Generic(char* _serverAdress, char* _userName, char* _passWord, uint16_t _timeout)
 {
   userName 			= _userName;
@@ -41,10 +45,14 @@ FTPClient_Generic::FTPClient_Generic(char* _serverAdress, char* _userName, char*
   timeout 			= _timeout;
 }
 
+/////////////////////////////////////////////
+
 theFTPClient* FTPClient_Generic::GetDataClient()
 {
   return &dclient;
 }
+
+/////////////////////////////////////////////
 
 bool FTPClient_Generic::isConnected()
 {
@@ -55,6 +63,8 @@ bool FTPClient_Generic::isConnected()
 
   return _isConnected;
 }
+
+/////////////////////////////////////////////
 
 void FTPClient_Generic::GetLastModifiedTime(const char  * fileName, char* result)
 {
@@ -67,6 +77,8 @@ void FTPClient_Generic::GetLastModifiedTime(const char  * fileName, char* result
   client.println(fileName);
   GetFTPAnswer (result, 4);
 }
+
+/////////////////////////////////////////////
 
 void FTPClient_Generic::WriteClientBuffered(theFTPClient* cli, unsigned char * data, int dataLength)
 {
@@ -93,6 +105,8 @@ void FTPClient_Generic::WriteClientBuffered(theFTPClient* cli, unsigned char * d
     cli->write(clientBuf, clientCount);
   }
 }
+
+/////////////////////////////////////////////
 
 void FTPClient_Generic::GetFTPAnswer (char* result, int offsetStart)
 {
@@ -151,6 +165,8 @@ void FTPClient_Generic::GetFTPAnswer (char* result, int offsetStart)
   }
 }
 
+/////////////////////////////////////////////
+
 void FTPClient_Generic::WriteData (unsigned char * data, int dataLength)
 {
   FTP_LOGDEBUG(F("Writing"));
@@ -160,6 +176,8 @@ void FTPClient_Generic::WriteData (unsigned char * data, int dataLength)
 
   WriteClientBuffered(&dclient, &data[0], dataLength);
 }
+
+/////////////////////////////////////////////
 
 void FTPClient_Generic::CloseFile ()
 {
@@ -172,6 +190,8 @@ void FTPClient_Generic::CloseFile ()
   GetFTPAnswer();
 }
 
+/////////////////////////////////////////////
+
 void FTPClient_Generic::Write(const char * str)
 {
   FTP_LOGDEBUG(F("Write File"));
@@ -182,12 +202,16 @@ void FTPClient_Generic::Write(const char * str)
   GetDataClient()->print(str);
 }
 
+/////////////////////////////////////////////
+
 void FTPClient_Generic::CloseConnection()
 {
   client.println(COMMAND_QUIT);
   client.stop();
   FTP_LOGINFO(F("Connection closed"));
 }
+
+/////////////////////////////////////////////
 
 void FTPClient_Generic::OpenConnection()
 {
@@ -219,6 +243,8 @@ void FTPClient_Generic::OpenConnection()
   GetFTPAnswer();
 }
 
+/////////////////////////////////////////////
+
 void FTPClient_Generic::RenameFile(char* from, char* to)
 {
   FTP_LOGINFO("Send RNFR");
@@ -239,6 +265,8 @@ void FTPClient_Generic::RenameFile(char* from, char* to)
   GetFTPAnswer();
 }
 
+/////////////////////////////////////////////
+
 void FTPClient_Generic::NewFile (const char* fileName)
 {
   FTP_LOGINFO("Send STOR");
@@ -251,6 +279,8 @@ void FTPClient_Generic::NewFile (const char* fileName)
   
   GetFTPAnswer();
 }
+
+/////////////////////////////////////////////
 
 void FTPClient_Generic::InitFile(const char* type)
 {
@@ -296,6 +326,8 @@ void FTPClient_Generic::InitFile(const char* type)
   }
 }
 
+/////////////////////////////////////////////
+
 void FTPClient_Generic::AppendFile (char* fileName)
 {
   FTP_LOGINFO("Send APPE");
@@ -307,6 +339,8 @@ void FTPClient_Generic::AppendFile (char* fileName)
   client.println(fileName);
   GetFTPAnswer();
 }
+
+/////////////////////////////////////////////
 
 void FTPClient_Generic::ChangeWorkDir(const char * dir)
 {
@@ -320,6 +354,8 @@ void FTPClient_Generic::ChangeWorkDir(const char * dir)
   GetFTPAnswer();
 }
 
+/////////////////////////////////////////////
+
 void FTPClient_Generic::DeleteFile(const char * file)
 {
   FTP_LOGINFO("Send DELE");
@@ -331,6 +367,8 @@ void FTPClient_Generic::DeleteFile(const char * file)
   client.println(file);
   GetFTPAnswer();
 }
+
+/////////////////////////////////////////////
 
 void FTPClient_Generic::MakeDir(const char * dir)
 {
@@ -344,6 +382,8 @@ void FTPClient_Generic::MakeDir(const char * dir)
   
   GetFTPAnswer();
 }
+
+/////////////////////////////////////////////
 
 void FTPClient_Generic::ContentList(const char * dir, String * list)
 {
@@ -378,6 +418,8 @@ void FTPClient_Generic::ContentList(const char * dir, String * list)
     }
   }
 }
+
+/////////////////////////////////////////////
 
 void FTPClient_Generic::ContentListWithListCommand(const char * dir, String * list)
 {
@@ -417,8 +459,9 @@ void FTPClient_Generic::ContentListWithListCommand(const char * dir, String * li
       _b++;
     }
   }
-
 }
+
+/////////////////////////////////////////////
 
 void FTPClient_Generic::DownloadString(const char * filename, String &str)
 {
@@ -441,6 +484,8 @@ void FTPClient_Generic::DownloadString(const char * filename, String &str)
     str += GetDataClient()->readString();
   }
 }
+
+/////////////////////////////////////////////
 
 void FTPClient_Generic::DownloadFile(const char * filename, unsigned char * buf, size_t length, bool printUART )
 {
@@ -477,5 +522,7 @@ void FTPClient_Generic::DownloadFile(const char * filename, unsigned char * buf,
     }
   }
 }
+
+/////////////////////////////////////////////
 
 #endif    // FTPCLIENT_GENERIC_IMPL_H

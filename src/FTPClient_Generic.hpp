@@ -13,7 +13,7 @@
     
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
-  1.0.0   K Hoang      31/03/2022 Initial porting and coding to support many more boards, using WiFi or Ethernet
+  1.0.0   K Hoang      11/05/2022 Initial porting and coding to support many more boards, using WiFi or Ethernet
  *****************************************************************************************************************************/
 
 #pragma once
@@ -23,54 +23,61 @@
 
 #include "FTPClient_Generic_Debug.h"
 
-#define BUFFER_SIZE				1500
+/////////////////////////////////////////////
 
-#define TIMEOUT_MS				10000UL
+#define BUFFER_SIZE        1500
+
+#define TIMEOUT_MS        10000UL
+
+/////////////////////////////////////////////
 
 #if FTP_CLIENT_USING_ETHERNET
 
   #include <EthernetClient.h>
-  #define theFTPClient		EthernetClient
+  #define theFTPClient    EthernetClient
   
 #elif FTP_CLIENT_USING_WIFININA
 
   #include <WiFiClient_Generic.h>
-  #define theFTPClient		WiFiClient
+  #define theFTPClient    WiFiClient
   
 #else
 
   #include <WiFiClient.h>
-  #define theFTPClient		WiFiClient
+  #define theFTPClient    WiFiClient
   
 #endif
 
-#define FTP_PORT									21
+/////////////////////////////////////////////
 
-#define COMMAND_QUIT										F("QUIT")
-#define COMMAND_USER										F("USER ")
-#define COMMAND_PASS										F("PASS ")
+#define FTP_PORT                        21
 
-#define COMMAND_RENAME_FILE_FROM				F("RNFR ")
-#define COMMAND_RENAME_FILE_TO				  F("RNTO ")
+#define COMMAND_QUIT                    F("QUIT")
+#define COMMAND_USER                    F("USER ")
+#define COMMAND_PASS                    F("PASS ")
 
-#define COMMAND_FILE_LAST_MOD_TIME		  F("MDTM ")
+#define COMMAND_RENAME_FILE_FROM        F("RNFR ")
+#define COMMAND_RENAME_FILE_TO          F("RNTO ")
 
-#define COMMAND_APPEND_FILE   				  F("APPE ")
-#define COMMAND_DELETE_FILE   				  F("DELE ")
+#define COMMAND_FILE_LAST_MOD_TIME      F("MDTM ")
 
-#define COMMAND_CURRENT_WORKING_DIR 	  F("CWD ")
-#define COMMAND_MAKE_DIR 	              F("MKD ")
+#define COMMAND_APPEND_FILE             F("APPE ")
+#define COMMAND_DELETE_FILE             F("DELE ")
+
+#define COMMAND_CURRENT_WORKING_DIR     F("CWD ")
+#define COMMAND_MAKE_DIR                F("MKD ")
 #define COMMAND_LIST_DIR_STANDARD       F("MLSD")
 #define COMMAND_LIST_DIR                F("LIST")
 
-#define COMMAND_DOWNLOAD 		            F("RETR ")
-#define COMMAND_FILE_UPLOAD				      F("STOR ")
+#define COMMAND_DOWNLOAD                F("RETR ")
+#define COMMAND_FILE_UPLOAD             F("STOR ")
 
-#define COMMAND_PASSIVE_MODE			      F("PASV")
+#define COMMAND_PASSIVE_MODE            F("PASV")
 
 #define COMMAND_XFER_TYPE_ASCII         ("Type A")
 #define COMMAND_XFER_TYPE_BINARY        ("Type I")
 
+/////////////////////////////////////////////
 
 class FTPClient_Generic
 {
@@ -78,8 +85,8 @@ class FTPClient_Generic
   
     void WriteClientBuffered(theFTPClient* cli, unsigned char * data, int dataLength);
     
-    theFTPClient 	client;
-    theFTPClient 	dclient;
+    theFTPClient  client;
+    theFTPClient  dclient;
     
     char outBuf[128];
     unsigned char outCount;

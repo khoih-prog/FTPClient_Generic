@@ -13,7 +13,7 @@
     
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
-  1.0.0   K Hoang      31/03/2022 Initial porting and coding to support many more boards, using WiFi or Ethernet
+  1.0.0   K Hoang      11/05/2022 Initial porting and coding to support many more boards, using WiFi or Ethernet
  *****************************************************************************************************************************/
 
 #pragma once
@@ -30,7 +30,6 @@
 #define FTPCLIENT_GENERIC_VERSION_PATCH      0
 
 #define FTPCLIENT_GENERIC_VERSION_INT        1000000
-
 
 /////////////////////////////////////////////////////////
 
