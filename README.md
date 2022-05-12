@@ -14,7 +14,7 @@
 
 ## Table of Contents
 
-* [Why do we need this FTPClient_Generic library](#why-do-we-need-this-ethernetwebserver-library)
+* [Why do we need this FTPClient_Generic library](#why-do-we-need-this-FTPClient_Generic-library)
   * [Features](#features)
   * [Currently supported Boards using Ethernet](#currently-supported-boards-using-Ethernet)
   * [Currently supported Ethernet shields/modules](#currently-supported-ethernet-shieldsmodules)
@@ -286,12 +286,12 @@ This [**WiFiWebServer library**](https://github.com/khoih-prog/WiFiWebServer) cu
    - [`UIPEthernet library v2.0.11+`](https://github.com/UIPEthernet/UIPEthernet) for ENC28J60. [![GitHub release](https://img.shields.io/github/release/UIPEthernet/UIPEthernet.svg)](https://github.com/UIPEthernet/UIPEthernet/releases/latest)
    - [`NativeEthernet Library version stable111+`](https://github.com/vjmuzik/NativeEthernet) for Teensy 4.1 built-in Ethernet.
    - [`QNEthernet Library version v0.14.0+`](https://github.com/ssilverman/QNEthernet) for Teensy 4.1 built-in Ethernet.
-16. Depending on which WiFi you're using
-	-[`WiFiNINA_Generic library v1.8.14-3+`](https://github.com/khoih-prog/WiFiNINA_Generic) if using WiFiNINA. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiNINA_Generic.svg?)](https://www.ardu-badge.com/WiFiNINA_Generic).
-	-[`ESP_AT_Lib library v1.4.1+`](https://github.com/khoih-prog/ESP_AT_Lib) if using ESP8288/ESP32-AT shields. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/ESP_AT_Lib.svg?)](https://www.ardu-badge.com/ESP_AT_Lib).
-	-[`Modified WiFi101 Library v0.16.1+`](https://github.com/khoih-prog/WiFi101) to use SAMD MKR1000, etc. boards with WiFi101.
-	-[`WiFiEspAT library v1.3.2+`](https://github.com/jandrassy/WiFiEspAT) if using ESP8288/ESP32-AT shields. [![GitHub release](https://img.shields.io/github/release/jandrassy/WiFiEspAT.svg)](https://github.com/jandrassy/WiFiEspAT/releases/latest)
-	-[`WiFiMulti_Generic library v1.1.1+`](https://github.com/khoih-prog/WiFiMulti_Generic) to use WiFiMulti function. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiMulti_Generic.svg?)](https://www.ardu-badge.com/WiFiMulti_Generic). **New**
+16. Depending on which WiFi you're using: 
+   -[`WiFiNINA_Generic library v1.8.14-3+`](https://github.com/khoih-prog/WiFiNINA_Generic) if using WiFiNINA. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiNINA_Generic.svg?)](https://www.ardu-badge.com/WiFiNINA_Generic).
+   -[`ESP_AT_Lib library v1.4.1+`](https://github.com/khoih-prog/ESP_AT_Lib) if using ESP8288/ESP32-AT shields. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/ESP_AT_Lib.svg?)](https://www.ardu-badge.com/ESP_AT_Lib).
+   -[`Modified WiFi101 Library v0.16.1+`](https://github.com/khoih-prog/WiFi101) to use SAMD MKR1000, etc. boards with WiFi101.
+   -[`WiFiEspAT library v1.3.2+`](https://github.com/jandrassy/WiFiEspAT) if using ESP8288/ESP32-AT shields. [![GitHub release](https://img.shields.io/github/release/jandrassy/WiFiEspAT.svg)](https://github.com/jandrassy/WiFiEspAT/releases/latest)
+   -[`WiFiMulti_Generic library v1.1.1+`](https://github.com/khoih-prog/WiFiMulti_Generic) to use WiFiMulti function. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiMulti_Generic.svg?)](https://www.ardu-badge.com/WiFiMulti_Generic). **New**
 
 ---
 ---
@@ -1314,14 +1314,14 @@ ftp.DownloadFile(fileName, downloaded_file, fileSize, false);
 
 #### 1. File [FTPClient_DownloadFile.ino](examples/Ethernet/FTPClient_DownloadFile/FTPClient_DownloadFile.ino)
 
-https://github.com/khoih-prog/FTPClient_Generic/blob/a8ec9e3f8f0bb3385e4200c78edd4dd2448e59db/examples/AdvancedWebServer/AdvancedWebServer.ino#L44-L426
+https://github.com/khoih-prog/FTPClient_Generic/blob/a24dd81391fa3f645366b5e0943eaf457c7c26cb/examples/Ethernet/FTPClient_DownloadFile/FTPClient_DownloadFile.ino#L13-L343
 
 
 ---
 
 #### 2. File [defines.h](examples/Ethernet/FTPClient_DownloadFile/defines.h)
 
-https://github.com/khoih-prog/FTPClient_Generic/blob/a8ec9e3f8f0bb3385e4200c78edd4dd2448e59db/examples/AdvancedWebServer/defines.h#L10-L481
+https://github.com/khoih-prog/FTPClient_Generic/blob/a24dd81391fa3f645366b5e0943eaf457c7c26cb/examples/Ethernet/FTPClient_DownloadFile/defines.h#L12-L486
 
 ---
 ---
@@ -2422,6 +2422,7 @@ If you want to contribute to this project:
 
 ## Copyright
 
+Copyright 2019- Leonardo Bispo
 Copyright 2022- Khoi Hoang
 
 
