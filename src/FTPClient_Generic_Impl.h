@@ -27,22 +27,22 @@
 
 FTPClient_Generic::FTPClient_Generic(char* _serverAdress, uint16_t _port, char* _userName, char* _passWord, uint16_t _timeout)
 {
-  userName 			= _userName;
-  passWord 			= _passWord;
-  serverAdress 	= _serverAdress;
-  port 					= _port;
-  timeout 			= _timeout;
+  userName      = _userName;
+  passWord      = _passWord;
+  serverAdress  = _serverAdress;
+  port          = _port;
+  timeout       = _timeout;
 }
 
 /////////////////////////////////////////////
 
 FTPClient_Generic::FTPClient_Generic(char* _serverAdress, char* _userName, char* _passWord, uint16_t _timeout)
 {
-  userName 			= _userName;
-  passWord 			= _passWord;
-  serverAdress 	= _serverAdress;
-  port 					= FTP_PORT;
-  timeout 			= _timeout;
+  userName      = _userName;
+  passWord      = _passWord;
+  serverAdress  = _serverAdress;
+  port          = FTP_PORT;
+  timeout       = _timeout;
 }
 
 /////////////////////////////////////////////
@@ -114,7 +114,9 @@ void FTPClient_Generic::GetFTPAnswer (char* result, int offsetStart)
   outCount = 0;
 
   unsigned long _m = millis();
-  while (!client.available() && millis() < _m + timeout) delay(1);
+  
+  while (!client.available() && millis() < _m + timeout) 
+    delay(1);
 
   if ( !client.available())
   {
@@ -143,6 +145,7 @@ void FTPClient_Generic::GetFTPAnswer (char* result, int offsetStart)
   {
     _isConnected = false;
     isConnected();
+    
     return;
   }
   else
@@ -516,8 +519,8 @@ void FTPClient_Generic::DownloadFile(const char * filename, unsigned char * buf,
     {
       for (size_t _b = 0; _b < length; _b++ )
       {
-        dclient.readBytes(_buf, 1),
-                          Serial.print(_buf[0], HEX);
+        dclient.readBytes(_buf, 1);
+        FTP_LOGDEBUG0(_buf[0]);
       }
     }
   }
