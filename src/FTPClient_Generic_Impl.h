@@ -514,7 +514,6 @@ void FTPClient_Generic::DownloadFile(const char * filename, unsigned char * buf,
   {
     if ( !printUART )
       dclient.readBytes(buf, length);
-
     else
     {
       for (size_t _b = 0; _b < length; _b++ )
