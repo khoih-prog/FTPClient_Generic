@@ -1,0 +1,2 @@
+# FTPClient_Generic
+FTP Client for Generic boards such as AVR Mega, megaAVR, Portenta_H7, Teensy, SAM DUE, SAMD21, SAMD51, STM32F/L/H/G/WB/MP1, nRF52, RP2040-based (Nano-RP2040-Connect, RASPBERRY_PI_PICO, ESP32/ESP8266, etc.). FTP Client can use WiFi (ESP_WiFi, Portenta_H7 WiFi, WiFiNINA, WiFi101, U-Blox W101, W102, ESP8266/ESP32-AT), Ethernet W5100, W5100S, W5200, W5500, ENC28J60, Portenta_H7 Ethernet or Teensy 4.1 NativeEthernet/QNEthernet
