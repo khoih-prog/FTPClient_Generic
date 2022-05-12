@@ -172,7 +172,7 @@ This [**FTPClient_Generic** library](https://github.com/khoih-prog/FTPClient_Gen
 
 #### Currently Supported Boards using WiFi
 
-This [**WiFiWebServer library**](https://github.com/khoih-prog/WiFiWebServer) currently supports these following boards:
+This [**FTPClient_Generic library**](https://github.com/khoih-prog/FTPClient_Generic) currently supports these following boards:
 
  1. SAM DUE
 
@@ -1365,7 +1365,6 @@ Creating new file helloworld.txt
 [FTP] Send TYPE Type A
 [FTP] Send PASV
 [FTP] outBuf = 227 Entering Passive Mode (4043483328, port 55600)
-
 [FTP] _dataAddress:  192.168.2.241 , Data port:  55600
 [FTP] Data connection established
 [FTP] Send STOR
@@ -1374,7 +1373,6 @@ Creating new file helloworld.txt
 [FTP] Send TYPE Type A
 [FTP] Send PASV
 [FTP] outBuf = 227 Entering Passive Mode (4043483328, port 55600)
-
 [FTP] _dataAddress:  192.168.2.241 , Data port:  55600
 [FTP] Data connection established
 [FTP] Send RETR
@@ -1383,14 +1381,12 @@ Creating new file helloworld.txt
 150 18 bytes to download
 226-File successfully transferred
 226 1 ms, 18 kbytes/s
-
 [FTP] Result end
 timedRead timeout = 1000
 The file content is: Hi, I'm a new file
 [FTP] Send TYPE Type A
 [FTP] Send PASV
 [FTP] outBuf = 227 Entering Passive Mode (4043483328, port 55600)
-
 [FTP] _dataAddress:  192.168.2.241 , Data port:  55600
 [FTP] Data connection established
 [FTP] Send MLSD
