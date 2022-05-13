@@ -20,11 +20,6 @@
 #include <FTPClient_Generic.h>
 #include "octocat.h"
 
-#define WIFI_SSID       "HueNet1"
-#define WIFI_PASS       "jenniqqs"
-//#define WIFI_SSID      ""
-//#define WIFI_PASS      ""
-
 char ftp_server[] = "192.168.2.241";
 char ftp_user[]   = "teensy4x";
 char ftp_pass[]   = "ftp_test";

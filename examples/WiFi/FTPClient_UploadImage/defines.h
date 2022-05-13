@@ -383,9 +383,7 @@
 
 #include <WiFiWebServer.h>
 
-#define WIFI_SSID       "HueNet1"
-#define WIFI_PASS       "jenniqqs"
-//#define WIFI_SSID      ""
-//#define WIFI_PASS      ""
+#define WIFI_SSID      "YOUR_SSID"
+#define WIFI_PASS      "12345678"
 
 #endif    //defines_h
