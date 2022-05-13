@@ -16,8 +16,7 @@
 
 #include <FTPClient_Generic.h>
 
-char ftp_server[] = "192.168.2.109";
-//char ftp_server[] = "192.168.2.241";
+char ftp_server[] = "192.168.2.241";
 char ftp_user[]   = "teensy4x";
 char ftp_pass[]   = "ftp_test";
 
