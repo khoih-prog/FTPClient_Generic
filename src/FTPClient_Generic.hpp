@@ -9,11 +9,12 @@
     
   Built by Khoi Hoang https://github.com/khoih-prog/FTPClient_Generic
   
-  Version: 1.0.0
+  Version: 1.1.0
     
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
   1.0.0   K Hoang      11/05/2022 Initial porting and coding to support many more boards, using WiFi or Ethernet
+  1.1.0   K Hoang      13/05/2022 Add support to Teensy 4.1 using QNEthernet or NativeEthernet
  *****************************************************************************************************************************/
 
 #pragma once
@@ -31,7 +32,17 @@
 
 /////////////////////////////////////////////
 
-#if FTP_CLIENT_USING_ETHERNET
+#if FTP_CLIENT_USING_QNETHERNET
+
+  #include <QNEthernetClient.h>
+  #define theFTPClient    EthernetClient
+  
+#elif FTP_CLIENT_USING_NATIVE_ETHERNET
+
+  #include <NativeEthernetClient.h>
+  #define theFTPClient    EthernetClient  
+  
+#elif FTP_CLIENT_USING_ETHERNET
 
   #include <EthernetClient.h>
   #define theFTPClient    EthernetClient

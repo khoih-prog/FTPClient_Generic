@@ -83,6 +83,9 @@
     * [ 3. FTPClient_DownloadFile_RP2040_SPI1](examples/Ethernet/RP2040/FTPClient_DownloadFile_RP2040_SPI1)
     * [ 4. FTPClient_DownloadFile_STM32_LAN8742A](examples/Ethernet/STM32_LAN8742A/FTPClient_DownloadFile_STM32_LAN8742A)
     * [ 5. FTPClient_UploadImage_STM32_LAN8742A](examples/Ethernet/STM32_LAN8742A/FTPClient_UploadImage_STM32_LAN8742A)
+  * [QNEthernet Examples](#QNEthernet-examples)
+    * [ 1. FTPClient_DownloadFile](examples/QNEthernet/FTPClient_DownloadFile)
+    * [ 2. FTPClient_UploadImage](examples/QNEthernet/FTPClient_UploadImage) 
   * [WiFi Examples](#WiFi-examples)
     * [ 1. FTPClient_DownloadFile](examples/WiFi/FTPClient_DownloadFile)
     * [ 2. FTPClient_UploadImage](examples/WiFi/FTPClient_UploadImage)
@@ -163,8 +166,8 @@ This [**FTPClient_Generic** library](https://github.com/khoih-prog/FTPClient_Gen
 1. W5x00 using [`Ethernet_Generic`](https://github.com/khoih-prog/Ethernet_Generic) library
 2. W5x00 using [`Ethernet`](https://www.arduino.cc/en/Reference/Ethernet), [`EthernetLarge`](https://github.com/OPEnSLab-OSU/EthernetLarge), [`Ethernet2`](https://github.com/adafruit/Ethernet2) or [`Ethernet3`](https://github.com/sstaub/Ethernet3) library
 3. ENC28J60 using [`EthernetENC`](https://github.com/jandrassy/EthernetENC) or [`UIPEthernet`](https://github.com/UIPEthernet/UIPEthernet) library
-4. Teensy 4.1 built-in Ethernet using [`NativeEthernet`](https://github.com/vjmuzik/NativeEthernet) library
-5. Teensy 4.1 built-in Ethernet using [`QNEthernet`](https://github.com/ssilverman/QNEthernet) library
+4. Teensy 4.1 built-in Ethernet using [`NativeEthernet`](https://github.com/vjmuzik/NativeEthernet) library. **From v1.1.0**
+5. Teensy 4.1 built-in Ethernet using [`QNEthernet`](https://github.com/ssilverman/QNEthernet) library. **From v1.1.0**
 6. Portenta_H7 Ethernet using [`Portenta_Ethernet`](https://github.com/arduino/ArduinoCore-mbed/tree/master/libraries/Ethernet) library
 
 ---
@@ -283,11 +286,11 @@ This [**FTPClient_Generic library**](https://github.com/khoih-prog/FTPClient_Gen
 15. Depending on which Ethernet card you're using:
    - [`Ethernet_Generic library v2.3.0+`](https://github.com/khoih-prog/Ethernet_Generic) for W5100, W5200 and W5500/WIZ550io/WIZ850io/USR-ES1 with Wiznet W5500 chip.  [![GitHub release](https://img.shields.io/github/release/khoih-prog/Ethernet_Generic.svg)](https://github.com/khoih-prog/Ethernet_Generic/releases/latest)
    - [`EthernetENC library v2.0.2+`](https://github.com/jandrassy/EthernetENC) for ENC28J60. [![GitHub release](https://img.shields.io/github/release/jandrassy/EthernetENC.svg)](https://github.com/jandrassy/EthernetENC/releases/latest).
-   - [`UIPEthernet library v2.0.11+`](https://github.com/UIPEthernet/UIPEthernet) for ENC28J60. [![GitHub release](https://img.shields.io/github/release/UIPEthernet/UIPEthernet.svg)](https://github.com/UIPEthernet/UIPEthernet/releases/latest)
-   - [`NativeEthernet Library version stable111+`](https://github.com/vjmuzik/NativeEthernet) for Teensy 4.1 built-in Ethernet.
-   - [`QNEthernet Library version v0.14.0+`](https://github.com/ssilverman/QNEthernet) for Teensy 4.1 built-in Ethernet.
+   - [`UIPEthernet library v2.0.12+`](https://github.com/UIPEthernet/UIPEthernet) for ENC28J60. [![GitHub release](https://img.shields.io/github/release/UIPEthernet/UIPEthernet.svg)](https://github.com/UIPEthernet/UIPEthernet/releases/latest)
+   - [`NativeEthernet Library version stable111+`](https://github.com/vjmuzik/NativeEthernet) for Teensy 4.1 built-in Ethernet. **From v1.1.0**
+   - [`QNEthernet Library version v0.14.0+`](https://github.com/ssilverman/QNEthernet) for Teensy 4.1 built-in Ethernet. **From v1.1.0**
 16. Depending on which WiFi you're using: 
-   - [`WiFiNINA_Generic library v1.8.14-3+`](https://github.com/khoih-prog/WiFiNINA_Generic) if using WiFiNINA. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiNINA_Generic.svg?)](https://www.ardu-badge.com/WiFiNINA_Generic).
+   - [`WiFiNINA_Generic library v1.8.14-4+`](https://github.com/khoih-prog/WiFiNINA_Generic) if using WiFiNINA. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiNINA_Generic.svg?)](https://www.ardu-badge.com/WiFiNINA_Generic).
    - [`ESP_AT_Lib library v1.4.1+`](https://github.com/khoih-prog/ESP_AT_Lib) if using ESP8288/ESP32-AT shields. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/ESP_AT_Lib.svg?)](https://www.ardu-badge.com/ESP_AT_Lib).
    - [`Modified WiFi101 Library v0.16.1+`](https://github.com/khoih-prog/WiFi101) to use SAMD MKR1000, etc. boards with WiFi101.
    - [`WiFiEspAT library v1.3.2+`](https://github.com/jandrassy/WiFiEspAT) if using ESP8288/ESP32-AT shields. [![GitHub release](https://img.shields.io/github/release/jandrassy/WiFiEspAT.svg)](https://github.com/jandrassy/WiFiEspAT/releases/latest)
@@ -1296,6 +1299,11 @@ ftp.DownloadFile(fileName, downloaded_file, fileSize, false);
  4. [FTPClient_DownloadFile_STM32_LAN8742A](examples/Ethernet/STM32_LAN8742A/FTPClient_DownloadFile_STM32_LAN8742A)
  5. [FTPClient_UploadImage_STM32_LAN8742A](examples/Ethernet/STM32_LAN8742A/FTPClient_UploadImage_STM32_LAN8742A)
  
+#### QNEthernet Examples
+
+ 1. [FTPClient_DownloadFile](examples/QNEthernet/FTPClient_DownloadFile)
+ 2. [FTPClient_UploadImage](examples/QNEthernet/FTPClient_UploadImage)
+ 
 #### WiFi Examples
  
  1. [FTPClient_DownloadFile](examples/WiFi/FTPClient_DownloadFile)
@@ -1335,7 +1343,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on TEENSY 4.0 with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.0.0
+FTPCLIENT_GENERIC v1.1.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -1452,7 +1460,7 @@ The following is debug terminal output when running example [FTPClient_UploadIma
 
 ```
 Starting FTPClient_UploadImage on Nano RP2040 Connect with WiFiNINA using WiFiNINA_Generic Library
-FTPCLIENT_GENERIC v1.0.0
+FTPCLIENT_GENERIC v1.1.0
 Connecting WiFi
 IP address: 192.168.2.117
 [FTP] Connecting to:  192.168.2.241
@@ -1519,7 +1527,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on PORTENTA_H7_M7 with Ethernet using Portenta_Ethernet Library
-FTPCLIENT_GENERIC v1.0.0
+FTPCLIENT_GENERIC v1.1.0
 [EWS] ======== USE_PORTENTA_H7_ETHERNET ========
 Using mac index = 13
 Connected! IP address: 192.168.2.123
@@ -1618,7 +1626,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_UploadImage on MBED RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.0.0
+FTPCLIENT_GENERIC v1.1.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 19
@@ -1704,7 +1712,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on NUCLEO_L552ZE_Q with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.0.0
+FTPCLIENT_GENERIC v1.1.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -1820,7 +1828,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile_STM32_LAN8742A on NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
-FTPCLIENT_GENERIC v1.0.0
+FTPCLIENT_GENERIC v1.1.0
 EthernetWebServer_STM32 v1.5.0
 Connected! IP address: 192.168.2.124
 [FTP] Connecting to:  192.168.2.241
@@ -1919,7 +1927,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on ITSYBITSY_M4 with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.0.0
+FTPCLIENT_GENERIC v1.1.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 25
@@ -2034,7 +2042,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_UploadImage on NRF52840_FEATHER with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.0.0
+FTPCLIENT_GENERIC v1.1.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 25
@@ -2121,7 +2129,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on SAMD_NANO_33_IOT with WiFiNINA using WiFiNINA_Generic Library
-FTPCLIENT_GENERIC v1.0.0
+FTPCLIENT_GENERIC v1.1.0
 Connecting WiFi
 IP address: 192.168.2.118
 [FTP] Connecting to:  192.168.2.241
@@ -2221,7 +2229,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on ESP32S3_DEV with ESP WiFi using WiFi Library
-FTPCLIENT_GENERIC v1.0.0
+FTPCLIENT_GENERIC v1.1.0
 Connecting WiFi
 .........
 IP address: 192.168.2.115
@@ -2366,8 +2374,8 @@ Submit issues to: [FTPClient_Generic issues](https://github.com/khoih-prog/FTPCl
 10. Add support to [`EthernetENC`](https://github.com/jandrassy/EthernetENC)
 11. Add support to RP2040-based boards such as RASPBERRY_PI_PICO, using [**Arduino-mbed RP2040** core](https://github.com/arduino/ArduinoCore-mbed)
 12. Add support to RP2040-based boards such as RASPBERRY_PI_PICO, using [**Earle Philhower's arduino-pico** core](https://github.com/earlephilhower/arduino-pico)
-13. Add support to Teensy 4.1 built-in Ethernet using [`NativeEthernet`](https://github.com/vjmuzik/NativeEthernet) library
-14. Add support to Teensy 4.1 built-in Ethernet using [`QNEthernet`](https://github.com/ssilverman/QNEthernet) library
+13. Add support to Teensy 4.1 built-in Ethernet using [`NativeEthernet`](https://github.com/vjmuzik/NativeEthernet) library. **From v1.1.0**
+14. Add support to Teensy 4.1 built-in Ethernet using [`QNEthernet`](https://github.com/ssilverman/QNEthernet) library. **From v1.1.0**
 15. Add support to **Portenta_H7 boards**, using [**Arduino-mbed mbed_portenta** core](https://github.com/arduino/ArduinoCore-mbed).
 16. Add support to SAMD21/SAMD51 boards using [Fab_SAM_Arduino core](https://github.com/qbolsee/ArduinoCore-fab-sam)
 17. Use new [**Ethernet_Generic** library](https://github.com/khoih-prog/Ethernet_Generic) as default for W5x00.
