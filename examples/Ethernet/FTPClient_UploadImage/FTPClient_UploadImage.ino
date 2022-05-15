@@ -14,19 +14,25 @@
 
 #include "defines.h"
 
-//#include <WiFi.h>
-//#include <WiFiClient.h>
+// To use `true` with the following PASV mode asnswer from server
+// 227 Entering Passive Mode (192,168,2,112,157,218)
+// Using `false` with old style PASV answer, such as `FTP_Server_Teensy41` library
+#define USING_NEW_PASSIVE_MODE_ANSWER_TYPE      true
 
 #include <FTPClient_Generic.h>
 #include "octocat.h"
 
-char ftp_server[] = "192.168.2.241";
-char ftp_user[]   = "teensy4x";
+// Change according to your FTP server
+char ftp_server[] = "192.168.2.112";
+
+char ftp_user[]   = "ftp_test";
 char ftp_pass[]   = "ftp_test";
 
-// FTPClient_Generic(char* _serverAdress, char* _userName, char* _passWord, uint16_t _timeout = 10000, uint8_t _verbose = 1);
+// FTPClient_Generic(char* _serverAdress, char* _userName, char* _passWord, uint16_t _timeout = 10000);
 FTPClient_Generic ftp (ftp_server, ftp_user, ftp_pass, 60000);
 
+char dirName[]    = "/home/ftp_test";
+char newDirName[] = "/home/ftp_test/NewDir";
 
 void initEthernet()
 { 
@@ -261,14 +267,18 @@ void setup()
 
   ftp.OpenConnection();
 
-  // Get directory content
+  //Change directory
+  ftp.ChangeWorkDir(dirName);
+
+  // Get the file size
+  String       list[128];
+
+  // Get the directory content in order to allocate buffer
+  // my server response => type=file;modify=20190101000010;size=18; helloworld.txt
+
   ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
-  String list[128];
-
-  ftp.ChangeWorkDir("/");
-
-  ftp.ContentList("", list);
-  Serial.println("\nDirectory info: ");
+  
+  ftp.ContentListWithListCommand("", list);
 
   for (uint16_t i = 0; i < sizeof(list); i++)
   {
@@ -285,7 +295,7 @@ void setup()
 
   // Create the new file and send the image
   //ftp.ChangeWorkDir("myNewDir");
-  Serial.println("Writing octocat.jpg");
+  Serial.print("Writing octocat.jpg, size = "); Serial.println(sizeof(octocat_pic));
   
   ftp.InitFile(COMMAND_XFER_TYPE_BINARY);
   ftp.NewFile("octocat.jpg");
@@ -306,5 +316,4 @@ void setup()
 
 void loop()
 {
-
 }

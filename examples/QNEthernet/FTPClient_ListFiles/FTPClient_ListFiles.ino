@@ -1,17 +1,14 @@
 /******************************************************************************
-  FTPClient_UploadImage.ino
+  FTPClient_ListFiles.ino
 
   FTP Client for Generic boards using SD, FS, etc.
-  
-  Based on and modified from 
-  
+
+  Based on and modified from
+
   1) esp32_ftpclient Library         https://github.com/ldab/ESP32_FTPClient
-    
+
   Built by Khoi Hoang https://github.com/khoih-prog/FTPClient_Generic
 ******************************************************************************/
-
-// Note: Only NativeEthernet can upload large binary files, such as this `octocat.jpg` => (size = 51695)
-// QNEthernet still has some issue, creating very small file (size = 5840). Don't use to upload large binary files
 
 #include "Arduino.h"
 
@@ -23,7 +20,6 @@
 #define USING_NEW_PASSIVE_MODE_ANSWER_TYPE      true
 
 #include <FTPClient_Generic.h>
-#include "octocat.h"
 
 // Change according to your FTP server
 char ftp_server[] = "192.168.2.112";
@@ -113,15 +109,11 @@ void setup()
 
   delay(500);
 
-  Serial.print(F("\nStarting FTPClient_UploadImage on ")); Serial.print(BOARD_NAME);
+  Serial.print(F("\nStarting FTPClient_ListFiles on ")); Serial.print(BOARD_NAME);
   Serial.print(F(" with ")); Serial.println(SHIELD_TYPE);
   Serial.println(FTPCLIENT_GENERIC_VERSION);
 
   initEthernet();
-
-#if (ESP32)
-  Serial.print("Max Free Heap: "); Serial.println(ESP.getMaxAllocHeap());
-#endif  
 
   ftp.OpenConnection();
 
@@ -146,31 +138,19 @@ void setup()
       break;
   }
 
-#if !(ESP8266)
-  // Make a new directory
-  //ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
-  //ftp.MakeDir("myNewDir");
-
-  // Create the new file and send the image
-  //ftp.ChangeWorkDir("myNewDir");
-  Serial.print("Writing octocat.jpg, size = "); Serial.println(sizeof(octocat_pic));
-  
+  //Create a new Directory
   ftp.InitFile(COMMAND_XFER_TYPE_BINARY);
-  ftp.NewFile("octocat.jpg");
-  ftp.WriteData( octocat_pic, sizeof(octocat_pic) );
-  ftp.CloseFile();
+  ftp.RemoveDir(newDirName);
+  ftp.MakeDir(newDirName);
 
-  // Create the file new and write a string into it
-  Serial.println("Writing hello_world.txt");
-  
-  ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
-  ftp.NewFile("hello_world.txt");
-  ftp.Write("Hello World");
-  ftp.CloseFile();
-#endif
+  //Enter the directory
+  ftp.ChangeWorkDir(newDirName);
+
+  Serial.println("CloseConnection");
 
   ftp.CloseConnection();
 }
+
 
 void loop()
 {

@@ -14,10 +14,17 @@
 
 #include "defines.h"
 
+// To use `true` with the following PASV mode asnswer from server
+// 227 Entering Passive Mode (192,168,2,112,157,218)
+// Using `false` with old style PASV answer, such as `FTP_Server_Teensy41` library
+#define USING_NEW_PASSIVE_MODE_ANSWER_TYPE      true
+
 #include <FTPClient_Generic.h>
 
-char ftp_server[] = "192.168.2.241";
-char ftp_user[]   = "teensy4x";
+// Change according to your FTP server
+char ftp_server[] = "192.168.2.112";
+
+char ftp_user[]   = "ftp_test";
 char ftp_pass[]   = "ftp_test";
 
 // FTPClient_Generic(char* _serverAdress, char* _userName, char* _passWord, uint16_t _timeout = 10000);
@@ -25,15 +32,17 @@ FTPClient_Generic ftp (ftp_server, ftp_user, ftp_pass, 60000);
 
 char fileName[] = "helloworld.txt";
 
+char dirName[]    = "/home/ftp_test";
+char newDirName[] = "/home/ftp_test/NewDir";
 
 void initEthernet()
 { 
 #if USE_NATIVE_ETHERNET
-  ET_LOGWARN(F("======== USE_NATIVE_ETHERNET ========"));
+  ET_LOGWARN(F("========= USE_NATIVE_ETHERNET ========="));
 #elif USE_QN_ETHERNET
   ET_LOGWARN(F("=========== USE_QN_ETHERNET ==========="));
 #else
-  ET_LOGWARN(F("========================="));
+  ET_LOGWARN(F("======================================="));
 #endif
 
 #if USE_NATIVE_ETHERNET
@@ -45,7 +54,7 @@ void initEthernet()
   //Ethernet.begin(mac[index], ip);
   Ethernet.begin(mac[index]);
 
-  Serial.println(F("========================="));
+  ET_LOGWARN(F("======================================="));
 
   Serial.print(F("Using mac index = "));
   Serial.println(index);
@@ -55,18 +64,18 @@ void initEthernet()
 
 #else
 
-  #if USING_DHCP
-    // Start the Ethernet connection, using DHCP
-    Serial.print("Initialize Ethernet using DHCP => ");
-    Ethernet.begin();
-    // give the Ethernet shield minimum 1 sec for DHCP and 2 secs for staticP to initialize:
-    delay(1000);
-  #else   
-    // Start the Ethernet connection, using static IP
-    Serial.print("Initialize Ethernet using static IP => ");
-    Ethernet.begin(myIP, myNetmask, myGW);
-    Ethernet.setDNSServerIP(mydnsServer);
-  #endif
+#if USING_DHCP
+  // Start the Ethernet connection, using DHCP
+  Serial.print("Initialize Ethernet using DHCP => ");
+  Ethernet.begin();
+  // give the Ethernet shield minimum 1 sec for DHCP and 2 secs for staticP to initialize:
+  delay(1000);
+#else
+  // Start the Ethernet connection, using static IP
+  Serial.print("Initialize Ethernet using static IP => ");
+  Ethernet.begin(myIP, myNetmask, myGW);
+  Ethernet.setDNSServerIP(mydnsServer);
+#endif
 
   if (!Ethernet.waitForLocalIP(5000))
   {
@@ -108,22 +117,33 @@ void setup()
 
   initEthernet();
 
-#if (ESP32)
-  Serial.print("Max Free Heap: "); Serial.println(ESP.getMaxAllocHeap());
-#endif
-
   ftp.OpenConnection();
 
   //Change directory
-  ftp.ChangeWorkDir("/");
+  ftp.ChangeWorkDir(dirName);
 
   Serial.println("Creating new file helloworld.txt");
 
   // Create a new file to use as the download example below:
   ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
   ftp.NewFile(fileName);
-  ftp.Write("Hi, I'm a new file");
+
+  String textContent = String("Hi, I'm a new ASCII file created @ millis = ") + millis();
+
+  ftp.Write(textContent.c_str());
   ftp.CloseFile();
+
+  ////////////////////////////////////////
+
+  ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
+  ftp.AppendFile(fileName);
+
+  textContent = String("\nAdded text @ millis = ") + millis();
+  
+  ftp.Write(textContent.c_str());
+  ftp.CloseFile();
+
+  ////////////////////////////////////////
 
   //Download the text file or read it
   String response = "";
@@ -131,62 +151,8 @@ void setup()
   ftp.DownloadString("helloworld.txt", response);
   Serial.println("The file content is: " + response);
 
-  // Get the file size
-  size_t       fileSize = 0;
-  String       list[128];
-
-  // Get the directory content in order to allocate buffer
-  // my server response => type=file;modify=20190101000010;size=18; helloworld.txt
-
-  ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
-  ftp.ContentList("", list);
-
-  for (uint16_t i = 0; i < sizeof(list); i++)
-  {
-    uint8_t indexSize = 0;
-
-    if (list[i].length() > 0)
-    {
-      list[i].toLowerCase();
-
-      if ( list[i].indexOf(fileName) > -1 )
-      {
-        indexSize = list[i].indexOf("size") + 5;
-
-        fileSize = list[i].substring(indexSize, indexSize + 6).toInt();
-      }
-
-      // Print the directory details
-      Serial.println(list[i]);
-    }
-    else
-      break;
-  }
-
-  // Print file size
-  Serial.println("\nFile size is: " + String(fileSize));
-
-  //Dynammically alocate buffer
-  unsigned char * downloaded_file = (unsigned char *) malloc(fileSize);
-
-  // And download the file
-  ftp.InitFile(COMMAND_XFER_TYPE_BINARY);
-  ftp.DownloadFile(fileName, downloaded_file, fileSize, false);
-
-  //Create a new Directory
-  ftp.InitFile(COMMAND_XFER_TYPE_BINARY);
-  ftp.MakeDir("myNewDir");
-
-  //Enter the directory
-  ftp.ChangeWorkDir("/myNewDir");
-
-  //And upload the file to the new directory
-  ftp.NewFile( fileName );
-  ftp.WriteData(downloaded_file, fileSize);
-  ftp.CloseFile();
-
-  free(downloaded_file);
-
+  ////////////////////////////////////////
+  
   Serial.println("CloseConnection");
 
   ftp.CloseConnection();
@@ -194,5 +160,4 @@ void setup()
 
 void loop()
 {
-
 }

@@ -30,11 +30,8 @@ char ftp_pass[]   = "ftp_test";
 // FTPClient_Generic(char* _serverAdress, char* _userName, char* _passWord, uint16_t _timeout = 10000);
 FTPClient_Generic ftp (ftp_server, ftp_user, ftp_pass, 60000);
 
-char fileName[] = "helloworld.txt";
-
 char dirName[]    = "/home/ftp_test";
 char newDirName[] = "/home/ftp_test/NewDir";
-
 
 void initEthernet()
 { 
@@ -257,49 +254,16 @@ void setup()
 
   delay(500);
 
-  Serial.print(F("\nStarting FTPClient_DownloadFile on ")); Serial.print(BOARD_NAME);
+  Serial.print(F("\nStarting FTPClient_ListFiles on ")); Serial.print(BOARD_NAME);
   Serial.print(F(" with ")); Serial.println(SHIELD_TYPE);
   Serial.println(FTPCLIENT_GENERIC_VERSION);
 
   initEthernet();
 
-#if (ESP32)
-  Serial.print("Max Free Heap: "); Serial.println(ESP.getMaxAllocHeap());
-#endif
-
   ftp.OpenConnection();
 
   //Change directory
   ftp.ChangeWorkDir(dirName);
-
-  Serial.println("Creating new file helloworld.txt");
-
-  // Create a new file to use as the download example below:
-  ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
-  ftp.NewFile(fileName);
-
-  String textContent = String("Hi, I'm a new ASCII file created @ millis = ") + millis();
-
-  ftp.Write(textContent.c_str());
-  ftp.CloseFile();
-
-  ////////////////////////////////////////
-
-  ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
-  ftp.AppendFile(fileName);
-
-  textContent = String("\nAdded text @ millis = ") + millis();
-  
-  ftp.Write(textContent.c_str());
-  ftp.CloseFile();
-
-  ////////////////////////////////////////
-
-  //Download the text file or read it
-  String response = "";
-  ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
-  ftp.DownloadString("helloworld.txt", response);
-  Serial.println("The file content is: " + response);
 
   // Get the file size
   String       list[128];
@@ -314,15 +278,18 @@ void setup()
   for (uint16_t i = 0; i < sizeof(list); i++)
   {
     if (list[i].length() > 0)
-    {
-      list[i].toLowerCase();
-
-      // Print the directory details
       Serial.println(list[i]);
-    }
     else
       break;
   }
+
+  //Create a new Directory
+  ftp.InitFile(COMMAND_XFER_TYPE_BINARY);
+  ftp.RemoveDir(newDirName);
+  ftp.MakeDir(newDirName);
+
+  //Enter the directory
+  ftp.ChangeWorkDir(newDirName);
 
   Serial.println("CloseConnection");
 

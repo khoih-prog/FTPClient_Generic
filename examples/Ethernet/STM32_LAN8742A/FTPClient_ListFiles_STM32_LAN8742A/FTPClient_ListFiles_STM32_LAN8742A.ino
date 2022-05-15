@@ -1,5 +1,5 @@
 /******************************************************************************
-  FTPClient_DownloadFile.ino
+  FTPClient_ListFiles_STM32_LAN8742A.ino
 
   FTP Client for Generic boards using SD, FS, etc.
 
@@ -30,10 +30,60 @@ char ftp_pass[]   = "ftp_test";
 // FTPClient_Generic(char* _serverAdress, char* _userName, char* _passWord, uint16_t _timeout = 10000);
 FTPClient_Generic ftp (ftp_server, ftp_user, ftp_pass, 60000);
 
-char fileName[] = "helloworld.txt";
-
 char dirName[]    = "/home/ftp_test";
 char newDirName[] = "/home/ftp_test/NewDir";
+
+void initEthernet()
+{ 
+#if USE_ETHERNET_GENERIC
+  Serial.println(ETHERNET_GENERIC_VERSION);
+#endif
+  
+  Serial.println(ETHERNET_WEBSERVER_STM32_VERSION);
+
+#if !(USE_BUILTIN_ETHERNET)
+  #if (USING_SPI2)
+    #if defined(CUR_PIN_MISO)
+      ET_LOGWARN(F("Default SPI pinout:"));
+      ET_LOGWARN1(F("MOSI:"), CUR_PIN_MOSI);
+      ET_LOGWARN1(F("MISO:"), CUR_PIN_MISO);
+      ET_LOGWARN1(F("SCK:"),  CUR_PIN_SCK);
+      ET_LOGWARN1(F("SS:"),   CUR_PIN_SS);
+      ET_LOGWARN(F("========================="));
+    #endif
+  #else
+    ET_LOGWARN(F("Default SPI pinout:"));
+    ET_LOGWARN1(F("MOSI:"), MOSI);
+    ET_LOGWARN1(F("MISO:"), MISO);
+    ET_LOGWARN1(F("SCK:"),  SCK);
+    ET_LOGWARN1(F("SS:"),   SS);
+    ET_LOGWARN(F("========================="));
+  #endif
+#endif
+
+#if !(USE_BUILTIN_ETHERNET || USE_UIP_ETHERNET)
+  // For other boards, to change if necessary
+  #if ( USE_ETHERNET_GENERIC || USE_ETHERNET_ENC )
+  Ethernet.init (USE_THIS_SS_PIN);
+
+  #elif USE_CUSTOM_ETHERNET
+  // You have to add initialization for your Custom Ethernet here
+  // This is just an example to setCSPin to USE_THIS_SS_PIN, and can be not correct and enough
+  //Ethernet.init(USE_THIS_SS_PIN);
+
+  #endif  //( ( USE_ETHERNET_GENERIC || USE_ETHERNET_ENC )
+#endif
+
+  // start the ethernet connection and the server:
+  // Use DHCP dynamic IP and random mac
+  uint16_t index = millis() % NUMBER_OF_MAC;
+  // Use Static IP
+  //Ethernet.begin(mac[index], ip);
+  Ethernet.begin(mac[index]);
+
+  Serial.print(F("Connected! IP address: "));
+  Serial.println(Ethernet.localIP());
+}
 
 void setup()
 {
@@ -42,60 +92,16 @@ void setup()
 
   delay(500);
 
-  Serial.print(F("\nStarting FTPClient_DownloadFile on ")); Serial.print(BOARD_NAME);
+  Serial.print(F("\nStarting FTPClient_ListFiles_STM32_LAN8742A on ")); Serial.print(BOARD_NAME);
   Serial.print(F(" with ")); Serial.println(SHIELD_TYPE);
   Serial.println(FTPCLIENT_GENERIC_VERSION);
 
-  WiFi.begin( WIFI_SSID, WIFI_PASS );
-
-  Serial.print("Connecting WiFi, SSID = "); Serial.println(WIFI_SSID);
-
-  while (WiFi.status() != WL_CONNECTED)
-  {
-    delay(500);
-    Serial.print(".");
-  }
-
-  Serial.print("\nIP address: ");
-  Serial.println(WiFi.localIP());
-
-#if (ESP32)
-  Serial.print("Max Free Heap: "); Serial.println(ESP.getMaxAllocHeap());
-#endif
+  initEthernet();
 
   ftp.OpenConnection();
 
   //Change directory
   ftp.ChangeWorkDir(dirName);
-
-  Serial.println("Creating new file helloworld.txt");
-
-  // Create a new file to use as the download example below:
-  ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
-  ftp.NewFile(fileName);
-
-  String textContent = String("Hi, I'm a new ASCII file created @ millis = ") + millis();
-
-  ftp.Write(textContent.c_str());
-  ftp.CloseFile();
-
-  ////////////////////////////////////////
-
-  ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
-  ftp.AppendFile(fileName);
-
-  textContent = String("\nAdded text @ millis = ") + millis();
-  
-  ftp.Write(textContent.c_str());
-  ftp.CloseFile();
-
-  ////////////////////////////////////////
-
-  //Download the text file or read it
-  String response = "";
-  ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
-  ftp.DownloadString("helloworld.txt", response);
-  Serial.println("The file content is: " + response);
 
   // Get the file size
   String       list[128];
@@ -110,15 +116,18 @@ void setup()
   for (uint16_t i = 0; i < sizeof(list); i++)
   {
     if (list[i].length() > 0)
-    {
-      list[i].toLowerCase();
-
-      // Print the directory details
       Serial.println(list[i]);
-    }
     else
       break;
   }
+
+  //Create a new Directory
+  ftp.InitFile(COMMAND_XFER_TYPE_BINARY);
+  ftp.RemoveDir(newDirName);
+  ftp.MakeDir(newDirName);
+
+  //Enter the directory
+  ftp.ChangeWorkDir(newDirName);
 
   Serial.println("CloseConnection");
 

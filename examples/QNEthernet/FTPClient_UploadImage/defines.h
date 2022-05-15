@@ -20,8 +20,8 @@
   // For Teensy 4.1
   #define BOARD_TYPE      "TEENSY 4.1"
   // Use true for NativeEthernet Library, false if using other Ethernet libraries
-  #define USE_NATIVE_ETHERNET     false
-  #define USE_QN_ETHERNET         true
+  #define USE_NATIVE_ETHERNET     true
+  #define USE_QN_ETHERNET         false
 #else
   #error Only Teensy 4.1 supported
 #endif
@@ -48,12 +48,12 @@
 #if USE_NATIVE_ETHERNET
   #include "NativeEthernet.h"
   #warning Using NativeEthernet lib for Teensy 4.1. Must also use Teensy Packages Patch or error
-  #define SHIELD_TYPE           "using NativeEthernet"
+  #define SHIELD_TYPE           "NativeEthernet"
 #elif USE_QN_ETHERNET
   #include "QNEthernet.h"       // https://github.com/ssilverman/QNEthernet
   using namespace qindesign::network;
   #warning Using QNEthernet lib for Teensy 4.1. Must also use Teensy Packages Patch or error
-  #define SHIELD_TYPE           "using QNEthernet"  
+  #define SHIELD_TYPE           "QNEthernet"  
 #endif
   
 #include <EthernetWebServer.h>
