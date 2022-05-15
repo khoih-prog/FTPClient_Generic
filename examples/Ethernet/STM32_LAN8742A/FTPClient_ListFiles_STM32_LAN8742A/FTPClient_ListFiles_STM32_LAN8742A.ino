@@ -14,24 +14,40 @@
 
 #include "defines.h"
 
-// To use `true` with the following PASV mode asnswer from server
-// 227 Entering Passive Mode (192,168,2,112,157,218)
-// Using `false` with old style PASV answer, such as `FTP_Server_Teensy41` library
-#define USING_NEW_PASSIVE_MODE_ANSWER_TYPE      true
-
 #include <FTPClient_Generic.h>
 
-// Change according to your FTP server
-char ftp_server[] = "192.168.2.112";
+// To use `true` with the following PASV mode asnswer from server, such as `VSFTP`
+// 227 Entering Passive Mode (192,168,2,112,157,218)
+// Using `false` with old style PASV answer, such as `FTP_Server_Teensy41` library
+// 227 Entering Passive Mode (4043483328, port 55600)
+#define USING_VSFTP_SERVER      true
 
-char ftp_user[]   = "ftp_test";
-char ftp_pass[]   = "ftp_test";
+#if USING_VSFTP_SERVER
+
+  // Change according to your FTP server
+  char ftp_server[] = "192.168.2.112";
+  
+  char ftp_user[]   = "ftp_test";
+  char ftp_pass[]   = "ftp_test";
+
+  char dirName[]    = "/home/ftp_test";
+  char newDirName[] = "/home/ftp_test/NewDir";
+
+#else
+
+  // Change according to your FTP server
+  char ftp_server[] = "192.168.2.241";
+  
+  char ftp_user[]   = "teensy4x";
+  char ftp_pass[]   = "ftp_test";
+
+  char dirName[]    = "/";
+  char newDirName[] = "/NewDir";
+
+#endif
 
 // FTPClient_Generic(char* _serverAdress, char* _userName, char* _passWord, uint16_t _timeout = 10000);
 FTPClient_Generic ftp (ftp_server, ftp_user, ftp_pass, 60000);
-
-char dirName[]    = "/home/ftp_test";
-char newDirName[] = "/home/ftp_test/NewDir";
 
 void initEthernet()
 { 
