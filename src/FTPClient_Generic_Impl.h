@@ -282,7 +282,7 @@ void FTPClient_Generic::RenameFile(char* from, char* to)
 
   FTP_LOGINFO("Send RNTO");
   
-  client.print(F("RNTO "));
+  client.print(COMMAND_RENAME_FILE_TO);
   client.println(to);
   
   GetFTPAnswer();
