@@ -79,16 +79,19 @@
 * [Examples](#examples)
   * [Ethernet Examples](#Ethernet-examples)
     * [ 1. FTPClient_DownloadFile](examples/Ethernet/FTPClient_DownloadFile)
-    * [ 2. FTPClient_UploadImage](examples/Ethernet/FTPClient_UploadImage)
-    * [ 3. FTPClient_DownloadFile_RP2040_SPI1](examples/Ethernet/RP2040/FTPClient_DownloadFile_RP2040_SPI1)
-    * [ 4. FTPClient_DownloadFile_STM32_LAN8742A](examples/Ethernet/STM32_LAN8742A/FTPClient_DownloadFile_STM32_LAN8742A)
-    * [ 5. FTPClient_UploadImage_STM32_LAN8742A](examples/Ethernet/STM32_LAN8742A/FTPClient_UploadImage_STM32_LAN8742A)
+    * [ 2. FTPClient_ListFiles](examples/Ethernet/FTPClient_ListFiles)
+    * [ 3. FTPClient_UploadImage](examples/Ethernet/FTPClient_UploadImage)
+    * [ 4. FTPClient_DownloadFile_RP2040_SPI1](examples/Ethernet/RP2040/FTPClient_DownloadFile_RP2040_SPI1)
+    * [ 5. FTPClient_DownloadFile_STM32_LAN8742A](examples/Ethernet/STM32_LAN8742A/FTPClient_DownloadFile_STM32_LAN8742A)
+    * [ 6. FTPClient_ListFiles_STM32_LAN8742A](examples/Ethernet/STM32_LAN8742A/FTPClient_ListFiles_STM32_LAN8742A)
   * [QNEthernet Examples](#QNEthernet-examples)
     * [ 1. FTPClient_DownloadFile](examples/QNEthernet/FTPClient_DownloadFile)
-    * [ 2. FTPClient_UploadImage](examples/QNEthernet/FTPClient_UploadImage) 
+    * [ 2. FTPClient_ListFiles](examples/QNEthernet/FTPClient_ListFiles)
+    * [ 3. FTPClient_UploadImage](examples/QNEthernet/FTPClient_UploadImage)
   * [WiFi Examples](#WiFi-examples)
     * [ 1. FTPClient_DownloadFile](examples/WiFi/FTPClient_DownloadFile)
-    * [ 2. FTPClient_UploadImage](examples/WiFi/FTPClient_UploadImage)
+    * [ 2. FTPClient_UploadImage](examples/WiFi/FTPClient_ListFiles)
+    * [ 3. FTPClient_UploadImage](examples/WiFi/FTPClient_UploadImage)
   * [General Examples](#General-examples)
     * [ 1. multiFileProject](examples/multiFileProject)
 * [Example FTPClient_DownloadFile](#example-FTPClient_DownloadFile)
@@ -105,6 +108,7 @@
   * [ 8. FTPClient_UploadImage on NRF52840_FEATHER with W5x00 using Ethernet_Generic Library](#8-FTPClient_UploadImage-on-NRF52840_FEATHER-with-W5x00-using-Ethernet_Generic-Library)
   * [ 9. FTPClient_DownloadFile on SAMD_NANO_33_IOT with WiFiNINA using WiFiNINA_Generic Library](#9-FTPClient_DownloadFile-on-SAMD_NANO_33_IOT-with-WiFiNINA-using-WiFiNINA_Generic-Library)
   * [10. FTPClient_DownloadFile on ESP32S3_DEV with ESP WiFi using WiFi Library](#10-FTPClient_DownloadFile-on-ESP32S3_DEV-with-ESP-WiFi-using-WiFi-Library)
+  * [11. FTPClient_UploadImage on TEENSY 4.1 with NativeEthernet](#11-FTPClient_UploadImage-on-TEENSY-41-with-NativeEthernet)
 * [Debug](#debug)
 * [Troubleshooting](#troubleshooting)
 * [Issues](#issues)
@@ -129,6 +133,9 @@ This [**FTPClient_Generic library**](https://github.com/khoih-prog/FTPClient_Gen
 Library is based on and modified from:
 
 1. [Leonardo Bispo's ESP32_FTPClient](https://github.com/ldab/ESP32_FTPClient)
+
+
+Now supporting other new FTP Servers, such as [`vsftpd`](https://ubuntu.com/server/docs/service-ftp) in Linux, Ubuntu, Rasbberry Pi, etc.
 
 ---
 ---
@@ -1294,21 +1301,23 @@ ftp.DownloadFile(fileName, downloaded_file, fileSize, false);
 #### Ethernet Examples
 
  1. [FTPClient_DownloadFile](examples/Ethernet/FTPClient_DownloadFile)
- 2. [FTPClient_UploadImage](examples/Ethernet/FTPClient_UploadImage)
- 3. [FTPClient_DownloadFile_RP2040_SPI1](examples/Ethernet/RP2040/FTPClient_DownloadFile_RP2040_SPI1)
- 4. [FTPClient_DownloadFile_STM32_LAN8742A](examples/Ethernet/STM32_LAN8742A/FTPClient_DownloadFile_STM32_LAN8742A)
- 5. [FTPClient_UploadImage_STM32_LAN8742A](examples/Ethernet/STM32_LAN8742A/FTPClient_UploadImage_STM32_LAN8742A)
+ 2. [FTPClient_ListFiles](examples/Ethernet/FTPClient_ListFiles)
+ 3. [FTPClient_UploadImage](examples/Ethernet/FTPClient_UploadImage)
+ 4. [FTPClient_DownloadFile_RP2040_SPI1](examples/Ethernet/RP2040/FTPClient_DownloadFile_RP2040_SPI1)
+ 5. [FTPClient_DownloadFile_STM32_LAN8742A](examples/Ethernet/STM32_LAN8742A/FTPClient_DownloadFile_STM32_LAN8742A)
+ 6. [FTPClient_ListFiles_STM32_LAN8742A](examples/Ethernet/STM32_LAN8742A/FTPClient_ListFiles_STM32_LAN8742A)
  
 #### QNEthernet Examples
 
  1. [FTPClient_DownloadFile](examples/QNEthernet/FTPClient_DownloadFile)
- 2. [FTPClient_UploadImage](examples/QNEthernet/FTPClient_UploadImage)
+ 2. [FTPClient_ListFiles](examples/QNEthernet/FTPClient_ListFiles)
+ 3. [FTPClient_UploadImage](examples/QNEthernet/FTPClient_UploadImage)
  
 #### WiFi Examples
  
  1. [FTPClient_DownloadFile](examples/WiFi/FTPClient_DownloadFile)
- 2. [FTPClient_UploadImage](examples/WiFi/FTPClient_UploadImage)
- 
+ 2. [FTPClient_ListFiles](examples/WiFi/FTPClient_ListFiles) 
+ 3. [FTPClient_UploadImage](examples/WiFi/FTPClient_UploadImage)
 
 #### General Example
  
@@ -1322,14 +1331,14 @@ ftp.DownloadFile(fileName, downloaded_file, fileSize, false);
 
 #### 1. File [FTPClient_DownloadFile.ino](examples/Ethernet/FTPClient_DownloadFile/FTPClient_DownloadFile.ino)
 
-https://github.com/khoih-prog/FTPClient_Generic/blob/a24dd81391fa3f645366b5e0943eaf457c7c26cb/examples/Ethernet/FTPClient_DownloadFile/FTPClient_DownloadFile.ino#L13-L343
+https://github.com/khoih-prog/FTPClient_Generic/blob/4a26d8e358916be0d90633a67b3b8b725050e6c1/examples/Ethernet/FTPClient_DownloadFile/FTPClient_DownloadFile.ino#L13-L334
 
 
 ---
 
 #### 2. File [defines.h](examples/Ethernet/FTPClient_DownloadFile/defines.h)
 
-https://github.com/khoih-prog/FTPClient_Generic/blob/a24dd81391fa3f645366b5e0943eaf457c7c26cb/examples/Ethernet/FTPClient_DownloadFile/defines.h#L12-L486
+https://github.com/khoih-prog/FTPClient_Generic/blob/4a26d8e358916be0d90633a67b3b8b725050e6c1/examples/Ethernet/FTPClient_DownloadFile/defines.h#L12-L486
 
 ---
 ---
@@ -1338,12 +1347,12 @@ https://github.com/khoih-prog/FTPClient_Generic/blob/a24dd81391fa3f645366b5e0943
 
 #### 1. FTPClient_DownloadFile on TEENSY 4.0 with W5x00 using Ethernet_Generic Library
 
-The following is debug terminal output when running example [FTPClient_DownloadFile](examples/Ethernet/FTPClient_DownloadFile) on TEENSY 4.0 with W5x00 using Ethernet_Generic Library on SPI0/SPI
+The following is debug terminal output when running example [FTPClient_DownloadFile](examples/Ethernet/FTPClient_DownloadFile) on TEENSY 4.0 with W5x00 using Ethernet_Generic Library on SPI0/SPI connecting to [`vsftpd`](https://ubuntu.com/server/docs/service-ftp) server
 
 
 ```
 Starting FTPClient_DownloadFile on TEENSY 4.0 with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.1.0
+FTPCLIENT_GENERIC v1.2.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -1362,91 +1371,52 @@ FTPCLIENT_GENERIC v1.1.0
 [EWS] SCK: 13
 [EWS] SS: 10
 [EWS] =========================
-Using mac index = 14
-Connected! IP address: 192.168.2.99
-[FTP] Connecting to:  192.168.2.241
+Using mac index = 0
+Connected! IP address: 192.168.2.97
+[FTP] Connecting to:  192.168.2.112
 [FTP] Command connected
-[FTP] Send USER =  teensy4x
+[FTP] Send USER =  ftp_test
 [FTP] Send PASSWORD =  ftp_test
 [FTP] Send CWD
 Creating new file helloworld.txt
 [FTP] Send TYPE Type A
 [FTP] Send PASV
-[FTP] outBuf = 227 Entering Passive Mode (4043483328, port 55600)
-[FTP] _dataAddress:  192.168.2.241 , Data port:  55600
+[FTP] outBuf = 227 Entering Passive Mode (192,168,2,112,167,15).
+
+[FTP] Data port:  42767
+[FTP] _dataAddress:  192.168.2.112 , Data port:  42767
 [FTP] Data connection established
 [FTP] Send STOR
 [FTP] Write File
 [FTP] Close File
 [FTP] Send TYPE Type A
 [FTP] Send PASV
-[FTP] outBuf = 227 Entering Passive Mode (4043483328, port 55600)
-[FTP] _dataAddress:  192.168.2.241 , Data port:  55600
+[FTP] outBuf = 227 Entering Passive Mode (192,168,2,112,38,72).
+[FTP] Data port:  9800
+[FTP] _dataAddress:  192.168.2.112 , Data port:  9800
 [FTP] Data connection established
-[FTP] Send RETR
-[FTP] Result start
-[FTP] Result:  150-Connected to port 55600
-150 18 bytes to download
-226-File successfully transferred
-226 1 ms, 18 kbytes/s
-[FTP] Result end
-timedRead timeout = 1000
-The file content is: Hi, I'm a new file
+[FTP] Send APPE
+[FTP] Write File
+[FTP] Close File
 [FTP] Send TYPE Type A
 [FTP] Send PASV
-[FTP] outBuf = 227 Entering Passive Mode (4043483328, port 55600)
-[FTP] _dataAddress:  192.168.2.241 , Data port:  55600
-[FTP] Data connection established
-[FTP] Send MLSD
-[FTP] Result start
-[FTP] Result:  150 Accepted data connection to port 55600
-226-options: -a -l
-226 18 matches total
-[FTP] Result end
-type=file;modify=20220429231446;size=3810; index1.htm
-type=file;modify=19800101000000;size=13; foo.txt
-type=file;modify=20190101003904;size=3714; index2.htm
-type=file;modify=20220429225004;size=3810; index.htm
-type=file;modify=20220409222458;size=10; mydatalog.txt
-type=file;modify=20220313201514;size=4116; edit.htm.gz
-type=file;modify=20220313201514;size=41214; canadaflag_1.png
-type=file;modify=20220313201514;size=8311; canadaflag_2.png
-type=file;modify=20220313201514;size=11156; canadaflag_3.jpg
-type=file;modify=20190101003834;size=1150; favicon.ico
-type=file;modify=20220313201514;size=1971; graphs.js.gz
-type=file;modify=20220429225252;size=8311; canadaflag_2_1.png
-type=file;modify=20220429225138;size=1547; esp_at_wm_lite.txt
-type=file;modify=20190101002054;size=18; helloworld.txt
-type=dir;modify=20190101000020;size=0; mynewdir
-type=dir;modify=20190101001150;size=0; my_new_dir
-type=file;modify=20190101001412;size=51695; octocat.jpg
-type=file;modify=20190101001414;size=11; hello_world.txt
-File size is: 18
-[FTP] Send TYPE Type I
-[FTP] Send PASV
-[FTP] outBuf = 227 Entering Passive Mode (4043483328, port 55600)
-[FTP] _dataAddress:  192.168.2.241 , Data port:  55600
+[FTP] outBuf = 227 Entering Passive Mode (192,168,2,112,56,103).
+[FTP] Data port:  14439
+[FTP] _dataAddress:  192.168.2.112 , Data port:  14439
 [FTP] Data connection established
 [FTP] Send RETR
-[FTP] Result start
-[FTP] Result:  150-Connected to port 55600
-150 18 bytes to download
-226 File successfully transferred
-[FTP] Result end
-[FTP] Send TYPE Type I
+[FTP] Result:  150 Opening ASCII mode data connection for helloworld.txt (75 bytes).
+timedRead timeout = 1000
+The file content is: Hi, I'm a new ASCII file created @ millis = 2677
+Added text @ millis = 2683
+[FTP] Send TYPE Type A
 [FTP] Send PASV
-[FTP] outBuf = 227 Entering Passive Mode (4043483328, port 55600)
-[FTP] _dataAddress:  192.168.2.241 , Data port:  55600
-[FTP] Data connection established
-[FTP] Send MKD
-[FTP] FTP error:  521 "myNewDir" directory already exists
-[FTP] Send CWD
-[FTP] FTP error:  521 "myNewDir" directory already exists
-[FTP] Send STOR
-[FTP] FTP error:  521 "myNewDir" directory already exists
-[FTP] Writing
-[FTP] FTP error:  521 "myNewDir" directory already exists
-[FTP] Close File
+[FTP] outBuf = 226 Transfer complete.
+[FTP] outBuf = 227 Entering Passive Mode (192,168,2,112,101,234).
+[FTP] Data port:  26090
+[FTP] _dataAddress:  192.168.2.112 , Data port:  26090
+[FTP] Send LIST
+[FTP] Result:  200 Switching to ASCII mode.
 CloseConnection
 [FTP] Connection closed
 ```
@@ -1460,7 +1430,7 @@ The following is debug terminal output when running example [FTPClient_UploadIma
 
 ```
 Starting FTPClient_UploadImage on Nano RP2040 Connect with WiFiNINA using WiFiNINA_Generic Library
-FTPCLIENT_GENERIC v1.1.0
+FTPCLIENT_GENERIC v1.2.0
 Connecting WiFi
 IP address: 192.168.2.117
 [FTP] Connecting to:  192.168.2.241
@@ -1527,7 +1497,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on PORTENTA_H7_M7 with Ethernet using Portenta_Ethernet Library
-FTPCLIENT_GENERIC v1.1.0
+FTPCLIENT_GENERIC v1.2.0
 [EWS] ======== USE_PORTENTA_H7_ETHERNET ========
 Using mac index = 13
 Connected! IP address: 192.168.2.123
@@ -1626,7 +1596,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_UploadImage on MBED RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.1.0
+FTPCLIENT_GENERIC v1.2.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 19
@@ -1712,7 +1682,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on NUCLEO_L552ZE_Q with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.1.0
+FTPCLIENT_GENERIC v1.2.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -1828,7 +1798,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile_STM32_LAN8742A on NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
-FTPCLIENT_GENERIC v1.1.0
+FTPCLIENT_GENERIC v1.2.0
 EthernetWebServer_STM32 v1.5.0
 Connected! IP address: 192.168.2.124
 [FTP] Connecting to:  192.168.2.241
@@ -1927,7 +1897,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on ITSYBITSY_M4 with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.1.0
+FTPCLIENT_GENERIC v1.2.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 25
@@ -2042,7 +2012,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_UploadImage on NRF52840_FEATHER with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.1.0
+FTPCLIENT_GENERIC v1.2.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 25
@@ -2129,7 +2099,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on SAMD_NANO_33_IOT with WiFiNINA using WiFiNINA_Generic Library
-FTPCLIENT_GENERIC v1.1.0
+FTPCLIENT_GENERIC v1.2.0
 Connecting WiFi
 IP address: 192.168.2.118
 [FTP] Connecting to:  192.168.2.241
@@ -2229,7 +2199,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on ESP32S3_DEV with ESP WiFi using WiFi Library
-FTPCLIENT_GENERIC v1.1.0
+FTPCLIENT_GENERIC v1.2.0
 Connecting WiFi
 .........
 IP address: 192.168.2.115
@@ -2320,6 +2290,62 @@ CloseConnection
 [FTP] Connection closed
 ```
 
+---
+
+#### 11. FTPClient_UploadImage on TEENSY 4.1 with NativeEthernet
+
+The following is debug terminal output when running example [FTPClient_UploadImage](examples/QNEthernet/FTPClient_UploadImage) on TEENSY 4.1 with using NativeEthernet, connecting to [`vsftpd`](https://ubuntu.com/server/docs/service-ftp) server
+
+```
+Starting FTPClient_UploadImage on TEENSY 4.1 with NativeEthernet
+FTPCLIENT_GENERIC v1.2.0
+[EWS] ======== USE_NATIVE_ETHERNET ========
+[EWS] =====================================
+Using mac index = 6
+Connected! IP address: 192.168.2.105
+[FTP] Connecting to:  192.168.2.112
+[FTP] Command connected
+[FTP] Send USER =  ftp_test
+[FTP] Send PASSWORD =  ftp_test
+[FTP] Send CWD
+[FTP] Send TYPE Type A
+[FTP] Send PASV
+[FTP] outBuf = 227 Entering Passive Mode (192,168,2,112,156,132).
+
+[FTP] Data port:  40068
+[FTP] _dataAddress:  192.168.2.112 , Data port:  40068
+[FTP] Data connection established
+[FTP] Send LIST
+[FTP] Result:  150 Here comes the directory listing.
+NewDir
+hello_world.txt
+helloworld.txt
+octocat.jpg
+Writing octocat.jpg, size = 51695
+[FTP] Send TYPE Type I
+[FTP] Send PASV
+[FTP] outBuf = 226 Directory send OK.
+227 Entering Passive Mode (192,168,2,112,27,30).
+[FTP] outBuf = 227 Entering Passive Mode (192,168,2,112,122,216).
+[FTP] Data port:  31448
+[FTP] _dataAddress:  192.168.2.112 , Data port:  31448
+[FTP] Data connection established
+[FTP] Send STOR
+[FTP] Writing
+[FTP] WriteData: datalen =  51695
+[FTP] Close File
+Writing hello_world.txt
+[FTP] Send TYPE Type A
+[FTP] Send PASV
+[FTP] outBuf = 227 Entering Passive Mode (192,168,2,112,151,205).
+[FTP] Data port:  38861
+[FTP] _dataAddress:  192.168.2.112 , Data port:  38861
+[FTP] Data connection established
+[FTP] Send STOR
+[FTP] Write File
+[FTP] Close File
+[FTP] Connection closed
+```
 
 ---
 ---
@@ -2388,6 +2414,7 @@ Submit issues to: [FTPClient_Generic issues](https://github.com/khoih-prog/FTPCl
 24. Add support to WiFiNINA using [**WiFiNINA_Generic library**](https://github.com/khoih-prog/WiFiNINA_Generic). 
 26. Add support to [`WiFi101 library`](https://www.arduino.cc/en/Reference/WiFi101)
 27. Add support to new **ESP32-S2, ESP32-S3 and ESP32_C3**
+28. Add support to other new FTP Servers, such as [`vsftpd`](https://ubuntu.com/server/docs/service-ftp) in Linux, Ubuntu, Rasbberry Pi, etc.
 
 
 ---

@@ -13,6 +13,7 @@
 
 
 * [Changelog](#changelog)
+  * [Releases v1.2.0](#releases-v120)
   * [Releases v1.1.0](#releases-v110)
   * [Releases v1.0.0](#releases-v100)
 
@@ -20,6 +21,13 @@
 ---
 
 ## Changelog
+
+#### Releases v1.2.0
+
+1. Add support to other new FTP Servers, such as [`vsftpd`](https://ubuntu.com/server/docs/service-ftp) in Linux, Ubuntu, Rasbberry Pi, etc.
+2. Fix bug
+3. Update examples
+
 
 #### Releases v1.1.0
 

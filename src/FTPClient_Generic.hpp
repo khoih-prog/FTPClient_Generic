@@ -9,12 +9,13 @@
     
   Built by Khoi Hoang https://github.com/khoih-prog/FTPClient_Generic
   
-  Version: 1.1.0
+  Version: 1.2.0
     
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
   1.0.0   K Hoang      11/05/2022 Initial porting and coding to support many more boards, using WiFi or Ethernet
   1.1.0   K Hoang      13/05/2022 Add support to Teensy 4.1 using QNEthernet or NativeEthernet
+  1.2.0   K Hoang      14/05/2022 Add support to other FTP Servers. Fix bug
  *****************************************************************************************************************************/
 
 #pragma once
@@ -27,6 +28,7 @@
 /////////////////////////////////////////////
 
 #define BUFFER_SIZE        1500
+//#define BUFFER_SIZE        1460
 
 #define TIMEOUT_MS        10000UL
 
@@ -77,8 +79,9 @@
 
 #define COMMAND_CURRENT_WORKING_DIR     F("CWD ")
 #define COMMAND_MAKE_DIR                F("MKD ")
-#define COMMAND_LIST_DIR_STANDARD       F("MLSD")
-#define COMMAND_LIST_DIR                F("LIST")
+#define COMMAND_REMOVE_DIR              F("RMD ")
+#define COMMAND_LIST_DIR_STANDARD       F("MLSD ")
+#define COMMAND_LIST_DIR                F("LIST ")
 
 #define COMMAND_DOWNLOAD                F("RETR ")
 #define COMMAND_FILE_UPLOAD             F("STOR ")
@@ -87,6 +90,10 @@
 
 #define COMMAND_XFER_TYPE_ASCII         ("Type A")
 #define COMMAND_XFER_TYPE_BINARY        ("Type I")
+
+/////////////////////////////////////////////
+
+#define ENTERING_PASSIVE_MODE           227
 
 /////////////////////////////////////////////
 
@@ -114,8 +121,10 @@ class FTPClient_Generic
     theFTPClient* GetDataClient();
 
     // KH
-    IPAddress _dataAddress;
-    uint16_t  _dataPort;
+    IPAddress     _dataAddress;
+    uint16_t      _dataPort;
+    
+    bool          inASCIIMode = false;
     //////
 
   public:
@@ -138,6 +147,7 @@ class FTPClient_Generic
     void ChangeWorkDir(const char * dir);
     void DeleteFile(const char * file);
     void MakeDir(const char * dir);
+    void RemoveDir(const char * dir);
     void ContentList(const char * dir, String * list);
     void ContentListWithListCommand(const char * dir, String * list);
     void DownloadString(const char * filename, String &str);
