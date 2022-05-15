@@ -27,7 +27,7 @@
 #include "FTPClient_Generic.hpp"
 
 #if !defined(USING_NEW_PASSIVE_MODE_ANSWER_TYPE)
-  #define USING_NEW_PASSIVE_MODE_ANSWER_TYPE		true
+  #define USING_NEW_PASSIVE_MODE_ANSWER_TYPE    true
 #endif
 
 /////////////////////////////////////////////
@@ -345,51 +345,51 @@ void FTPClient_Generic::InitFile(const char* type)
   
   if (atoi(passiveIP) <= 0xFF)
   {
-		char *tStr = strtok(outBuf, "(,");
-		int array_pasv[6];
-		
-		for ( int i = 0; i < 6; i++) 
-		{
-		  tStr = strtok(NULL, "(,");
-		  
-		  //FTP_LOGDEBUG1("tStr =", tStr);
-		  
-		  if (tStr == NULL) 
-		  {
-		    FTP_LOGDEBUG(F("Bad PASV Answer"));
-		    
-		    CloseConnection();
-		    return;
-		  }
-		  
-		  array_pasv[i] = atoi(tStr);
-		}
-		
-		unsigned int hiPort, loPort;
-		hiPort = array_pasv[4] << 8;
-		loPort = array_pasv[5] & 255;
+    char *tStr = strtok(outBuf, "(,");
+    int array_pasv[6];
+    
+    for ( int i = 0; i < 6; i++) 
+    {
+      tStr = strtok(NULL, "(,");
+      
+      //FTP_LOGDEBUG1("tStr =", tStr);
+      
+      if (tStr == NULL) 
+      {
+        FTP_LOGDEBUG(F("Bad PASV Answer"));
+        
+        CloseConnection();
+        return;
+      }
+      
+      array_pasv[i] = atoi(tStr);
+    }
+    
+    unsigned int hiPort, loPort;
+    hiPort = array_pasv[4] << 8;
+    loPort = array_pasv[5] & 255;
 
-		_dataAddress = IPAddress(array_pasv[0],array_pasv[1],array_pasv[2],array_pasv[3]);
+    _dataAddress = IPAddress(array_pasv[0],array_pasv[1],array_pasv[2],array_pasv[3]);
 
-		_dataPort = hiPort | loPort;
-		
-		FTP_LOGDEBUG1(F("Data port: "), _dataPort);
+    _dataPort = hiPort | loPort;
+    
+    FTP_LOGDEBUG1(F("Data port: "), _dataPort);
   }
   else
   {
-		// Using with old style PASV answer, such as `FTP_Server_Teensy41` library
+    // Using with old style PASV answer, such as `FTP_Server_Teensy41` library
 
-		//char *subStr = strchr(outBuf, '(') + 1;
-		char *ptr = strtok(passiveIP, ",");
-		uint32_t ret = strtoul( ptr, &tmpPtr, 10 );
+    //char *subStr = strchr(outBuf, '(') + 1;
+    char *ptr = strtok(passiveIP, ",");
+    uint32_t ret = strtoul( ptr, &tmpPtr, 10 );
 
-		// get IP of data client
-		_dataAddress = IPAddress(ret);
+    // get IP of data client
+    _dataAddress = IPAddress(ret);
 
-		passiveIP = strchr(outBuf, ')');
-		ptr = strtok(passiveIP, "port ");
+    passiveIP = strchr(outBuf, ')');
+    ptr = strtok(passiveIP, "port ");
 
-		_dataPort = strtol( ptr, &tmpPtr, 10 );
+    _dataPort = strtol( ptr, &tmpPtr, 10 );
   }
 
   FTP_LOGINFO3(F("_dataAddress: "), _dataAddress, F(", Data port: "), _dataPort);
