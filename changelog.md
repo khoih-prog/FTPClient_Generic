@@ -13,6 +13,7 @@
 
 
 * [Changelog](#changelog)
+  * [Releases v1.2.1](#releases-v121)
   * [Releases v1.2.0](#releases-v120)
   * [Releases v1.1.0](#releases-v110)
   * [Releases v1.0.0](#releases-v100)
@@ -21,6 +22,10 @@
 ---
 
 ## Changelog
+
+#### Releases v1.2.1
+
+1. Auto detect server response type in PASV mode
 
 #### Releases v1.2.0
 

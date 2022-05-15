@@ -9,13 +9,14 @@
     
   Built by Khoi Hoang https://github.com/khoih-prog/FTPClient_Generic
   
-  Version: 1.2.0
+  Version: 1.2.1
     
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
   1.0.0   K Hoang      11/05/2022 Initial porting and coding to support many more boards, using WiFi or Ethernet
   1.1.0   K Hoang      13/05/2022 Add support to Teensy 4.1 using QNEthernet or NativeEthernet
   1.2.0   K Hoang      14/05/2022 Add support to other FTP Servers. Fix bug
+  1.2.1   K Hoang      14/05/2022 Auto detect server response type in PASV mode
  *****************************************************************************************************************************/
 
 #pragma once
@@ -336,55 +337,60 @@ void FTPClient_Generic::InitFile(const char* type)
     delay(1000);
   }
   
-#if USING_NEW_PASSIVE_MODE_ANSWER_TYPE
-
-  char *tStr = strtok(outBuf, "(,");
-  int array_pasv[6];
+  // Test to know which format
+  // 227 Entering Passive Mode (192,168,2,112,157,218)
+  // 227 Entering Passive Mode (4043483328, port 55600)
+  char *passiveIP = strchr(outBuf, '(') + 1;
+  //FTP_LOGDEBUG1("passiveIP =", atoi(passiveIP));
   
-  for ( int i = 0; i < 6; i++) 
+  if (atoi(passiveIP) <= 0xFF)
   {
-    tStr = strtok(NULL, "(,");
-    
-    //FTP_LOGDEBUG1("tStr =", tStr);
-    
-    if (tStr == NULL) 
-    {
-      FTP_LOGDEBUG(F("Bad PASV Answer"));
-      
-      CloseConnection();
-      return;
-    }
-    
-    array_pasv[i] = atoi(tStr);
+		char *tStr = strtok(outBuf, "(,");
+		int array_pasv[6];
+		
+		for ( int i = 0; i < 6; i++) 
+		{
+		  tStr = strtok(NULL, "(,");
+		  
+		  //FTP_LOGDEBUG1("tStr =", tStr);
+		  
+		  if (tStr == NULL) 
+		  {
+		    FTP_LOGDEBUG(F("Bad PASV Answer"));
+		    
+		    CloseConnection();
+		    return;
+		  }
+		  
+		  array_pasv[i] = atoi(tStr);
+		}
+		
+		unsigned int hiPort, loPort;
+		hiPort = array_pasv[4] << 8;
+		loPort = array_pasv[5] & 255;
+
+		_dataAddress = IPAddress(array_pasv[0],array_pasv[1],array_pasv[2],array_pasv[3]);
+
+		_dataPort = hiPort | loPort;
+		
+		FTP_LOGDEBUG1(F("Data port: "), _dataPort);
   }
-  
-  unsigned int hiPort, loPort;
-  hiPort = array_pasv[4] << 8;
-  loPort = array_pasv[5] & 255;
+  else
+  {
+		// Using with old style PASV answer, such as `FTP_Server_Teensy41` library
 
-  _dataAddress = IPAddress(array_pasv[0],array_pasv[1],array_pasv[2],array_pasv[3]);
+		//char *subStr = strchr(outBuf, '(') + 1;
+		char *ptr = strtok(passiveIP, ",");
+		uint32_t ret = strtoul( ptr, &tmpPtr, 10 );
 
-  _dataPort = hiPort | loPort;
-  
-  FTP_LOGDEBUG1(F("Data port: "), _dataPort);
+		// get IP of data client
+		_dataAddress = IPAddress(ret);
 
-#else
+		passiveIP = strchr(outBuf, ')');
+		ptr = strtok(passiveIP, "port ");
 
-  // Using with old style PASV answer, such as `FTP_Server_Teensy41` library
-
-  char *subStr = strchr(outBuf, '(') + 1;
-  char *ptr = strtok(subStr, ",");
-  uint32_t ret = strtoul( ptr, &tmpPtr, 10 );
-
-  // get IP of data client
-  _dataAddress = IPAddress(ret);
-
-  subStr = strchr(outBuf, ')');
-  ptr = strtok(subStr, "port ");
-
-  _dataPort = strtol( ptr, &tmpPtr, 10 );
- 
-#endif
+		_dataPort = strtol( ptr, &tmpPtr, 10 );
+  }
 
   FTP_LOGINFO3(F("_dataAddress: "), _dataAddress, F(", Data port: "), _dataPort);
 

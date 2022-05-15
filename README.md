@@ -1331,14 +1331,14 @@ ftp.DownloadFile(fileName, downloaded_file, fileSize, false);
 
 #### 1. File [FTPClient_DownloadFile.ino](examples/Ethernet/FTPClient_DownloadFile/FTPClient_DownloadFile.ino)
 
-https://github.com/khoih-prog/FTPClient_Generic/blob/4a26d8e358916be0d90633a67b3b8b725050e6c1/examples/Ethernet/FTPClient_DownloadFile/FTPClient_DownloadFile.ino#L13-L334
+https://github.com/khoih-prog/FTPClient_Generic/blob/a72a6cd7859491add0929ee4967dbd4c1705b73c/examples/Ethernet/FTPClient_DownloadFile/FTPClient_DownloadFile.ino#L13-L349
 
 
 ---
 
 #### 2. File [defines.h](examples/Ethernet/FTPClient_DownloadFile/defines.h)
 
-https://github.com/khoih-prog/FTPClient_Generic/blob/4a26d8e358916be0d90633a67b3b8b725050e6c1/examples/Ethernet/FTPClient_DownloadFile/defines.h#L12-L486
+https://github.com/khoih-prog/FTPClient_Generic/blob/a72a6cd7859491add0929ee4967dbd4c1705b73c/examples/Ethernet/FTPClient_DownloadFile/defines.h#L12-L486
 
 ---
 ---
@@ -1352,7 +1352,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on TEENSY 4.0 with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.2.0
+FTPCLIENT_GENERIC v1.2.1
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -1430,7 +1430,7 @@ The following is debug terminal output when running example [FTPClient_UploadIma
 
 ```
 Starting FTPClient_UploadImage on Nano RP2040 Connect with WiFiNINA using WiFiNINA_Generic Library
-FTPCLIENT_GENERIC v1.2.0
+FTPCLIENT_GENERIC v1.2.1
 Connecting WiFi
 IP address: 192.168.2.117
 [FTP] Connecting to:  192.168.2.241
@@ -1497,7 +1497,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on PORTENTA_H7_M7 with Ethernet using Portenta_Ethernet Library
-FTPCLIENT_GENERIC v1.2.0
+FTPCLIENT_GENERIC v1.2.1
 [EWS] ======== USE_PORTENTA_H7_ETHERNET ========
 Using mac index = 13
 Connected! IP address: 192.168.2.123
@@ -1596,7 +1596,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_UploadImage on MBED RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.2.0
+FTPCLIENT_GENERIC v1.2.1
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 19
@@ -1682,7 +1682,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on NUCLEO_L552ZE_Q with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.2.0
+FTPCLIENT_GENERIC v1.2.1
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -1798,7 +1798,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile_STM32_LAN8742A on NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
-FTPCLIENT_GENERIC v1.2.0
+FTPCLIENT_GENERIC v1.2.1
 EthernetWebServer_STM32 v1.5.0
 Connected! IP address: 192.168.2.124
 [FTP] Connecting to:  192.168.2.241
@@ -1897,7 +1897,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on ITSYBITSY_M4 with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.2.0
+FTPCLIENT_GENERIC v1.2.1
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 25
@@ -2012,7 +2012,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_UploadImage on NRF52840_FEATHER with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.2.0
+FTPCLIENT_GENERIC v1.2.1
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 25
@@ -2099,7 +2099,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on SAMD_NANO_33_IOT with WiFiNINA using WiFiNINA_Generic Library
-FTPCLIENT_GENERIC v1.2.0
+FTPCLIENT_GENERIC v1.2.1
 Connecting WiFi
 IP address: 192.168.2.118
 [FTP] Connecting to:  192.168.2.241
@@ -2199,7 +2199,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on ESP32S3_DEV with ESP WiFi using WiFi Library
-FTPCLIENT_GENERIC v1.2.0
+FTPCLIENT_GENERIC v1.2.1
 Connecting WiFi
 .........
 IP address: 192.168.2.115
@@ -2298,7 +2298,7 @@ The following is debug terminal output when running example [FTPClient_UploadIma
 
 ```
 Starting FTPClient_UploadImage on TEENSY 4.1 with NativeEthernet
-FTPCLIENT_GENERIC v1.2.0
+FTPCLIENT_GENERIC v1.2.1
 [EWS] ======== USE_NATIVE_ETHERNET ========
 [EWS] =====================================
 Using mac index = 6
@@ -2415,7 +2415,7 @@ Submit issues to: [FTPClient_Generic issues](https://github.com/khoih-prog/FTPCl
 26. Add support to [`WiFi101 library`](https://www.arduino.cc/en/Reference/WiFi101)
 27. Add support to new **ESP32-S2, ESP32-S3 and ESP32_C3**
 28. Add support to other new FTP Servers, such as [`vsftpd`](https://ubuntu.com/server/docs/service-ftp) in Linux, Ubuntu, Rasbberry Pi, etc.
-
+29. Auto detect server response type in **PASV** mode
 
 ---
 ---
