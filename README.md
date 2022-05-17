@@ -109,6 +109,7 @@
   * [ 9. FTPClient_DownloadFile on SAMD_NANO_33_IOT with WiFiNINA using WiFiNINA_Generic Library](#9-FTPClient_DownloadFile-on-SAMD_NANO_33_IOT-with-WiFiNINA-using-WiFiNINA_Generic-Library)
   * [10. FTPClient_DownloadFile on ESP32S3_DEV with ESP WiFi using WiFi Library](#10-FTPClient_DownloadFile-on-ESP32S3_DEV-with-ESP-WiFi-using-WiFi-Library)
   * [11. FTPClient_UploadImage on TEENSY 4.1 with NativeEthernet](#11-FTPClient_UploadImage-on-TEENSY-41-with-NativeEthernet)
+  * [12. FTPClient_UploadImage on TEENSY 4.1 with QNEthernet](#12-FTPClient_UploadImage-on-TEENSY-41-with-QNEthernet)
 * [Debug](#debug)
 * [Troubleshooting](#troubleshooting)
 * [Issues](#issues)
