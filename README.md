@@ -2350,7 +2350,7 @@ Writing hello_world.txt
 
 ---
 
-#### 12. FTPClient_UploadImage on TEENSY 4.1 with NativeEthernet
+#### 12. FTPClient_UploadImage on TEENSY 4.1 with QNEthernet
 
 The following is debug terminal output and directory listing after running example [FTPClient_UploadImage](examples/QNEthernet/FTPClient_UploadImage) on TEENSY 4.1 with using QNEthernet, connecting to [`vsftpd`](https://ubuntu.com/server/docs/service-ftp) server
 
