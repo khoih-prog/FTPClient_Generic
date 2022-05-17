@@ -9,7 +9,7 @@
     
   Built by Khoi Hoang https://github.com/khoih-prog/FTPClient_Generic
   
-  Version: 1.2.1
+  Version: 1.3.0
     
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
@@ -17,6 +17,7 @@
   1.1.0   K Hoang      13/05/2022 Add support to Teensy 4.1 using QNEthernet or NativeEthernet
   1.2.0   K Hoang      14/05/2022 Add support to other FTP Servers. Fix bug
   1.2.1   K Hoang      14/05/2022 Auto detect server response type in PASV mode
+  1.3.0   K Hoang      16/05/2022 Fix uploading issue of large files for WiFi, QNEthernet
  *****************************************************************************************************************************/
 
 #pragma once
@@ -26,13 +27,13 @@
 
 /////////////////////////////////////////////////////////
 
-#define FTPCLIENT_GENERIC_VERSION            "FTPCLIENT_GENERIC v1.2.1"
+#define FTPCLIENT_GENERIC_VERSION            "FTPCLIENT_GENERIC v1.3.0"
 
 #define FTPCLIENT_GENERIC_VERSION_MAJOR      1
-#define FTPCLIENT_GENERIC_VERSION_MINOR      2
-#define FTPCLIENT_GENERIC_VERSION_PATCH      1
+#define FTPCLIENT_GENERIC_VERSION_MINOR      3
+#define FTPCLIENT_GENERIC_VERSION_PATCH      0
 
-#define FTPCLIENT_GENERIC_VERSION_INT        1002001
+#define FTPCLIENT_GENERIC_VERSION_INT        1003000
 
 /////////////////////////////////////////////////////////
 

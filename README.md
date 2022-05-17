@@ -286,13 +286,13 @@ This [**FTPClient_Generic library**](https://github.com/khoih-prog/FTPClient_Gen
  8. [`Adafruit nRF52 v1.3.0+`](https://github.com/adafruit/Adafruit_nRF52_Arduino) for nRF52 boards such as Adafruit NRF52840_FEATHER, NRF52832_FEATHER, NRF52840_FEATHER_SENSE, NRF52840_ITSYBITSY, NRF52840_CIRCUITPLAY, NRF52840_CLUE, NRF52840_METRO, NRF52840_PCA10056, PARTICLE_XENON, **NINA_B302_ublox**, etc. [![GitHub release](https://img.shields.io/github/release/adafruit/Adafruit_nRF52_Arduino.svg)](https://github.com/adafruit/Adafruit_nRF52_Arduino/releases/latest)
  9. [`ESP32 Core 2.0.3+`](https://github.com/espressif/arduino-esp32) for ESP32-based boards. [![Latest release](https://img.shields.io/github/release/espressif/arduino-esp32.svg)](https://github.com/espressif/arduino-esp32/releases/latest/)
 10. [`ESP8266 Core 3.0.2+`](https://github.com/esp8266/Arduino) for ESP8266-based boards. [![Latest release](https://img.shields.io/github/release/esp8266/Arduino.svg)](https://github.com/esp8266/Arduino/releases/latest/). To use ESP8266 core 2.7.1+ for LittleFS.
-11. [`ArduinoCore-mbed mbed_rp2040, mbed_nano, mbed_portenta core 3.0.1+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino (Use Arduino Board Manager) **Portenta_H7, RP2040-based boards, such as Nano_RP2040_Connect, RASPBERRY_PI_PICO**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest)
+11. [`ArduinoCore-mbed mbed_rp2040, mbed_nano, mbed_portenta core 3.1.1+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino (Use Arduino Board Manager) **Portenta_H7, RP2040-based boards, such as Nano_RP2040_Connect, RASPBERRY_PI_PICO**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest)
 12. [`Earle Philhower's arduino-pico core v2.0.1+`](https://github.com/earlephilhower/arduino-pico) for RP2040-based boards such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, etc. [![GitHub release](https://img.shields.io/github/release/earlephilhower/arduino-pico.svg)](https://github.com/earlephilhower/arduino-pico/releases/latest)
 13. [`Arduino megaAVR core 1.8.7+`](https://github.com/arduino/ArduinoCore-megaavr/releases) for Arduino megaAVR boards such as **Arduino UNO WiFi Rev2, AVR_NANO_EVERY, etc.**
 14. [`Functional-Vlpp library v1.0.2+`](https://github.com/khoih-prog/functional-vlpp) to use server's lambda function. To install. check [![arduino-library-badge](https://www.ardu-badge.com/badge/Functional-Vlpp.svg?)](https://www.ardu-badge.com/Functional-Vlpp)
 15. Depending on which Ethernet card you're using:
    - [`Ethernet_Generic library v2.3.0+`](https://github.com/khoih-prog/Ethernet_Generic) for W5100, W5200 and W5500/WIZ550io/WIZ850io/USR-ES1 with Wiznet W5500 chip.  [![GitHub release](https://img.shields.io/github/release/khoih-prog/Ethernet_Generic.svg)](https://github.com/khoih-prog/Ethernet_Generic/releases/latest)
-   - [`EthernetENC library v2.0.2+`](https://github.com/jandrassy/EthernetENC) for ENC28J60. [![GitHub release](https://img.shields.io/github/release/jandrassy/EthernetENC.svg)](https://github.com/jandrassy/EthernetENC/releases/latest).
+   - [`EthernetENC library v2.0.3+`](https://github.com/jandrassy/EthernetENC) for ENC28J60. [![GitHub release](https://img.shields.io/github/release/jandrassy/EthernetENC.svg)](https://github.com/jandrassy/EthernetENC/releases/latest).
    - [`UIPEthernet library v2.0.12+`](https://github.com/UIPEthernet/UIPEthernet) for ENC28J60. [![GitHub release](https://img.shields.io/github/release/UIPEthernet/UIPEthernet.svg)](https://github.com/UIPEthernet/UIPEthernet/releases/latest)
    - [`NativeEthernet Library version stable111+`](https://github.com/vjmuzik/NativeEthernet) for Teensy 4.1 built-in Ethernet. **From v1.1.0**
    - [`QNEthernet Library version v0.14.0+`](https://github.com/ssilverman/QNEthernet) for Teensy 4.1 built-in Ethernet. **From v1.1.0**
@@ -1352,7 +1352,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on TEENSY 4.0 with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.2.1
+FTPCLIENT_GENERIC v1.3.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -1430,7 +1430,7 @@ The following is debug terminal output when running example [FTPClient_UploadIma
 
 ```
 Starting FTPClient_UploadImage on Nano RP2040 Connect with WiFiNINA using WiFiNINA_Generic Library
-FTPCLIENT_GENERIC v1.2.1
+FTPCLIENT_GENERIC v1.3.0
 Connecting WiFi
 IP address: 192.168.2.117
 [FTP] Connecting to:  192.168.2.241
@@ -1497,7 +1497,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on PORTENTA_H7_M7 with Ethernet using Portenta_Ethernet Library
-FTPCLIENT_GENERIC v1.2.1
+FTPCLIENT_GENERIC v1.3.0
 [EWS] ======== USE_PORTENTA_H7_ETHERNET ========
 Using mac index = 13
 Connected! IP address: 192.168.2.123
@@ -1596,7 +1596,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_UploadImage on MBED RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.2.1
+FTPCLIENT_GENERIC v1.3.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 19
@@ -1682,7 +1682,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on NUCLEO_L552ZE_Q with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.2.1
+FTPCLIENT_GENERIC v1.3.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -1798,7 +1798,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile_STM32_LAN8742A on NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
-FTPCLIENT_GENERIC v1.2.1
+FTPCLIENT_GENERIC v1.3.0
 EthernetWebServer_STM32 v1.5.0
 Connected! IP address: 192.168.2.124
 [FTP] Connecting to:  192.168.2.241
@@ -1897,7 +1897,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on ITSYBITSY_M4 with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.2.1
+FTPCLIENT_GENERIC v1.3.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 25
@@ -2012,7 +2012,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_UploadImage on NRF52840_FEATHER with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.2.1
+FTPCLIENT_GENERIC v1.3.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 25
@@ -2099,7 +2099,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on SAMD_NANO_33_IOT with WiFiNINA using WiFiNINA_Generic Library
-FTPCLIENT_GENERIC v1.2.1
+FTPCLIENT_GENERIC v1.3.0
 Connecting WiFi
 IP address: 192.168.2.118
 [FTP] Connecting to:  192.168.2.241
@@ -2199,7 +2199,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on ESP32S3_DEV with ESP WiFi using WiFi Library
-FTPCLIENT_GENERIC v1.2.1
+FTPCLIENT_GENERIC v1.3.0
 Connecting WiFi
 .........
 IP address: 192.168.2.115
@@ -2298,7 +2298,7 @@ The following is debug terminal output when running example [FTPClient_UploadIma
 
 ```
 Starting FTPClient_UploadImage on TEENSY 4.1 with NativeEthernet
-FTPCLIENT_GENERIC v1.2.1
+FTPCLIENT_GENERIC v1.3.0
 [EWS] ======== USE_NATIVE_ETHERNET ========
 [EWS] =====================================
 Using mac index = 6
@@ -2345,6 +2345,75 @@ Writing hello_world.txt
 [FTP] Write File
 [FTP] Close File
 [FTP] Connection closed
+```
+
+---
+
+#### 12. FTPClient_UploadImage on TEENSY 4.1 with NativeEthernet
+
+The following is debug terminal output and directory listing after running example [FTPClient_UploadImage](examples/QNEthernet/FTPClient_UploadImage) on TEENSY 4.1 with using QNEthernet, connecting to [`vsftpd`](https://ubuntu.com/server/docs/service-ftp) server
+
+```
+Starting FTPClient_UploadImage on TEENSY 4.1 with QNEthernet
+FTPCLIENT_GENERIC v1.3.0
+[EWS] =========== USE_QN_ETHERNET ===========
+Initialize Ethernet using static IP => IP Address = 192.168.2.222
+[FTP] Connecting to:  192.168.2.112
+[FTP] Command connected
+[FTP] Send USER =  ftp_test
+[FTP] Send PASSWORD =  ftp_test
+[FTP] Send CWD
+[FTP] Send TYPE Type A
+[FTP] Send PASV
+[FTP] outBuf = 227 Entering Passive Mode (192,168,2,112,203,166).
+
+[FTP] Data port:  52134
+[FTP] _dataAddress:  192.168.2.112 , Data port:  52134
+[FTP] Data connection established
+[FTP] Send LIST
+[FTP] Result:  150 Here comes the directory listing.
+226 Directory send OK.
+NewDir
+hello_world.txt
+helloworld.txt
+Writing octocat.jpg, size = 51695
+[FTP] Send TYPE Type I
+[FTP] Send PASV
+[FTP] outBuf = 227 Entering Passive Mode (192,168,2,112,215,146).
+[FTP] Data port:  55186
+[FTP] _dataAddress:  192.168.2.112 , Data port:  55186
+[FTP] Data connection established
+[FTP] Send STOR
+[FTP] Writing
+[FTP] WriteData: datalen =  51695
+[FTP] Close File
+Writing hello_world.txt
+[FTP] Send TYPE Type A
+[FTP] Send PASV
+[FTP] outBuf = 227 Entering Passive Mode (192,168,2,112,127,205).
+[FTP] Data port:  32717
+[FTP] _dataAddress:  192.168.2.112 , Data port:  32717
+[FTP] Data connection established
+[FTP] Send STOR
+[FTP] Write File
+[FTP] Close File
+[FTP] Connection closed
+```
+
+- Directory listing
+
+```
+pi@raspberrypi-02:/home/ftp_test $ ls -la
+total 84
+drwxrwxrwx 3 ftp_test ftp_test  4096 May 16 21:26 .
+drwxr-xr-x 4 root     root      4096 May 14 16:55 ..
+-rw-r--r-- 1 ftp_test ftp_test   220 May 14 16:55 .bash_logout
+-rw-r--r-- 1 ftp_test ftp_test  3523 May 14 16:55 .bashrc
+-rwxrwxrwx 1 ftp_test ftp_test    11 May 16 21:26 hello_world.txt
+-rwxrwxrwx 1 ftp_test ftp_test    75 May 16 20:29 helloworld.txt
+drwx------ 2 ftp_test ftp_test  4096 May 16 20:19 NewDir
+-rw------- 1 ftp_test ftp_test 51695 May 16 21:26 octocat.jpg
+-rw-r--r-- 1 ftp_test ftp_test   807 May 14 16:55 .profile
 ```
 
 ---
@@ -2416,6 +2485,8 @@ Submit issues to: [FTPClient_Generic issues](https://github.com/khoih-prog/FTPCl
 27. Add support to new **ESP32-S2, ESP32-S3 and ESP32_C3**
 28. Add support to other new FTP Servers, such as [`vsftpd`](https://ubuntu.com/server/docs/service-ftp) in Linux, Ubuntu, Rasbberry Pi, etc.
 29. Auto detect server response type in **PASV** mode
+30. Fix uploading issue of large files for **WiFi, QNEthernet**
+
 
 ---
 ---
