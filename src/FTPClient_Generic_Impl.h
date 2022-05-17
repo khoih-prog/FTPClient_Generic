@@ -489,7 +489,7 @@ void FTPClient_Generic::RemoveDir(const char * dir)
   }
   
   client.print(COMMAND_REMOVE_DIR);
-  client.println(F(dir));
+  client.println(dir);
   
   GetFTPAnswer();
 }
