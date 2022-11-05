@@ -2,11 +2,11 @@
   FTPClient_UploadImage.ino
 
   FTP Client for Generic boards using SD, FS, etc.
-  
-  Based on and modified from 
-  
+
+  Based on and modified from
+
   1) esp32_ftpclient Library         https://github.com/ldab/ESP32_FTPClient
-    
+
   Built by Khoi Hoang https://github.com/khoih-prog/FTPClient_Generic
 ******************************************************************************/
 
@@ -25,25 +25,25 @@
 
 #if USING_VSFTP_SERVER
 
-  // Change according to your FTP server
-  char ftp_server[] = "192.168.2.112";
-  
-  char ftp_user[]   = "ftp_test";
-  char ftp_pass[]   = "ftp_test";
+	// Change according to your FTP server
+	char ftp_server[] = "192.168.2.112";
 
-  char dirName[]    = "/home/ftp_test";
-  char newDirName[] = "/home/ftp_test/NewDir";
+	char ftp_user[]   = "ftp_test";
+	char ftp_pass[]   = "ftp_test";
+
+	char dirName[]    = "/home/ftp_test";
+	char newDirName[] = "/home/ftp_test/NewDir";
 
 #else
 
-  // Change according to your FTP server
-  char ftp_server[] = "192.168.2.241";
-  
-  char ftp_user[]   = "teensy4x";
-  char ftp_pass[]   = "ftp_test";
+	// Change according to your FTP server
+	char ftp_server[] = "192.168.2.241";
 
-  char dirName[]    = "/";
-  char newDirName[] = "/NewDir";
+	char ftp_user[]   = "teensy4x";
+	char ftp_pass[]   = "ftp_test";
+
+	char dirName[]    = "/";
+	char newDirName[] = "/NewDir";
 
 #endif
 
@@ -52,79 +52,85 @@ FTPClient_Generic ftp (ftp_server, ftp_user, ftp_pass, 60000);
 
 void setup()
 {
-  Serial.begin( 115200 );
-  while (!Serial && millis() < 5000);
+	Serial.begin( 115200 );
 
-  delay(500);
+	while (!Serial && millis() < 5000);
 
-  Serial.print(F("\nStarting FTPClient_UploadImage on ")); Serial.print(BOARD_NAME);
-  Serial.print(F(" with ")); Serial.println(SHIELD_TYPE);
-  Serial.println(FTPCLIENT_GENERIC_VERSION);
+	delay(500);
 
-  WiFi.begin( WIFI_SSID, WIFI_PASS );
+	Serial.print(F("\nStarting FTPClient_UploadImage on "));
+	Serial.print(BOARD_NAME);
+	Serial.print(F(" with "));
+	Serial.println(SHIELD_TYPE);
+	Serial.println(FTPCLIENT_GENERIC_VERSION);
 
-  Serial.print("Connecting WiFi, SSID = "); Serial.println(WIFI_SSID);
+	WiFi.begin( WIFI_SSID, WIFI_PASS );
 
-  while (WiFi.status() != WL_CONNECTED)
-  {
-    delay(500);
-    Serial.print(".");
-  }
+	Serial.print("Connecting WiFi, SSID = ");
+	Serial.println(WIFI_SSID);
 
-  Serial.print("\nIP address: ");
-  Serial.println(WiFi.localIP());
+	while (WiFi.status() != WL_CONNECTED)
+	{
+		delay(500);
+		Serial.print(".");
+	}
+
+	Serial.print("\nIP address: ");
+	Serial.println(WiFi.localIP());
 
 #if (ESP32)
-  Serial.print("Max Free Heap: "); Serial.println(ESP.getMaxAllocHeap());
-#endif  
-
-  ftp.OpenConnection();
-
-  //Change directory
-  ftp.ChangeWorkDir(dirName);
-
-  // Get the file size
-  String       list[128];
-
-  // Get the directory content in order to allocate buffer
-  // my server response => type=file;modify=20190101000010;size=18; helloworld.txt
-
-  ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
-  
-  ftp.ContentListWithListCommand("", list);
-
-  for (uint16_t i = 0; i < sizeof(list); i++)
-  {
-    if (list[i].length() > 0)
-      Serial.println(list[i]);
-    else
-      break;
-  }
-
-#if !(ESP8266)
-  // Make a new directory
-  //ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
-  //ftp.MakeDir("myNewDir");
-
-  // Create the new file and send the image
-  //ftp.ChangeWorkDir("myNewDir");
-  Serial.print("Writing octocat.jpg, size = "); Serial.println(sizeof(octocat_pic));
-  
-  ftp.InitFile(COMMAND_XFER_TYPE_BINARY);
-  ftp.NewFile("octocat.jpg");
-  ftp.WriteData( octocat_pic, sizeof(octocat_pic) );
-  ftp.CloseFile();
-
-  // Create the file new and write a string into it
-  Serial.println("Writing hello_world.txt");
-  
-  ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
-  ftp.NewFile("hello_world.txt");
-  ftp.Write("Hello World");
-  ftp.CloseFile();
+	Serial.print("Max Free Heap: ");
+	Serial.println(ESP.getMaxAllocHeap());
 #endif
 
-  ftp.CloseConnection();
+	ftp.OpenConnection();
+
+	//Change directory
+	ftp.ChangeWorkDir(dirName);
+
+	// Get the file size
+	String       list[128];
+
+	// Get the directory content in order to allocate buffer
+	// my server response => type=file;modify=20190101000010;size=18; helloworld.txt
+
+	ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
+
+	ftp.ContentListWithListCommand("", list);
+
+	for (uint16_t i = 0; i < sizeof(list); i++)
+	{
+		if (list[i].length() > 0)
+			Serial.println(list[i]);
+		else
+			break;
+	}
+
+#if !(ESP8266)
+	// Make a new directory
+	//ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
+	//ftp.MakeDir("myNewDir");
+
+	// Create the new file and send the image
+	//ftp.ChangeWorkDir("myNewDir");
+	Serial.print("Writing octocat.jpg, size = ");
+	Serial.println(sizeof(octocat_pic));
+
+	ftp.InitFile(COMMAND_XFER_TYPE_BINARY);
+	ftp.NewFile("octocat.jpg");
+	ftp.WriteData( octocat_pic, sizeof(octocat_pic) );
+	ftp.CloseFile();
+
+	// Create the file new and write a string into it
+	Serial.println("Writing hello_world.txt");
+
+	ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
+	ftp.NewFile("hello_world.txt");
+	ftp.Write("Hello World");
+	ftp.CloseFile();
+#endif
+
+	ftp.CloseConnection();
 }
 
 void loop()

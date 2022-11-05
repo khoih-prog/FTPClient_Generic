@@ -13,6 +13,7 @@
 
 
 * [Changelog](#changelog)
+  * [Releases v1.4.0](#releases-v140)
   * [Releases v1.3.0](#releases-v130)
   * [Releases v1.2.1](#releases-v121)
   * [Releases v1.2.0](#releases-v120)
@@ -23,6 +24,12 @@
 ---
 
 ## Changelog
+
+#### Releases v1.4.0
+
+1. Add support to ESP32 using Ethernet `W5x00` or `ENC28J60` with [`Ethernet_Generic`](https://github.com/khoih-prog/Ethernet_Generic) or [`EthernetENC`](https://github.com/jandrassy/EthernetENC) library
+2. Add astyle using `allman` style. Restyle the library
+3. Update `Packages' Patches`
 
 #### Releases v1.3.0
 

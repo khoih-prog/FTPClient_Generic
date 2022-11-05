@@ -2,15 +2,15 @@
   FTPClient_Generic.h
 
   FTP Client for Generic boards using SD, FS, etc.
-  
-  Based on and modified from 
-  
+
+  Based on and modified from
+
   1) esp32_ftpclient Library         https://github.com/ldab/ESP32_FTPClient
-    
+
   Built by Khoi Hoang https://github.com/khoih-prog/FTPClient_Generic
-  
-  Version: 1.3.0
-    
+
+  Version: 1.4.0
+
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
   1.0.0   K Hoang      11/05/2022 Initial porting and coding to support many more boards, using WiFi or Ethernet
@@ -18,6 +18,7 @@
   1.2.0   K Hoang      14/05/2022 Add support to other FTP Servers. Fix bug
   1.2.1   K Hoang      14/05/2022 Auto detect server response type in PASV mode
   1.3.0   K Hoang      16/05/2022 Fix uploading issue of large files for WiFi, QNEthernet
+  1.4.0   K Hoang      05/11/2022 Add support to ESP32/ESP8266 using Ethernet W5x00 or ENC28J60
  *****************************************************************************************************************************/
 
 #pragma once
@@ -27,13 +28,13 @@
 
 /////////////////////////////////////////////////////////
 
-#define FTPCLIENT_GENERIC_VERSION            "FTPCLIENT_GENERIC v1.3.0"
+#define FTPCLIENT_GENERIC_VERSION            "FTPCLIENT_GENERIC v1.4.0"
 
 #define FTPCLIENT_GENERIC_VERSION_MAJOR      1
-#define FTPCLIENT_GENERIC_VERSION_MINOR      3
+#define FTPCLIENT_GENERIC_VERSION_MINOR      4
 #define FTPCLIENT_GENERIC_VERSION_PATCH      0
 
-#define FTPCLIENT_GENERIC_VERSION_INT        1003000
+#define FTPCLIENT_GENERIC_VERSION_INT        1004000
 
 /////////////////////////////////////////////////////////
 

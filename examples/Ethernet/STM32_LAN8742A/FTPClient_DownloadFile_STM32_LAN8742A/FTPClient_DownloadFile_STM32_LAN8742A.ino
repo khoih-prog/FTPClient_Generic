@@ -25,25 +25,25 @@
 
 #if USING_VSFTP_SERVER
 
-  // Change according to your FTP server
-  char ftp_server[] = "192.168.2.112";
-  
-  char ftp_user[]   = "ftp_test";
-  char ftp_pass[]   = "ftp_test";
+	// Change according to your FTP server
+	char ftp_server[] = "192.168.2.112";
 
-  char dirName[]    = "/home/ftp_test";
-  char newDirName[] = "/home/ftp_test/NewDir";
+	char ftp_user[]   = "ftp_test";
+	char ftp_pass[]   = "ftp_test";
+
+	char dirName[]    = "/home/ftp_test";
+	char newDirName[] = "/home/ftp_test/NewDir";
 
 #else
 
-  // Change according to your FTP server
-  char ftp_server[] = "192.168.2.241";
-  
-  char ftp_user[]   = "teensy4x";
-  char ftp_pass[]   = "ftp_test";
+	// Change according to your FTP server
+	char ftp_server[] = "192.168.2.241";
 
-  char dirName[]    = "/";
-  char newDirName[] = "/NewDir";
+	char ftp_user[]   = "teensy4x";
+	char ftp_pass[]   = "ftp_test";
+
+	char dirName[]    = "/";
+	char newDirName[] = "/NewDir";
 
 #endif
 
@@ -54,113 +54,117 @@ char fileName[] = "helloworld.txt";
 
 
 void initEthernet()
-{ 
+{
 #if USE_ETHERNET_GENERIC
-  Serial.println(ETHERNET_GENERIC_VERSION);
+	Serial.println(ETHERNET_GENERIC_VERSION);
 #endif
-  
-  Serial.println(ETHERNET_WEBSERVER_STM32_VERSION);
+
+	Serial.println(ETHERNET_WEBSERVER_STM32_VERSION);
 
 #if !(USE_BUILTIN_ETHERNET)
-  #if (USING_SPI2)
-    #if defined(CUR_PIN_MISO)
-      ET_LOGWARN(F("Default SPI pinout:"));
-      ET_LOGWARN1(F("MOSI:"), CUR_PIN_MOSI);
-      ET_LOGWARN1(F("MISO:"), CUR_PIN_MISO);
-      ET_LOGWARN1(F("SCK:"),  CUR_PIN_SCK);
-      ET_LOGWARN1(F("SS:"),   CUR_PIN_SS);
-      ET_LOGWARN(F("========================="));
-    #endif
-  #else
-    ET_LOGWARN(F("Default SPI pinout:"));
-    ET_LOGWARN1(F("MOSI:"), MOSI);
-    ET_LOGWARN1(F("MISO:"), MISO);
-    ET_LOGWARN1(F("SCK:"),  SCK);
-    ET_LOGWARN1(F("SS:"),   SS);
-    ET_LOGWARN(F("========================="));
-  #endif
+#if (USING_SPI2)
+#if defined(CUR_PIN_MISO)
+	ET_LOGWARN(F("Default SPI pinout:"));
+	ET_LOGWARN1(F("MOSI:"), CUR_PIN_MOSI);
+	ET_LOGWARN1(F("MISO:"), CUR_PIN_MISO);
+	ET_LOGWARN1(F("SCK:"),  CUR_PIN_SCK);
+	ET_LOGWARN1(F("SS:"),   CUR_PIN_SS);
+	ET_LOGWARN(F("========================="));
+#endif
+#else
+	ET_LOGWARN(F("Default SPI pinout:"));
+	ET_LOGWARN1(F("MOSI:"), MOSI);
+	ET_LOGWARN1(F("MISO:"), MISO);
+	ET_LOGWARN1(F("SCK:"),  SCK);
+	ET_LOGWARN1(F("SS:"),   SS);
+	ET_LOGWARN(F("========================="));
+#endif
 #endif
 
 #if !(USE_BUILTIN_ETHERNET || USE_UIP_ETHERNET)
-  // For other boards, to change if necessary
-  #if ( USE_ETHERNET_GENERIC || USE_ETHERNET_ENC )
-  Ethernet.init (USE_THIS_SS_PIN);
+	// For other boards, to change if necessary
+#if ( USE_ETHERNET_GENERIC || USE_ETHERNET_ENC )
+	Ethernet.init (USE_THIS_SS_PIN);
 
-  #elif USE_CUSTOM_ETHERNET
-  // You have to add initialization for your Custom Ethernet here
-  // This is just an example to setCSPin to USE_THIS_SS_PIN, and can be not correct and enough
-  //Ethernet.init(USE_THIS_SS_PIN);
+#elif USE_CUSTOM_ETHERNET
+	// You have to add initialization for your Custom Ethernet here
+	// This is just an example to setCSPin to USE_THIS_SS_PIN, and can be not correct and enough
+	//Ethernet.init(USE_THIS_SS_PIN);
 
-  #endif  //( ( USE_ETHERNET_GENERIC || USE_ETHERNET_ENC )
+#endif  //( ( USE_ETHERNET_GENERIC || USE_ETHERNET_ENC )
 #endif
 
-  // start the ethernet connection and the server:
-  // Use DHCP dynamic IP and random mac
-  uint16_t index = millis() % NUMBER_OF_MAC;
-  // Use Static IP
-  //Ethernet.begin(mac[index], ip);
-  Ethernet.begin(mac[index]);
+	// start the ethernet connection and the server:
+	// Use DHCP dynamic IP and random mac
+	uint16_t index = millis() % NUMBER_OF_MAC;
+	// Use Static IP
+	//Ethernet.begin(mac[index], ip);
+	Ethernet.begin(mac[index]);
 
-  Serial.print(F("Connected! IP address: "));
-  Serial.println(Ethernet.localIP());
+	Serial.print(F("Connected! IP address: "));
+	Serial.println(Ethernet.localIP());
 }
 
 void setup()
 {
-  Serial.begin( 115200 );
-  while (!Serial && millis() < 5000);
+	Serial.begin( 115200 );
 
-  delay(500);
+	while (!Serial && millis() < 5000);
 
-  Serial.print(F("\nStarting FTPClient_DownloadFile_STM32_LAN8742A on ")); Serial.print(BOARD_NAME);
-  Serial.print(F(" with ")); Serial.println(SHIELD_TYPE);
-  Serial.println(FTPCLIENT_GENERIC_VERSION);
+	delay(500);
 
-  initEthernet();
+	Serial.print(F("\nStarting FTPClient_DownloadFile_STM32_LAN8742A on "));
+	Serial.print(BOARD_NAME);
+	Serial.print(F(" with "));
+	Serial.println(SHIELD_TYPE);
+	Serial.println(FTPCLIENT_GENERIC_VERSION);
+
+	initEthernet();
 
 #if (ESP32)
-  Serial.print("Max Free Heap: "); Serial.println(ESP.getMaxAllocHeap());
+	Serial.print("Max Free Heap: ");
+	Serial.println(ESP.getMaxAllocHeap());
 #endif
 
-  ftp.OpenConnection();
+	ftp.OpenConnection();
 
-  //Change directory
-  ftp.ChangeWorkDir(dirName);
+	//Change directory
+	ftp.ChangeWorkDir(dirName);
 
-  Serial.println("Creating new file helloworld.txt");
+	Serial.println("Creating new file helloworld.txt");
 
-  // Create a new file to use as the download example below:
-  ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
-  ftp.NewFile(fileName);
+	// Create a new file to use as the download example below:
+	ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
+	ftp.NewFile(fileName);
 
-  String textContent = String("Hi, I'm a new ASCII file created @ millis = ") + millis();
+	String textContent = String("Hi, I'm a new ASCII file created @ millis = ") + millis();
 
-  ftp.Write(textContent.c_str());
-  ftp.CloseFile();
+	ftp.Write(textContent.c_str());
+	ftp.CloseFile();
 
-  ////////////////////////////////////////
+	////////////////////////////////////////
 
-  ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
-  ftp.AppendFile(fileName);
+	ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
+	ftp.AppendFile(fileName);
 
-  textContent = String("\nAdded text @ millis = ") + millis();
-  
-  ftp.Write(textContent.c_str());
-  ftp.CloseFile();
+	textContent = String("\nAdded text @ millis = ") + millis();
 
-  ////////////////////////////////////////
+	ftp.Write(textContent.c_str());
+	ftp.CloseFile();
 
-  //Download the text file or read it
-  String response = "";
-  ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
-  ftp.DownloadString("helloworld.txt", response);
-  Serial.println("The file content is: " + response);
+	////////////////////////////////////////
 
-  ////////////////////////////////////////
+	//Download the text file or read it
+	String response = "";
+	ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
+	ftp.DownloadString("helloworld.txt", response);
+	Serial.println("The file content is: " + response);
 
-  Serial.println("CloseConnection");
+	////////////////////////////////////////
 
-  ftp.CloseConnection();
+	Serial.println("CloseConnection");
+
+	ftp.CloseConnection();
 }
 
 void loop()

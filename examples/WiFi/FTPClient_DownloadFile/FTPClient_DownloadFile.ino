@@ -25,25 +25,25 @@
 
 #if USING_VSFTP_SERVER
 
-  // Change according to your FTP server
-  char ftp_server[] = "192.168.2.112";
-  
-  char ftp_user[]   = "ftp_test";
-  char ftp_pass[]   = "ftp_test";
+	// Change according to your FTP server
+	char ftp_server[] = "192.168.2.112";
 
-  char dirName[]    = "/home/ftp_test";
-  char newDirName[] = "/home/ftp_test/NewDir";
+	char ftp_user[]   = "ftp_test";
+	char ftp_pass[]   = "ftp_test";
+
+	char dirName[]    = "/home/ftp_test";
+	char newDirName[] = "/home/ftp_test/NewDir";
 
 #else
 
-  // Change according to your FTP server
-  char ftp_server[] = "192.168.2.241";
-  
-  char ftp_user[]   = "teensy4x";
-  char ftp_pass[]   = "ftp_test";
+	// Change according to your FTP server
+	char ftp_server[] = "192.168.2.241";
 
-  char dirName[]    = "/";
-  char newDirName[] = "/NewDir";
+	char ftp_user[]   = "teensy4x";
+	char ftp_pass[]   = "ftp_test";
+
+	char dirName[]    = "/";
+	char newDirName[] = "/NewDir";
 
 #endif
 
@@ -54,92 +54,97 @@ char fileName[] = "helloworld.txt";
 
 void setup()
 {
-  Serial.begin( 115200 );
-  while (!Serial && millis() < 5000);
+	Serial.begin( 115200 );
 
-  delay(500);
+	while (!Serial && millis() < 5000);
 
-  Serial.print(F("\nStarting FTPClient_DownloadFile on ")); Serial.print(BOARD_NAME);
-  Serial.print(F(" with ")); Serial.println(SHIELD_TYPE);
-  Serial.println(FTPCLIENT_GENERIC_VERSION);
+	delay(500);
 
-  WiFi.begin( WIFI_SSID, WIFI_PASS );
+	Serial.print(F("\nStarting FTPClient_DownloadFile on "));
+	Serial.print(BOARD_NAME);
+	Serial.print(F(" with "));
+	Serial.println(SHIELD_TYPE);
+	Serial.println(FTPCLIENT_GENERIC_VERSION);
 
-  Serial.print("Connecting WiFi, SSID = "); Serial.println(WIFI_SSID);
+	WiFi.begin( WIFI_SSID, WIFI_PASS );
 
-  while (WiFi.status() != WL_CONNECTED)
-  {
-    delay(500);
-    Serial.print(".");
-  }
+	Serial.print("Connecting WiFi, SSID = ");
+	Serial.println(WIFI_SSID);
 
-  Serial.print("\nIP address: ");
-  Serial.println(WiFi.localIP());
+	while (WiFi.status() != WL_CONNECTED)
+	{
+		delay(500);
+		Serial.print(".");
+	}
+
+	Serial.print("\nIP address: ");
+	Serial.println(WiFi.localIP());
 
 #if (ESP32)
-  Serial.print("Max Free Heap: "); Serial.println(ESP.getMaxAllocHeap());
+	Serial.print("Max Free Heap: ");
+	Serial.println(ESP.getMaxAllocHeap());
 #endif
 
-  ftp.OpenConnection();
+	ftp.OpenConnection();
 
-  //Change directory
-  ftp.ChangeWorkDir(dirName);
+	//Change directory
+	ftp.ChangeWorkDir(dirName);
 
-  Serial.println("Creating new file helloworld.txt");
+	Serial.println("Creating new file helloworld.txt");
 
-  // Create a new file to use as the download example below:
-  ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
-  ftp.NewFile(fileName);
+	// Create a new file to use as the download example below:
+	ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
+	ftp.NewFile(fileName);
 
-  String textContent = String("Hi, I'm a new ASCII file created @ millis = ") + millis();
+	String textContent = String("Hi, I'm a new ASCII file created @ millis = ") + millis();
 
-  ftp.Write(textContent.c_str());
-  ftp.CloseFile();
+	ftp.Write(textContent.c_str());
+	ftp.CloseFile();
 
-  ////////////////////////////////////////
+	////////////////////////////////////////
 
-  ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
-  ftp.AppendFile(fileName);
+	ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
+	ftp.AppendFile(fileName);
 
-  textContent = String("\nAdded text @ millis = ") + millis();
-  
-  ftp.Write(textContent.c_str());
-  ftp.CloseFile();
+	textContent = String("\nAdded text @ millis = ") + millis();
 
-  ////////////////////////////////////////
+	ftp.Write(textContent.c_str());
+	ftp.CloseFile();
 
-  //Download the text file or read it
-  String response = "";
-  ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
-  ftp.DownloadString("helloworld.txt", response);
-  Serial.println("The file content is: " + response);
+	////////////////////////////////////////
 
-  // Get the file size
-  String       list[128];
+	//Download the text file or read it
+	String response = "";
+	ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
+	ftp.DownloadString("helloworld.txt", response);
+	Serial.println("The file content is: " + response);
 
-  // Get the directory content in order to allocate buffer
-  // my server response => type=file;modify=20190101000010;size=18; helloworld.txt
+	// Get the file size
+	String       list[128];
 
-  ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
-  
-  ftp.ContentListWithListCommand("", list);
+	// Get the directory content in order to allocate buffer
+	// my server response => type=file;modify=20190101000010;size=18; helloworld.txt
 
-  for (uint16_t i = 0; i < sizeof(list); i++)
-  {
-    if (list[i].length() > 0)
-    {
-      list[i].toLowerCase();
+	ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
 
-      // Print the directory details
-      Serial.println(list[i]);
-    }
-    else
-      break;
-  }
+	ftp.ContentListWithListCommand("", list);
 
-  Serial.println("CloseConnection");
+	for (uint16_t i = 0; i < sizeof(list); i++)
+	{
+		if (list[i].length() > 0)
+		{
+			list[i].toLowerCase();
 
-  ftp.CloseConnection();
+			// Print the directory details
+			Serial.println(list[i]);
+		}
+		else
+			break;
+	}
+
+	Serial.println("CloseConnection");
+
+	ftp.CloseConnection();
 }
 
 void loop()
