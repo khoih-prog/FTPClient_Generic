@@ -27,7 +27,7 @@
 
 #### Releases v1.4.0
 
-1. Add support to ESP32 using Ethernet `W5x00` or `ENC28J60` with [`Ethernet_Generic`](https://github.com/khoih-prog/Ethernet_Generic) or [`EthernetENC`](https://github.com/jandrassy/EthernetENC) library
+1. Add support to `ESP32/ESP8266` using Ethernet `W5x00` or `ENC28J60` with [`Ethernet_Generic`](https://github.com/khoih-prog/Ethernet_Generic) or [`EthernetENC`](https://github.com/jandrassy/EthernetENC) library
 2. Add astyle using `allman` style. Restyle the library
 3. Update `Packages' Patches`
 
