@@ -110,6 +110,7 @@
   * [10. FTPClient_DownloadFile on ESP32S3_DEV with ESP WiFi using WiFi Library](#10-FTPClient_DownloadFile-on-ESP32S3_DEV-with-ESP-WiFi-using-WiFi-Library)
   * [11. FTPClient_UploadImage on TEENSY 4.1 with NativeEthernet](#11-FTPClient_UploadImage-on-TEENSY-41-with-NativeEthernet)
   * [12. FTPClient_UploadImage on TEENSY 4.1 with QNEthernet](#12-FTPClient_UploadImage-on-TEENSY-41-with-QNEthernet)
+  * [13. FTPClient_DownloadFile on ESP32_DEV with W5x00 using Ethernet_Generic Library](#13-FTPClient_DownloadFile-on-ESP32_DEV-with-W5x00-using-Ethernet_Generic-Library)
 * [Debug](#debug)
 * [Troubleshooting](#troubleshooting)
 * [Issues](#issues)
@@ -278,31 +279,31 @@ This [**FTPClient_Generic library**](https://github.com/khoih-prog/FTPClient_Gen
 ## Prerequisites
 
  1. [`Arduino IDE 1.8.19+` for Arduino](https://github.com/arduino/Arduino). [![GitHub release](https://img.shields.io/github/release/arduino/Arduino.svg)](https://github.com/arduino/Arduino/releases/latest)
- 2. [`Arduino AVR core 1.8.5+`](https://github.com/arduino/ArduinoCore-avr) for Arduino (Use Arduino Board Manager) AVR boards. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-avr.svg)](https://github.com/arduino/ArduinoCore-avr/releases/latest)
- 3. [`Teensy core v1.56+`](https://www.pjrc.com/teensy/td_download.html) for Teensy (4.1, 4.0, 3.6, 3.5, 3,2, 3.1, 3.0) boards.
+ 2. [`Arduino AVR core 1.8.6+`](https://github.com/arduino/ArduinoCore-avr) for Arduino (Use Arduino Board Manager) AVR boards. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-avr.svg)](https://github.com/arduino/ArduinoCore-avr/releases/latest)
+ 3. [`Teensy core v1.57+`](https://www.pjrc.com/teensy/td_download.html) for Teensy (4.1, 4.0, 3.6, 3.5, 3,2, 3.1, 3.0) boards.
  4. [`Arduino SAM DUE core v1.6.12+`](https://github.com/arduino/ArduinoCore-sam) for SAM DUE ARM Cortex-M3 boards.
  5. [`Arduino SAMD core 1.8.13+`](https://github.com/arduino/ArduinoCore-samd) for SAMD ARM Cortex-M0+ boards. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-samd.svg)](https://github.com/arduino/ArduinoCore-samd/releases/latest)
- 6. [`Adafruit SAMD core 1.7.10+`](https://github.com/adafruit/ArduinoCore-samd) for SAMD ARM Cortex-M0+ and M4 boards (Nano 33 IoT, etc.). [![GitHub release](https://img.shields.io/github/release/adafruit/ArduinoCore-samd.svg)](https://github.com/adafruit/ArduinoCore-samd/releases/latest)
- 7. [`Seeeduino SAMD core 1.8.2+`](https://github.com/Seeed-Studio/ArduinoCore-samd) for SAMD21/SAMD51 boards (XIAO M0, Wio Terminal, etc.). [![Latest release](https://img.shields.io/github/release/Seeed-Studio/ArduinoCore-samd.svg)](https://github.com/Seeed-Studio/ArduinoCore-samd/releases/latest/)
+ 6. [`Adafruit SAMD core 1.7.11+`](https://github.com/adafruit/ArduinoCore-samd) for SAMD ARM Cortex-M0+ and M4 boards (Nano 33 IoT, etc.). [![GitHub release](https://img.shields.io/github/release/adafruit/ArduinoCore-samd.svg)](https://github.com/adafruit/ArduinoCore-samd/releases/latest)
+ 7. [`Seeeduino SAMD core 1.8.3+`](https://github.com/Seeed-Studio/ArduinoCore-samd) for SAMD21/SAMD51 boards (XIAO M0, Wio Terminal, etc.). [![Latest release](https://img.shields.io/github/release/Seeed-Studio/ArduinoCore-samd.svg)](https://github.com/Seeed-Studio/ArduinoCore-samd/releases/latest/)
  8. [`Adafruit nRF52 v1.3.0+`](https://github.com/adafruit/Adafruit_nRF52_Arduino) for nRF52 boards such as Adafruit NRF52840_FEATHER, NRF52832_FEATHER, NRF52840_FEATHER_SENSE, NRF52840_ITSYBITSY, NRF52840_CIRCUITPLAY, NRF52840_CLUE, NRF52840_METRO, NRF52840_PCA10056, PARTICLE_XENON, **NINA_B302_ublox**, etc. [![GitHub release](https://img.shields.io/github/release/adafruit/Adafruit_nRF52_Arduino.svg)](https://github.com/adafruit/Adafruit_nRF52_Arduino/releases/latest)
- 9. [`ESP32 Core 2.0.3+`](https://github.com/espressif/arduino-esp32) for ESP32-based boards. [![Latest release](https://img.shields.io/github/release/espressif/arduino-esp32.svg)](https://github.com/espressif/arduino-esp32/releases/latest/)
+ 9. [`ESP32 Core 2.0.5+`](https://github.com/espressif/arduino-esp32) for ESP32-based boards. [![Latest release](https://img.shields.io/github/release/espressif/arduino-esp32.svg)](https://github.com/espressif/arduino-esp32/releases/latest/)
 10. [`ESP8266 Core 3.0.2+`](https://github.com/esp8266/Arduino) for ESP8266-based boards. [![Latest release](https://img.shields.io/github/release/esp8266/Arduino.svg)](https://github.com/esp8266/Arduino/releases/latest/). To use ESP8266 core 2.7.1+ for LittleFS.
-11. [`ArduinoCore-mbed mbed_rp2040, mbed_nano, mbed_portenta core 3.1.1+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino (Use Arduino Board Manager) **Portenta_H7, RP2040-based boards, such as Nano_RP2040_Connect, RASPBERRY_PI_PICO**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest)
-12. [`Earle Philhower's arduino-pico core v2.0.1+`](https://github.com/earlephilhower/arduino-pico) for RP2040-based boards such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, etc. [![GitHub release](https://img.shields.io/github/release/earlephilhower/arduino-pico.svg)](https://github.com/earlephilhower/arduino-pico/releases/latest)
+11. [`ArduinoCore-mbed mbed_rp2040, mbed_nano, mbed_portenta core 3.4.1+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino (Use Arduino Board Manager) **Portenta_H7, RP2040-based boards, such as Nano_RP2040_Connect, RASPBERRY_PI_PICO**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest)
+12. [`Earle Philhower's arduino-pico core v2.6.3+`](https://github.com/earlephilhower/arduino-pico) for RP2040-based boards such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, etc. [![GitHub release](https://img.shields.io/github/release/earlephilhower/arduino-pico.svg)](https://github.com/earlephilhower/arduino-pico/releases/latest)
 13. [`Arduino megaAVR core 1.8.7+`](https://github.com/arduino/ArduinoCore-megaavr/releases) for Arduino megaAVR boards such as **Arduino UNO WiFi Rev2, AVR_NANO_EVERY, etc.**
 14. [`Functional-Vlpp library v1.0.2+`](https://github.com/khoih-prog/functional-vlpp) to use server's lambda function. To install. check [![arduino-library-badge](https://www.ardu-badge.com/badge/Functional-Vlpp.svg?)](https://www.ardu-badge.com/Functional-Vlpp)
 15. Depending on which Ethernet card you're using:
-   - [`Ethernet_Generic library v2.3.0+`](https://github.com/khoih-prog/Ethernet_Generic) for W5100, W5200 and W5500/WIZ550io/WIZ850io/USR-ES1 with Wiznet W5500 chip.  [![GitHub release](https://img.shields.io/github/release/khoih-prog/Ethernet_Generic.svg)](https://github.com/khoih-prog/Ethernet_Generic/releases/latest)
+   - [`Ethernet_Generic library v2.6.2+`](https://github.com/khoih-prog/Ethernet_Generic) for W5100, W5200 and W5500/WIZ550io/WIZ850io/USR-ES1 with Wiznet W5500 chip.  [![GitHub release](https://img.shields.io/github/release/khoih-prog/Ethernet_Generic.svg)](https://github.com/khoih-prog/Ethernet_Generic/releases/latest)
    - [`EthernetENC library v2.0.3+`](https://github.com/jandrassy/EthernetENC) for ENC28J60. [![GitHub release](https://img.shields.io/github/release/jandrassy/EthernetENC.svg)](https://github.com/jandrassy/EthernetENC/releases/latest).
    - [`UIPEthernet library v2.0.12+`](https://github.com/UIPEthernet/UIPEthernet) for ENC28J60. [![GitHub release](https://img.shields.io/github/release/UIPEthernet/UIPEthernet.svg)](https://github.com/UIPEthernet/UIPEthernet/releases/latest)
    - [`NativeEthernet Library version stable111+`](https://github.com/vjmuzik/NativeEthernet) for Teensy 4.1 built-in Ethernet. **From v1.1.0**
-   - [`QNEthernet Library version v0.14.0+`](https://github.com/ssilverman/QNEthernet) for Teensy 4.1 built-in Ethernet. **From v1.1.0**
+   - [`QNEthernet Library version v0.16.0+`](https://github.com/ssilverman/QNEthernet) for Teensy 4.1 built-in Ethernet. **From v1.1.0**
 16. Depending on which WiFi you're using: 
-   - [`WiFiNINA_Generic library v1.8.14-4+`](https://github.com/khoih-prog/WiFiNINA_Generic) if using WiFiNINA. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiNINA_Generic.svg?)](https://www.ardu-badge.com/WiFiNINA_Generic).
+   - [`WiFiNINA_Generic library v1.8.14-6+`](https://github.com/khoih-prog/WiFiNINA_Generic) if using WiFiNINA. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiNINA_Generic.svg?)](https://www.ardu-badge.com/WiFiNINA_Generic).
    - [`ESP_AT_Lib library v1.4.1+`](https://github.com/khoih-prog/ESP_AT_Lib) if using ESP8288/ESP32-AT shields. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/ESP_AT_Lib.svg?)](https://www.ardu-badge.com/ESP_AT_Lib).
    - [`Modified WiFi101 Library v0.16.1+`](https://github.com/khoih-prog/WiFi101) to use SAMD MKR1000, etc. boards with WiFi101.
-   - [`WiFiEspAT library v1.3.2+`](https://github.com/jandrassy/WiFiEspAT) if using ESP8288/ESP32-AT shields. [![GitHub release](https://img.shields.io/github/release/jandrassy/WiFiEspAT.svg)](https://github.com/jandrassy/WiFiEspAT/releases/latest)
-   - [`WiFiMulti_Generic library v1.1.1+`](https://github.com/khoih-prog/WiFiMulti_Generic) to use WiFiMulti function. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiMulti_Generic.svg?)](https://www.ardu-badge.com/WiFiMulti_Generic). **New**
+   - [`WiFiEspAT library v1.4.1+`](https://github.com/jandrassy/WiFiEspAT) if using ESP8288/ESP32-AT shields. [![GitHub release](https://img.shields.io/github/release/jandrassy/WiFiEspAT.svg)](https://github.com/jandrassy/WiFiEspAT/releases/latest)
+   - [`WiFiMulti_Generic library v1.2.2+`](https://github.com/khoih-prog/WiFiMulti_Generic) to use WiFiMulti function. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiMulti_Generic.svg?)](https://www.ardu-badge.com/WiFiMulti_Generic). **New**
 
 ---
 ---
@@ -317,9 +318,9 @@ You can also use this link [![arduino-library-badge](https://www.ardu-badge.com/
 ### Manual Install
 
 1. Navigate to [FTPClient_Generic](https://github.com/khoih-prog/FTPClient_Generic) page.
-2. Download the latest release `FTPClient_Generic-master.zip`.
-3. Extract the zip file to `FTPClient_Generic-master` directory 
-4. Copy the whole `FTPClient_Generic-master` folder to Arduino libraries' directory such as `~/Arduino/libraries/`.
+2. Download the latest release `FTPClient_Generic-main.zip`.
+3. Extract the zip file to `FTPClient_Generic-main` directory 
+4. Copy the whole `FTPClient_Generic-main` folder to Arduino libraries' directory such as `~/Arduino/libraries/`.
 
 ### VS Code & PlatformIO:
 
@@ -436,13 +437,13 @@ Whenever the above-mentioned compiler error issue is fixed with the new Arduino 
 
 #### 5. For Adafruit SAMD boards
  
- ***To be able to compile, run and automatically detect and display BOARD_NAME on Adafruit SAMD (Itsy-Bitsy M4, etc) boards***, you have to copy the whole [Adafruit SAMD Packages_Patches](Packages_Patches/adafruit/hardware/samd/1.7.10) directory into Adafruit samd directory (~/.arduino15/packages/adafruit/hardware/samd/1.7.10). 
+ ***To be able to compile, run and automatically detect and display BOARD_NAME on Adafruit SAMD (Itsy-Bitsy M4, etc) boards***, you have to copy the whole [Adafruit SAMD Packages_Patches](Packages_Patches/adafruit/hardware/samd/1.7.11) directory into Adafruit samd directory (~/.arduino15/packages/adafruit/hardware/samd/1.7.11). 
 
-Supposing the Adafruit SAMD core version is 1.7.10. This file must be copied into the directory:
+Supposing the Adafruit SAMD core version is 1.7.11. This file must be copied into the directory:
 
-- `~/.arduino15/packages/adafruit/hardware/samd/1.7.10/platform.txt`
-- `~/.arduino15/packages/adafruit/hardware/samd/1.7.10/cores/arduino/Print.h`
-- `~/.arduino15/packages/adafruit/hardware/samd/1.7.10/cores/arduino/Print.cpp`
+- `~/.arduino15/packages/adafruit/hardware/samd/1.7.11/platform.txt`
+- `~/.arduino15/packages/adafruit/hardware/samd/1.7.11/cores/arduino/Print.h`
+- `~/.arduino15/packages/adafruit/hardware/samd/1.7.11/cores/arduino/Print.cpp`
 
 Whenever a new version is installed, remember to copy this file into the new version directory. For example, new version is x.yy.zz
 This file must be copied into the directory:
@@ -453,14 +454,14 @@ This file must be copied into the directory:
 
 #### 6. For Seeeduino SAMD boards
  
- ***To be able to compile, run and automatically detect and display BOARD_NAME on Seeeduino SAMD (XIAO M0, Wio Terminal, etc) boards***, you have to copy the whole [Seeeduino SAMD Packages_Patches](Packages_Patches/Seeeduino/hardware/samd/1.8.2) directory into Seeeduino samd directory (~/.arduino15/packages/Seeeduino/hardware/samd/1.8.2). 
+ ***To be able to compile, run and automatically detect and display BOARD_NAME on Seeeduino SAMD (XIAO M0, Wio Terminal, etc) boards***, you have to copy the whole [Seeeduino SAMD Packages_Patches](Packages_Patches/Seeeduino/hardware/samd/1.8.3) directory into Seeeduino samd directory (~/.arduino15/packages/Seeeduino/hardware/samd/1.8.3). 
 
-Supposing the Seeeduino SAMD core version is 1.8.2. This file must be copied into the directory:
+Supposing the Seeeduino SAMD core version is 1.8.3. This file must be copied into the directory:
 
-- `~/.arduino15/packages/Seeeduino/hardware/samd/1.8.2/platform.txt`
-- `~/.arduino15/packages/Seeeduino/hardware/samd/1.8.2/cores/arduino/Arduino.h`
-- `~/.arduino15/packages/Seeeduino/hardware/samd/1.8.2/cores/arduino/Print.h`
-- `~/.arduino15/packages/Seeeduino/hardware/samd/1.8.2/cores/arduino/Print.cpp`
+- `~/.arduino15/packages/Seeeduino/hardware/samd/1.8.3/platform.txt`
+- `~/.arduino15/packages/Seeeduino/hardware/samd/1.8.3/cores/arduino/Arduino.h`
+- `~/.arduino15/packages/Seeeduino/hardware/samd/1.8.3/cores/arduino/Print.h`
+- `~/.arduino15/packages/Seeeduino/hardware/samd/1.8.3/cores/arduino/Print.cpp`
 
 Whenever a new version is installed, remember to copy this file into the new version directory. For example, new version is x.yy.zz
 This file must be copied into the directory:
@@ -474,7 +475,9 @@ This file must be copied into the directory:
 
 #### 7.1 For STM32 boards to use LAN8720
 
-To use LAN8720 on some STM32 boards 
+##### Note: Must use core v2.2.0 for LAN8720. Don't use core v2.3.0+ yet
+
+To use LAN8720 on some STM32 boards
 
 - **Nucleo-144 (F429ZI, NUCLEO_F746NG, NUCLEO_F746ZG, NUCLEO_F756ZG)**
 - **Discovery (DISCO_F746NG)**
@@ -496,12 +499,12 @@ theses files must be copied into the corresponding directory:
 
 #### 7.2 For STM32 boards to use Serial1
 
-**To use Serial1 on some STM32 boards without Serial1 definition (Nucleo-144 NUCLEO_F767ZI, Nucleo-64 NUCLEO_L053R8, etc.) boards**, you have to copy the files [STM32 variant.h](Packages_Patches/STM32/hardware/stm32/2.2.0) into STM32 stm32 directory (~/.arduino15/packages/STM32/hardware/stm32/2.2.0). You have to modify the files corresponding to your boards, this is just an illustration how to do.
+**To use Serial1 on some STM32 boards without Serial1 definition (Nucleo-144 NUCLEO_F767ZI, Nucleo-64 NUCLEO_L053R8, etc.) boards**, you have to copy the files [STM32 variant.h](Packages_Patches/STM32/hardware/stm32/2.3.0) into STM32 stm32 directory (~/.arduino15/packages/STM32/hardware/stm32/2.3.0). You have to modify the files corresponding to your boards, this is just an illustration how to do.
 
-Supposing the STM32 stm32 core version is 2.2.0. These files must be copied into the directory:
+Supposing the STM32 stm32 core version is 2.3.0. These files must be copied into the directory:
 
-- `~/.arduino15/packages/STM32/hardware/stm32/2.2.0/variants/STM32F7xx/F765Z(G-I)T_F767Z(G-I)T_F777ZIT/NUCLEO_F767ZI/variant.h` for Nucleo-144 NUCLEO_F767ZI.
-- `~/.arduino15/packages/STM32/hardware/stm32/2.2.0/variants/STM32L0xx/L052R(6-8)T_L053R(6-8)T_L063R8T/NUCLEO_L053R8/variant.h` for Nucleo-64 NUCLEO_L053R8.
+- `~/.arduino15/packages/STM32/hardware/stm32/2.3.0/variants/STM32F7xx/F765Z(G-I)T_F767Z(G-I)T_F777ZIT/NUCLEO_F767ZI/variant.h` for Nucleo-144 NUCLEO_F767ZI.
+- `~/.arduino15/packages/STM32/hardware/stm32/2.3.0/variants/STM32L0xx/L052R(6-8)T_L053R(6-8)T_L063R8T/NUCLEO_L053R8/variant.h` for Nucleo-64 NUCLEO_L053R8.
 
 Whenever a new version is installed, remember to copy this file into the new version directory. For example, new version is x.yy.zz,
 theses files must be copied into the corresponding directory:
@@ -544,12 +547,12 @@ With core after v1.5.0, this step is not necessary anymore thanks to the PR [Add
 
 #### 9. For Portenta_H7 boards using Arduino IDE in Linux
 
-  **To be able to upload firmware to Portenta_H7 using Arduino IDE in Linux (Ubuntu, etc.)**, you have to copy the file [portenta_post_install.sh](Packages_Patches/arduino/hardware/mbed_portenta/3.0.1/portenta_post_install.sh) into mbed_portenta directory (~/.arduino15/packages/arduino/hardware/mbed_portenta/3.0.1/portenta_post_install.sh). 
+  **To be able to upload firmware to Portenta_H7 using Arduino IDE in Linux (Ubuntu, etc.)**, you have to copy the file [portenta_post_install.sh](Packages_Patches/arduino/hardware/mbed_portenta/3.4.1/portenta_post_install.sh) into mbed_portenta directory (~/.arduino15/packages/arduino/hardware/mbed_portenta/3.4.1/portenta_post_install.sh). 
   
   Then run the following command using `sudo`
   
 ```
-$ cd ~/.arduino15/packages/arduino/hardware/mbed_portenta/3.0.1
+$ cd ~/.arduino15/packages/arduino/hardware/mbed_portenta/3.4.1
 $ chmod 755 portenta_post_install.sh
 $ sudo ./portenta_post_install.sh
 ```
@@ -562,9 +565,9 @@ This will create the file `/etc/udev/rules.d/49-portenta_h7.rules` as follows:
 SUBSYSTEMS=="usb", ATTRS{idVendor}=="2341", ATTRS{idProduct}=="035b", GROUP="plugdev", MODE="0666"
 ```
 
-Supposing the ArduinoCore-mbed core version is 3.0.1. Now only one file must be copied into the directory:
+Supposing the ArduinoCore-mbed core version is 3.4.1. Now only one file must be copied into the directory:
 
-- `~/.arduino15/packages/arduino/hardware/mbed_portenta/3.0.1/portenta_post_install.sh`
+- `~/.arduino15/packages/arduino/hardware/mbed_portenta/3.4.1/portenta_post_install.sh`
 
 Whenever a new version is installed, remember to copy this files into the new version directory. For example, new version is x.yy.zz
 
@@ -575,11 +578,11 @@ This file must be copied into the directory:
 
 #### 10. For RTL8720DN boards using AmebaD core
  
- To avoid compile error relating to PROGMEM, you have to copy the file [Realtek AmebaD core pgmspace.h](Packages_Patches/realtek/hardware/AmebaD/3.1.2/cores/arduino/avr/pgmspace.h) into Realtek AmebaD directory (~/.arduino15/packages/realtek/hardware/AmebaD/3.1.2/cores/arduino/avr/pgmspace.h). 
+ To avoid compile error relating to PROGMEM, you have to copy the file [Realtek AmebaD core pgmspace.h](Packages_Patches/realtek/hardware/AmebaD/3.1.4/cores/arduino/avr/pgmspace.h) into Realtek AmebaD directory (~/.arduino15/packages/realtek/hardware/AmebaD/3.1.4/cores/arduino/avr/pgmspace.h). 
 
-Supposing the Realtek AmebaD core version is 3.1.2. This file must be copied into the directory:
+Supposing the Realtek AmebaD core version is 3.1.4. This file must be copied into the directory:
 
-- `~/.arduino15/packages/realtek/hardware/AmebaD/3.1.2/cores/arduino/avr/pgmspace.h`
+- `~/.arduino15/packages/realtek/hardware/AmebaD/3.1.4/cores/arduino/avr/pgmspace.h`
 
 Whenever a new version is installed, remember to copy this file into the new version directory. For example, new version is x.yy.zz
 This file must be copied into the directory:
@@ -589,11 +592,11 @@ This file must be copied into the directory:
 
 #### 11. For SAMD21 and SAMD51 boards using ArduinoCore-fab-sam core
  
- To avoid compile error relating to SAMD21/SAMD51, you have to copy the file [ArduinoCore-fab-sam core pgmspace.h](Packages_Patches/Fab_SAM_Arduino/hardware/samd/1.6.18-alpha2/boards.txt) into `ArduinoCore-fab-sam` samd directory (~/.arduino15/packages/Fab_SAM_Arduino/hardware/samd/1.6.18-alpha2/boards.txt). 
+ To avoid compile error relating to SAMD21/SAMD51, you have to copy the file [ArduinoCore-fab-sam core pgmspace.h](Packages_Patches/Fab_SAM_Arduino/hardware/samd/1.9.0/boards.txt) into `ArduinoCore-fab-sam` samd directory (~/.arduino15/packages/Fab_SAM_Arduino/hardware/samd/1.9.0/boards.txt). 
 
-Supposing the `ArduinoCore-fab-sam` samd core version is 1.6.18-alpha2. This file must be copied into the directory:
+Supposing the `ArduinoCore-fab-sam` samd core version is 1.9.0. This file must be copied into the directory:
 
-- `~/.arduino15/packages/Fab_SAM_Arduino/hardware/samd/1.6.18-alpha2/boards.txt`
+- `~/.arduino15/packages/Fab_SAM_Arduino/hardware/samd/1.9.0/boards.txt`
 
 Whenever a new version is installed, remember to copy this file into the new version directory. For example, new version is x.yy.zz
 This file must be copied into the directory:
@@ -706,14 +709,14 @@ The current library implementation, using `xyz-Impl.h` instead of standard `xyz.
 
 You can include this `.hpp` file
 
-```
+```cpp
 // Can be included as many times as necessary, without `Multiple Definitions` Linker Error
 #include "FTPClient_Generic.hpp"     //https://github.com/khoih-prog/FTPClient_Generic
 ```
 
 in many files. But be sure to use the following `.h` file **in just 1 `.h`, `.cpp` or `.ino` file**, which must **not be included in any other file**, to avoid `Multiple Definitions` Linker Error
 
-```
+```cpp
 // To be included only in main(), .ino with setup() to avoid `Multiple Definitions` Linker Error
 #include "FTPClient_Generic.h"       //https://github.com/khoih-prog/FTPClient_Generic
 ```
@@ -859,7 +862,7 @@ For example, EthernetLarge library
 
 - Only for Teensy 4.1, to use NativeEthernet library
 
-```
+```cpp
 #if defined(__IMXRT1062__)
     // For Teensy 4.1/4.0
     #if defined(ARDUINO_TEENSY41)
@@ -878,7 +881,7 @@ For example, EthernetLarge library
 
 - Only for Teensy 4.1, to use another Ethernet library, for example Ethernet_Generic library
 
-```
+```cpp
 #if defined(__IMXRT1062__)
   // For Teensy 4.1/4.0
   #if defined(ARDUINO_TEENSY41)
@@ -905,7 +908,7 @@ For example, EthernetLarge library
 
 - Only for Teensy 4.1, to use QNEthernet library
 
-```
+```cpp
 #if ( defined(CORE_TEENSY) && defined(__IMXRT1062__) && defined(ARDUINO_TEENSY41) ) 
   // For Teensy 4.1
   #define BOARD_TYPE      "TEENSY 4.1"
@@ -983,7 +986,7 @@ These pins are tested OK with ESP8266 and W5x00
 #### 4. How to increase W5x00 TX/RX buffer
 
 - For **Ethernet_Generic** library only,  simply use as follows to have large buffer similar to EthernetLarge library
-```
+```cpp
 #define ETHERNET_LARGE_BUFFERS
 ```
 
@@ -1014,7 +1017,7 @@ Note that the buffer size must be larger than 256 bytes. See [Sending GZIP HTML 
 
 - For **Ethernet_Generic** library only, to use `SPI2` for ESP32
 
-```
+```cpp
 #define USING_SPI2                          true
 ```
 
@@ -1031,7 +1034,7 @@ SS:    5
 
 - For **Ethernet_Generic** library only, to use `SPI1` for RP2040 using [arduino-pico core](https://github.com/earlephilhower/arduino-pico) or [ArduinoCore-mbed](https://github.com/arduino/ArduinoCore-mbed)
 
-```
+```cpp
 #define USING_SPI2                          true
 ```
 
@@ -1048,7 +1051,7 @@ SS:    13
 
 - For **Ethernet_Generic** library only, to use `SPI1/SPI2` for Teensy 4.x
 
-```
+```cpp
 #include <SPI.h>
 
   // For RPI Pico using Mbed RP2040 core
@@ -1332,14 +1335,14 @@ ftp.DownloadFile(fileName, downloaded_file, fileSize, false);
 
 #### 1. File [FTPClient_DownloadFile.ino](examples/Ethernet/FTPClient_DownloadFile/FTPClient_DownloadFile.ino)
 
-https://github.com/khoih-prog/FTPClient_Generic/blob/a72a6cd7859491add0929ee4967dbd4c1705b73c/examples/Ethernet/FTPClient_DownloadFile/FTPClient_DownloadFile.ino#L13-L349
+https://github.com/khoih-prog/FTPClient_Generic/blob/5f9737a0e6127845df861109164479c74e93a7ea/examples/Ethernet/FTPClient_DownloadFile/FTPClient_DownloadFile.ino#L13-L355
 
 
 ---
 
 #### 2. File [defines.h](examples/Ethernet/FTPClient_DownloadFile/defines.h)
 
-https://github.com/khoih-prog/FTPClient_Generic/blob/a72a6cd7859491add0929ee4967dbd4c1705b73c/examples/Ethernet/FTPClient_DownloadFile/defines.h#L12-L486
+https://github.com/khoih-prog/FTPClient_Generic/blob/5f9737a0e6127845df861109164479c74e93a7ea/examples/Ethernet/FTPClient_DownloadFile/defines.h#L12-L477
 
 ---
 ---
@@ -1353,7 +1356,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on TEENSY 4.0 with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.3.0
+FTPCLIENT_GENERIC v1.4.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -1431,7 +1434,7 @@ The following is debug terminal output when running example [FTPClient_UploadIma
 
 ```
 Starting FTPClient_UploadImage on Nano RP2040 Connect with WiFiNINA using WiFiNINA_Generic Library
-FTPCLIENT_GENERIC v1.3.0
+FTPCLIENT_GENERIC v1.4.0
 Connecting WiFi
 IP address: 192.168.2.117
 [FTP] Connecting to:  192.168.2.241
@@ -1498,7 +1501,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on PORTENTA_H7_M7 with Ethernet using Portenta_Ethernet Library
-FTPCLIENT_GENERIC v1.3.0
+FTPCLIENT_GENERIC v1.4.0
 [EWS] ======== USE_PORTENTA_H7_ETHERNET ========
 Using mac index = 13
 Connected! IP address: 192.168.2.123
@@ -1597,7 +1600,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_UploadImage on MBED RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.3.0
+FTPCLIENT_GENERIC v1.4.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 19
@@ -1683,7 +1686,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on NUCLEO_L552ZE_Q with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.3.0
+FTPCLIENT_GENERIC v1.4.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -1799,7 +1802,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile_STM32_LAN8742A on NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
-FTPCLIENT_GENERIC v1.3.0
+FTPCLIENT_GENERIC v1.4.0
 EthernetWebServer_STM32 v1.5.0
 Connected! IP address: 192.168.2.124
 [FTP] Connecting to:  192.168.2.241
@@ -1898,7 +1901,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on ITSYBITSY_M4 with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.3.0
+FTPCLIENT_GENERIC v1.4.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 25
@@ -2013,7 +2016,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_UploadImage on NRF52840_FEATHER with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.3.0
+FTPCLIENT_GENERIC v1.4.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 25
@@ -2100,7 +2103,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on SAMD_NANO_33_IOT with WiFiNINA using WiFiNINA_Generic Library
-FTPCLIENT_GENERIC v1.3.0
+FTPCLIENT_GENERIC v1.4.0
 Connecting WiFi
 IP address: 192.168.2.118
 [FTP] Connecting to:  192.168.2.241
@@ -2200,7 +2203,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```
 Starting FTPClient_DownloadFile on ESP32S3_DEV with ESP WiFi using WiFi Library
-FTPCLIENT_GENERIC v1.3.0
+FTPCLIENT_GENERIC v1.4.0
 Connecting WiFi
 .........
 IP address: 192.168.2.115
@@ -2299,7 +2302,7 @@ The following is debug terminal output when running example [FTPClient_UploadIma
 
 ```
 Starting FTPClient_UploadImage on TEENSY 4.1 with NativeEthernet
-FTPCLIENT_GENERIC v1.3.0
+FTPCLIENT_GENERIC v1.4.0
 [EWS] ======== USE_NATIVE_ETHERNET ========
 [EWS] =====================================
 Using mac index = 6
@@ -2356,7 +2359,7 @@ The following is debug terminal output and directory listing after running examp
 
 ```
 Starting FTPClient_UploadImage on TEENSY 4.1 with QNEthernet
-FTPCLIENT_GENERIC v1.3.0
+FTPCLIENT_GENERIC v1.4.0
 [EWS] =========== USE_QN_ETHERNET ===========
 Initialize Ethernet using static IP => IP Address = 192.168.2.222
 [FTP] Connecting to:  192.168.2.112
@@ -2417,6 +2420,88 @@ drwx------ 2 ftp_test ftp_test  4096 May 16 20:19 NewDir
 -rw-r--r-- 1 ftp_test ftp_test   807 May 14 16:55 .profile
 ```
 
+---
+
+#### 13. FTPClient_DownloadFile on ESP32_DEV with W5x00 using Ethernet_Generic Library
+
+The following is debug terminal output when running example [FTPClient_DownloadFile](examples/Ethernet/FTPClient_DownloadFile) on ESP32_DEV with W5x00 using Ethernet_Generic Library on SPI0/SPI
+
+
+```
+Starting FTPClient_DownloadFile on ESP32_DEV with W5x00 using Ethernet_Generic Library on SPI0/SPI
+FTPCLIENT_GENERIC v1.4.0
+[EWS] =========== USE_ETHERNET_GENERIC ===========
+[EWS] Default SPI pinout:
+[EWS] MOSI: 23
+[EWS] MISO: 19
+[EWS] SCK: 18
+[EWS] SS: 5
+[EWS] =========================
+[EWS] ESP32 setCsPin: 5
+[ETG] W5100 init, using W5100Class::ss_pin =  5 , whereas new ss_pin =  10 , SS_PIN_DEFAULT = 22
+[ETG] Chip is W5500
+[ETG] W5100::init: W5500, SSIZE = 8192
+[EWS] =========================
+[EWS] Currently Used SPI pinout:
+[EWS] MOSI: 23
+[EWS] MISO: 19
+[EWS] SCK: 18
+[EWS] SS: 5
+[EWS] =========================
+Using mac index = 0
+Connected! IP address: 192.168.2.109
+Max Free Heap: 116724
+[FTP] Connecting to:  192.168.2.112
+[FTP] Command connected
+[FTP] Send USER =  ftp_test
+[FTP] Send PASSWORD =  ftp_test
+[FTP] Send CWD
+Creating new file helloworld.txt
+[FTP] Send TYPE Type A
+[FTP] Send PASV
+[FTP] outBuf = 227 Entering Passive Mode (192,168,2,112,97,137).
+[FTP] Data port:  24969
+[FTP] _dataAddress:  192.168.2.112 , Data port:  24969
+[FTP] Data connection established
+[FTP] Send STOR
+[FTP] Write File
+[FTP] Close File
+[FTP] Send TYPE Type A
+[FTP] Send PASV
+[FTP] outBuf = 227 Entering Passive Mode (192,168,2,112,127,110).
+[FTP] Data port:  32622
+[FTP] _dataAddress:  192.168.2.112 , Data port:  32622
+[FTP] Data connection established
+[FTP] Send APPE
+[FTP] Write File
+[FTP] Close File
+[FTP] Send TYPE Type A
+[FTP] Send PASV
+[FTP] outBuf = 227 Entering Passive Mode (192,168,2,112,25,113).
+[FTP] Data port:  6513
+[FTP] _dataAddress:  192.168.2.112 , Data port:  6513
+[FTP] Data connection established
+[FTP] Send RETR
+[FTP] Result:  150 Opening ASCII mode data connection for helloworld.txt (75 bytes).
+226 Transfer complete.
+The file content is: Hi, I'm a new ASCII file created @ millis = 2090
+Added text @ millis = 2406
+[FTP] Send TYPE Type A
+[FTP] Send PASV
+[FTP] outBuf = 227 Entering Passive Mode (192,168,2,112,143,251).
+[FTP] Data port:  36859
+[FTP] _dataAddress:  192.168.2.112 , Data port:  36859
+[FTP] Data connection established
+[FTP] Send LIST
+[FTP] Result:  150 Here comes the directory listing.
+226 Directory send OK.
+hello_world.txt
+helloworld.txt
+octocat.jpg
+CloseConnection
+[FTP] Connection closed
+
+```
 ---
 ---
 
@@ -2487,6 +2572,8 @@ Submit issues to: [FTPClient_Generic issues](https://github.com/khoih-prog/FTPCl
 28. Add support to other new FTP Servers, such as [`vsftpd`](https://ubuntu.com/server/docs/service-ftp) in Linux, Ubuntu, Rasbberry Pi, etc.
 29. Auto detect server response type in **PASV** mode
 30. Fix uploading issue of large files for **WiFi, QNEthernet**
+31. Add support to ESP32 using Ethernet `W5x00` or `ENC28J60` with [`Ethernet_Generic`](https://github.com/khoih-prog/Ethernet_Generic) or [`EthernetENC`](https://github.com/jandrassy/EthernetENC) library
+32. Add astyle using `allman` style. Restyle the library
 
 
 ---
@@ -2497,11 +2584,12 @@ Submit issues to: [FTPClient_Generic issues](https://github.com/khoih-prog/FTPCl
 Many thanks for everyone for bug reporting, new feature suggesting, testing and contributing to the development of this library.
 
 1. Based on and modified from the [Leonardo Bispo's ESP32_FTPClient](https://github.com/ldab/ESP32_FTPClient)
-
+2. Thanks to [KvarTechnologies](https://github.com/KvarTechnologies) to report issue [unable to compile to DOIT esp32 DEV KIT #4](https://github.com/khoih-prog/FTPClient_Generic/issues/4) leading to the new version v1.4.0 to add support to ESP32 using Ethernet `W5x00` or `ENC28J60`
 
 <table>
   <tr>
     <td align="center"><a href="https://github.com/ldab"><img src="https://github.com/ldab.png" width="100px;" alt="ldab"/><br /><sub><b>⭐️ Leonardo Bispo</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/KvarTechnologies"><img src="https://github.com/KvarTechnologies.png" width="100px;" alt="KvarTechnologies"/><br /><sub><b>KvarTechnologies</b></sub></a><br /></td>
   </tr> 
 </table>
 
