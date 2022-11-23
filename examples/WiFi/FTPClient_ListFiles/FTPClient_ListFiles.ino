@@ -24,25 +24,25 @@
 
 #if USING_VSFTP_SERVER
 
-	// Change according to your FTP server
-	char ftp_server[] = "192.168.2.112";
+  // Change according to your FTP server
+  char ftp_server[] = "192.168.2.112";
 
-	char ftp_user[]   = "ftp_test";
-	char ftp_pass[]   = "ftp_test";
+  char ftp_user[]   = "ftp_test";
+  char ftp_pass[]   = "ftp_test";
 
-	char dirName[]    = "/home/ftp_test";
-	char newDirName[] = "/home/ftp_test/NewDir";
+  char dirName[]    = "/home/ftp_test";
+  char newDirName[] = "/home/ftp_test/NewDir";
 
 #else
 
-	// Change according to your FTP server
-	char ftp_server[] = "192.168.2.241";
+  // Change according to your FTP server
+  char ftp_server[] = "192.168.2.241";
 
-	char ftp_user[]   = "teensy4x";
-	char ftp_pass[]   = "ftp_test";
+  char ftp_user[]   = "teensy4x";
+  char ftp_pass[]   = "ftp_test";
 
-	char dirName[]    = "/";
-	char newDirName[] = "/NewDir";
+  char dirName[]    = "/";
+  char newDirName[] = "/NewDir";
 
 #endif
 
@@ -52,72 +52,72 @@ FTPClient_Generic ftp (ftp_server, ftp_user, ftp_pass, 60000);
 
 void setup()
 {
-	Serial.begin( 115200 );
+  Serial.begin( 115200 );
 
-	while (!Serial && millis() < 5000);
+  while (!Serial && millis() < 5000);
 
-	delay(500);
+  delay(500);
 
-	Serial.print(F("\nStarting FTPClient_ListFiles on "));
-	Serial.print(BOARD_NAME);
-	Serial.print(F(" with "));
-	Serial.println(SHIELD_TYPE);
-	Serial.println(FTPCLIENT_GENERIC_VERSION);
+  Serial.print(F("\nStarting FTPClient_ListFiles on "));
+  Serial.print(BOARD_NAME);
+  Serial.print(F(" with "));
+  Serial.println(SHIELD_TYPE);
+  Serial.println(FTPCLIENT_GENERIC_VERSION);
 
 
-	WiFi.begin( WIFI_SSID, WIFI_PASS );
+  WiFi.begin( WIFI_SSID, WIFI_PASS );
 
-	Serial.print("Connecting WiFi, SSID = ");
-	Serial.println(WIFI_SSID);
+  Serial.print("Connecting WiFi, SSID = ");
+  Serial.println(WIFI_SSID);
 
-	while (WiFi.status() != WL_CONNECTED)
-	{
-		delay(500);
-		Serial.print(".");
-	}
+  while (WiFi.status() != WL_CONNECTED)
+  {
+    delay(500);
+    Serial.print(".");
+  }
 
-	Serial.print("\nIP address: ");
-	Serial.println(WiFi.localIP());
+  Serial.print("\nIP address: ");
+  Serial.println(WiFi.localIP());
 
 #if (ESP32)
-	Serial.print("Max Free Heap: ");
-	Serial.println(ESP.getMaxAllocHeap());
+  Serial.print("Max Free Heap: ");
+  Serial.println(ESP.getMaxAllocHeap());
 #endif
 
-	ftp.OpenConnection();
+  ftp.OpenConnection();
 
-	//Change directory
-	ftp.ChangeWorkDir(dirName);
+  //Change directory
+  ftp.ChangeWorkDir(dirName);
 
-	// Get the file size
-	String       list[128];
+  // Get the file size
+  String       list[128];
 
-	// Get the directory content in order to allocate buffer
-	// my server response => type=file;modify=20190101000010;size=18; helloworld.txt
+  // Get the directory content in order to allocate buffer
+  // my server response => type=file;modify=20190101000010;size=18; helloworld.txt
 
-	ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
+  ftp.InitFile(COMMAND_XFER_TYPE_ASCII);
 
-	ftp.ContentListWithListCommand("", list);
+  ftp.ContentListWithListCommand("", list);
 
-	for (uint16_t i = 0; i < sizeof(list); i++)
-	{
-		if (list[i].length() > 0)
-			Serial.println(list[i]);
-		else
-			break;
-	}
+  for (uint16_t i = 0; i < sizeof(list); i++)
+  {
+    if (list[i].length() > 0)
+      Serial.println(list[i]);
+    else
+      break;
+  }
 
-	//Create a new Directory
-	ftp.InitFile(COMMAND_XFER_TYPE_BINARY);
-	ftp.RemoveDir(newDirName);
-	ftp.MakeDir(newDirName);
+  //Create a new Directory
+  ftp.InitFile(COMMAND_XFER_TYPE_BINARY);
+  ftp.RemoveDir(newDirName);
+  ftp.MakeDir(newDirName);
 
-	//Enter the directory
-	ftp.ChangeWorkDir(newDirName);
+  //Enter the directory
+  ftp.ChangeWorkDir(newDirName);
 
-	Serial.println("CloseConnection");
+  Serial.println("CloseConnection");
 
-	ftp.CloseConnection();
+  ftp.CloseConnection();
 }
 
 void loop()

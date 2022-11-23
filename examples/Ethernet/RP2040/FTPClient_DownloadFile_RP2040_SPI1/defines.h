@@ -27,73 +27,73 @@
 #define USE_CUSTOM_ETHERNET   false
 
 #if ( defined(ARDUINO_ARCH_RP2040) || defined(ARDUINO_RASPBERRY_PI_PICO) || defined(ARDUINO_ADAFRUIT_FEATHER_RP2040) || defined(ARDUINO_GENERIC_RP2040) )
-	#if defined(ETHERNET_USE_RPIPICO)
-		#undef ETHERNET_USE_RPIPICO
-	#endif
-	#define ETHERNET_USE_RPIPICO      true
+  #if defined(ETHERNET_USE_RPIPICO)
+    #undef ETHERNET_USE_RPIPICO
+  #endif
+  #define ETHERNET_USE_RPIPICO      true
 #else
-	#error Only RP2040 supported
+  #error Only RP2040 supported
 #endif
 
 #include <SPI.h>
 
 #if defined(ARDUINO_ARCH_MBED)
 
-	#if defined(BOARD_NAME)
-		#undef BOARD_NAME
-	#endif
+  #if defined(BOARD_NAME)
+    #undef BOARD_NAME
+  #endif
 
-	#if defined(ARDUINO_RASPBERRY_PI_PICO)
-		#define BOARD_NAME      "MBED RASPBERRY_PI_PICO"
-	#elif defined(ARDUINO_ADAFRUIT_FEATHER_RP2040)
-		#define BOARD_NAME      "MBED ADAFRUIT_FEATHER_RP2040"
-	#elif defined(ARDUINO_GENERIC_RP2040)
-		#define BOARD_NAME      "MBED GENERIC_RP2040"
-	#else
-		#define BOARD_NAME      "MBED Unknown RP2040"
-	#endif
+  #if defined(ARDUINO_RASPBERRY_PI_PICO)
+    #define BOARD_NAME      "MBED RASPBERRY_PI_PICO"
+  #elif defined(ARDUINO_ADAFRUIT_FEATHER_RP2040)
+    #define BOARD_NAME      "MBED ADAFRUIT_FEATHER_RP2040"
+  #elif defined(ARDUINO_GENERIC_RP2040)
+    #define BOARD_NAME      "MBED GENERIC_RP2040"
+  #else
+    #define BOARD_NAME      "MBED Unknown RP2040"
+  #endif
 
-	// For RPI Pico using Mbed RP2040 core
-	#if (USING_SPI2)
-		#define USING_CUSTOM_SPI          true
+  // For RPI Pico using Mbed RP2040 core
+  #if (USING_SPI2)
+    #define USING_CUSTOM_SPI          true
 
-		// SCK: GPIO14,  MOSI: GPIO15, MISO: GPIO12, SS/CS: GPIO13 for SPI1
-		#define CUR_PIN_MISO              12
-		#define CUR_PIN_MOSI              15
-		#define CUR_PIN_SCK               14
-		#define CUR_PIN_SS                13
+    // SCK: GPIO14,  MOSI: GPIO15, MISO: GPIO12, SS/CS: GPIO13 for SPI1
+    #define CUR_PIN_MISO              12
+    #define CUR_PIN_MOSI              15
+    #define CUR_PIN_SCK               14
+    #define CUR_PIN_SS                13
 
-		#define SPI_NEW_INITIALIZED       true
+    #define SPI_NEW_INITIALIZED       true
 
-		// Don't create the instance with CUR_PIN_SS, or Ethernet not working
-		// To change for other boards' SPI libraries
-		#define SPIClass      arduino::MbedSPI
+    // Don't create the instance with CUR_PIN_SS, or Ethernet not working
+    // To change for other boards' SPI libraries
+    #define SPIClass      arduino::MbedSPI
 
-		// Be careful, Mbed SPI ctor is so weird, reversing the order => MISO, MOSI, SCK
-		//arduino::MbedSPI::MbedSPI(int miso, int mosi, int sck)
-		SPIClass SPI_New(CUR_PIN_MISO, CUR_PIN_MOSI, CUR_PIN_SCK);
+    // Be careful, Mbed SPI ctor is so weird, reversing the order => MISO, MOSI, SCK
+    //arduino::MbedSPI::MbedSPI(int miso, int mosi, int sck)
+    SPIClass SPI_New(CUR_PIN_MISO, CUR_PIN_MOSI, CUR_PIN_SCK);
 
-		//#warning Using USE_THIS_SS_PIN = CUR_PIN_SS = 13
+    //#warning Using USE_THIS_SS_PIN = CUR_PIN_SS = 13
 
-		#if defined(USE_THIS_SS_PIN)
-			#undef USE_THIS_SS_PIN
-		#endif
-		#define USE_THIS_SS_PIN       CUR_PIN_SS    //13
+    #if defined(USE_THIS_SS_PIN)
+      #undef USE_THIS_SS_PIN
+    #endif
+    #define USE_THIS_SS_PIN       CUR_PIN_SS    //13
 
-	#else
-		// SCK: GPIO18,  MOSI: GPIO19, MISO: GPIO16, SS/CS: GPIO17 for SPI0
-		#define USE_THIS_SS_PIN       17
-	#endif
+  #else
+    // SCK: GPIO18,  MOSI: GPIO19, MISO: GPIO16, SS/CS: GPIO17 for SPI0
+    #define USE_THIS_SS_PIN       17
+  #endif
 
 #else
-	// For RPI Pico using E. Philhower RP2040 core
-	#if (USING_SPI2)
-		// SCK: GPIO14,  MOSI: GPIO15, MISO: GPIO12, SS/CS: GPIO13 for SPI1
-		#define USE_THIS_SS_PIN       13
-	#else
-		// SCK: GPIO18,  MOSI: GPIO19, MISO: GPIO16, SS/CS: GPIO17 for SPI0
-		#define USE_THIS_SS_PIN       17
-	#endif
+  // For RPI Pico using E. Philhower RP2040 core
+  #if (USING_SPI2)
+    // SCK: GPIO14,  MOSI: GPIO15, MISO: GPIO12, SS/CS: GPIO13 for SPI1
+    #define USE_THIS_SS_PIN       13
+  #else
+    // SCK: GPIO18,  MOSI: GPIO19, MISO: GPIO16, SS/CS: GPIO17 for SPI0
+    #define USE_THIS_SS_PIN       17
+  #endif
 
 #endif
 
@@ -113,15 +113,15 @@
 #include "Ethernet_Generic.h"
 
 #if defined(ETHERNET_LARGE_BUFFERS)
-	#define SHIELD_TYPE           "W5x00 using Ethernet_Generic Library with Large Buffer"
+  #define SHIELD_TYPE           "W5x00 using Ethernet_Generic Library with Large Buffer"
 #else
-	#define SHIELD_TYPE           "W5x00 using Ethernet_Generic Library"
+  #define SHIELD_TYPE           "W5x00 using Ethernet_Generic Library"
 #endif
 
 #include <EthernetWebServer.h>
 
 #ifndef SHIELD_TYPE
-	#define SHIELD_TYPE     "Unknown Ethernet shield/library"
+  #define SHIELD_TYPE     "Unknown Ethernet shield/library"
 #endif
 
 // Enter a MAC address and IP address for your controller below.
@@ -129,26 +129,26 @@
 
 byte mac[][NUMBER_OF_MAC] =
 {
-	{ 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x01 },
-	{ 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x02 },
-	{ 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x03 },
-	{ 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x04 },
-	{ 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x05 },
-	{ 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x06 },
-	{ 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x07 },
-	{ 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x08 },
-	{ 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x09 },
-	{ 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x0A },
-	{ 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x0B },
-	{ 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x0C },
-	{ 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x0D },
-	{ 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x0E },
-	{ 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x0F },
-	{ 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x10 },
-	{ 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x11 },
-	{ 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x12 },
-	{ 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x13 },
-	{ 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x14 },
+  { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x01 },
+  { 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x02 },
+  { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x03 },
+  { 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x04 },
+  { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x05 },
+  { 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x06 },
+  { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x07 },
+  { 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x08 },
+  { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x09 },
+  { 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x0A },
+  { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x0B },
+  { 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x0C },
+  { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x0D },
+  { 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x0E },
+  { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x0F },
+  { 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x10 },
+  { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x11 },
+  { 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x12 },
+  { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0x13 },
+  { 0xDE, 0xAD, 0xBE, 0xEF, 0xBE, 0x14 },
 };
 
 // Select the IP address according to your local network

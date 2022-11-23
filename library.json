@@ -30,7 +30,7 @@
     {
       "owner": "khoih-prog",
       "name": "Ethernet_Generic",
-      "version": "^2.6.2"
+      "version": "^2.7.1"
     },
     {
       "owner": "ssilverman",
@@ -53,7 +53,7 @@
     {
       "owner": "khoih-prog",
       "name": "WiFiNINA_Generic",
-      "version": ">=1.8.14-6",
+      "version": ">=1.8.15-1",
       "platforms": ["*"]
     },
     {
