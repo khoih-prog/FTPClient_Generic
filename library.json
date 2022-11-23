@@ -69,8 +69,10 @@
       "platforms": ["*"]
     },
     {
-      "name": "WiFi101",
-      "version": "https://github.com/khoih-prog/WiFi101"
+      "owner": "khoih-prog",
+      "name": "WiFi101_Generic",
+      "version": ">=1.0.0",
+      "platforms": ["*"]
     },
     {
       "owner": "jandrassy",
