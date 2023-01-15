@@ -138,12 +138,12 @@ class FTPClient_Generic
     void CloseConnection();
     bool isConnected();
     void NewFile (const char* fileName);
-    void AppendFile( char* fileName);
+    void AppendFile(const char* fileName);
     void WriteData (unsigned char * data, int dataLength);
     void CloseFile ();
     void GetFTPAnswer (char* result = NULL, int offsetStart = 0);
     void GetLastModifiedTime(const char* fileName, char* result);
-    void RenameFile(char* from, char* to);
+    void RenameFile(const char* from, const char* to);
     void Write(const char * str);
     void InitFile(const char* type);
     void ChangeWorkDir(const char * dir);

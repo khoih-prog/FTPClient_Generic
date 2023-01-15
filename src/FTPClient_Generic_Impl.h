@@ -279,7 +279,7 @@ void FTPClient_Generic::OpenConnection()
 
 /////////////////////////////////////////////
 
-void FTPClient_Generic::RenameFile(char* from, char* to)
+void FTPClient_Generic::RenameFile(const char* from, const char* to)
 {
   FTP_LOGINFO("Send RNFR");
 
@@ -424,7 +424,7 @@ void FTPClient_Generic::InitFile(const char* type)
 
 /////////////////////////////////////////////
 
-void FTPClient_Generic::AppendFile (char* fileName)
+void FTPClient_Generic::AppendFile (const char* fileName)
 {
   FTP_LOGINFO("Send APPE");
 
