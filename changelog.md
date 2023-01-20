@@ -17,6 +17,7 @@
 
 
 * [Changelog](#changelog)
+  * [Releases v1.5.0](#releases-v150)
   * [Releases v1.4.0](#releases-v140)
   * [Releases v1.3.0](#releases-v130)
   * [Releases v1.2.1](#releases-v121)
@@ -28,6 +29,10 @@
 ---
 
 ## Changelog
+
+#### Releases v1.5.0
+
+1. Add support to `RP2040W` with `CYW43439` WiFi using `arduino-pico` core
 
 #### Releases v1.4.0
 

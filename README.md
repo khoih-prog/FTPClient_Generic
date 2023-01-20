@@ -113,6 +113,7 @@
   * [11. FTPClient_UploadImage on TEENSY 4.1 with NativeEthernet](#11-FTPClient_UploadImage-on-TEENSY-41-with-NativeEthernet)
   * [12. FTPClient_UploadImage on TEENSY 4.1 with QNEthernet](#12-FTPClient_UploadImage-on-TEENSY-41-with-QNEthernet)
   * [13. FTPClient_DownloadFile on ESP32_DEV with W5x00 using Ethernet_Generic Library](#13-FTPClient_DownloadFile-on-ESP32_DEV-with-W5x00-using-Ethernet_Generic-Library)
+  * [14. FTPClient_DownloadFile on RASPBERRY_PI_PICO_W with RP2040W CYW43439 WiFi](#14-FTPClient_DownloadFile-on-RASPBERRY_PI_PICO_W-with-RP2040W-CYW43439 WiFi)
 * [Debug](#debug)
 * [Troubleshooting](#troubleshooting)
 * [Issues](#issues)
@@ -207,14 +208,14 @@ This [**FTPClient_Generic library**](https://github.com/khoih-prog/FTPClient_Gen
 
  7. RP2040-based boards, such as **Nano RP2040 Connect**, using [**Arduino-mbed RP2040** core](https://github.com/arduino/ArduinoCore-mbed) or [**Earle Philhower's arduino-pico** core](https://github.com/earlephilhower/arduino-pico)
  
- 8. RP2040-based boards, such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, using [**Arduino-mbed RP2040** core](https://github.com/arduino/ArduinoCore-mbed) or [**Earle Philhower's arduino-pico** core](https://github.com/earlephilhower/arduino-pico).
+ 8. RP2040-based boards, such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, using [**Arduino-mbed RP2040** core](https://github.com/arduino/ArduinoCore-mbed) or [**arduino-pico** core](https://github.com/earlephilhower/arduino-pico).
 
  9. **ESP32**
  
   - ESP32 boards, such as `ESP32_DEV`, etc.
   - ESP32S2-based boards, such as `ESP32S2_DEV`, `ESP32_S2 Saola`, etc.
-  - ESP32C3-based boards, such as `ESP32C3_DEV`, etc. **New**
-  - ESP32_S3 (ESP32S3_DEV, ESP32_S3_BOX, UM TINYS3, UM PROS3, UM FEATHERS3, etc.) **New**
+  - ESP32C3-based boards, such as `ESP32C3_DEV`, etc. 
+  - ESP32_S3 (ESP32S3_DEV, ESP32_S3_BOX, UM TINYS3, UM PROS3, UM FEATHERS3, etc.) 
   
 10. **ESP8266**
 
@@ -224,34 +225,34 @@ This [**FTPClient_Generic library**](https://github.com/khoih-prog/FTPClient_Gen
 
 13. Arduino `megaAVR` boards using Arduino core
 
-  - UNO WiFi Rev2   : `WiFi101`      **New**
-  - Nano Every      : `WiFiEspAT`    **New**
+  - UNO WiFi Rev2   : `WiFi101_Generic`
+  - Nano Every      : `WiFiEspAT`
   
 14. CO2 Ampel
 
-  - SAMD      : `WiFi101`      **New**
+  - SAMD      : `WiFi101_Generic`
 
-15. STM32 using `STM32duino Maple` core. **New**
+15. STM32 using `STM32duino Maple` core
 
 16. Sparkfun SAMD
 
-- SAMD21, SAMD51 : `WiFiEspAT`  **New**
+- SAMD21, SAMD51 : `WiFiEspAT`
 
 17. Industruino SAMD
 
-  - D21G : WiFiEspAT  **New**
+  - D21G : WiFiEspAT
 
 18. Tlera Corp STM32WB boards
 
-  - Firefly-WB55RG, Nucleo-WB55RG, etc. : `WiFiEspAT`  **New**
+  - Firefly-WB55RG, Nucleo-WB55RG, etc. : `WiFiEspAT`
 
 19. Maixduino boards
 
-  - Sipeed Maixduino, etc. : `WiFiEspAT`  **New**
+  - Sipeed Maixduino, etc. : `WiFiEspAT`
 
-20. `RTL8720DN` using Realtek `AmebaD` core  **New**
+20. `RTL8720DN` using Realtek `AmebaD` core
 
-21. Arduino, Sparkfun, Adafruit, etc. AVR boards (Mega, 32U4, etc.). To use patch for `ArduinoSTL` library **New**
+21. Arduino, Sparkfun, Adafruit, etc. AVR boards (Mega, 32U4, etc.). To use patch for `ArduinoSTL` library
 
   - Arduino Uno / Mega / Duemilanove / Diecimila / LilyPad / Mini / Fio / Nano, etc.
   - **Arduino ATMega 16U4, 32U4** such as AVR Leonardo, Leonardo ETH, YUN, Esplora, LILYPAD_USB, AVR_ROBOT_CONTROL, AVR_ROBOT_MOTOR, AVR_INDUSTRIAL101, etc.
@@ -260,6 +261,8 @@ This [**FTPClient_Generic library**](https://github.com/khoih-prog/FTPClient_Gen
   - **Generic or Sparkfun AVR ATmega_32U4** such as **AVR_MAKEYMAKEY, AVR_PROMICRO, etc.**
   - **Generic or Sparkfun AVR ATmega_328(P)** such as **ARDUINO_REDBOT, ARDUINO_AVR_DIGITAL_SANDBOX, etc.**
   - **Generic or Sparkfun AVR ATmega128RFA1** such as **ATMEGA128RFA1_DEV_BOARD, etc.**
+
+22. `RP2040W` with `CYW43439` WiFi using [**arduino-pico** core](https://github.com/earlephilhower/arduino-pico) **New**
 
 ---
 
@@ -282,30 +285,30 @@ This [**FTPClient_Generic library**](https://github.com/khoih-prog/FTPClient_Gen
 
  1. [`Arduino IDE 1.8.19+` for Arduino](https://github.com/arduino/Arduino). [![GitHub release](https://img.shields.io/github/release/arduino/Arduino.svg)](https://github.com/arduino/Arduino/releases/latest)
  2. [`Arduino AVR core 1.8.6+`](https://github.com/arduino/ArduinoCore-avr) for Arduino (Use Arduino Board Manager) AVR boards. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-avr.svg)](https://github.com/arduino/ArduinoCore-avr/releases/latest)
- 3. [`Teensy core v1.57+`](https://www.pjrc.com/teensy/td_download.html) for Teensy (4.1, 4.0, 3.6, 3.5, 3,2, 3.1, 3.0) boards.
+ 3. [`Teensy core v1.57+`](https://github.com/PaulStoffregen/cores) for Teensy 4.1.  [![GitHub release](https://img.shields.io/github/release/PaulStoffregen/cores.svg)](https://github.com/PaulStoffregen/cores/releases/latest)
  4. [`Arduino SAM DUE core v1.6.12+`](https://github.com/arduino/ArduinoCore-sam) for SAM DUE ARM Cortex-M3 boards.
  5. [`Arduino SAMD core 1.8.13+`](https://github.com/arduino/ArduinoCore-samd) for SAMD ARM Cortex-M0+ boards. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-samd.svg)](https://github.com/arduino/ArduinoCore-samd/releases/latest)
  6. [`Adafruit SAMD core 1.7.11+`](https://github.com/adafruit/ArduinoCore-samd) for SAMD ARM Cortex-M0+ and M4 boards (Nano 33 IoT, etc.). [![GitHub release](https://img.shields.io/github/release/adafruit/ArduinoCore-samd.svg)](https://github.com/adafruit/ArduinoCore-samd/releases/latest)
  7. [`Seeeduino SAMD core 1.8.3+`](https://github.com/Seeed-Studio/ArduinoCore-samd) for SAMD21/SAMD51 boards (XIAO M0, Wio Terminal, etc.). [![Latest release](https://img.shields.io/github/release/Seeed-Studio/ArduinoCore-samd.svg)](https://github.com/Seeed-Studio/ArduinoCore-samd/releases/latest/)
  8. [`Adafruit nRF52 v1.3.0+`](https://github.com/adafruit/Adafruit_nRF52_Arduino) for nRF52 boards such as Adafruit NRF52840_FEATHER, NRF52832_FEATHER, NRF52840_FEATHER_SENSE, NRF52840_ITSYBITSY, NRF52840_CIRCUITPLAY, NRF52840_CLUE, NRF52840_METRO, NRF52840_PCA10056, PARTICLE_XENON, **NINA_B302_ublox**, etc. [![GitHub release](https://img.shields.io/github/release/adafruit/Adafruit_nRF52_Arduino.svg)](https://github.com/adafruit/Adafruit_nRF52_Arduino/releases/latest)
- 9. [`ESP32 Core 2.0.5+`](https://github.com/espressif/arduino-esp32) for ESP32-based boards. [![Latest release](https://img.shields.io/github/release/espressif/arduino-esp32.svg)](https://github.com/espressif/arduino-esp32/releases/latest/)
-10. [`ESP8266 Core 3.0.2+`](https://github.com/esp8266/Arduino) for ESP8266-based boards. [![Latest release](https://img.shields.io/github/release/esp8266/Arduino.svg)](https://github.com/esp8266/Arduino/releases/latest/). To use ESP8266 core 2.7.1+ for LittleFS.
-11. [`ArduinoCore-mbed mbed_rp2040, mbed_nano, mbed_portenta core 3.4.1+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino (Use Arduino Board Manager) **Portenta_H7, RP2040-based boards, such as Nano_RP2040_Connect, RASPBERRY_PI_PICO**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest)
-12. [`Earle Philhower's arduino-pico core v2.6.3+`](https://github.com/earlephilhower/arduino-pico) for RP2040-based boards such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, etc. [![GitHub release](https://img.shields.io/github/release/earlephilhower/arduino-pico.svg)](https://github.com/earlephilhower/arduino-pico/releases/latest)
+ 9. [`ESP32 Core 2.0.6+`](https://github.com/espressif/arduino-esp32) for ESP32-based boards. [![Latest release](https://img.shields.io/github/release/espressif/arduino-esp32.svg)](https://github.com/espressif/arduino-esp32/releases/latest/)
+10. [`ESP8266 Core 3.1.1+`](https://github.com/esp8266/Arduino) for ESP8266-based boards. [![Latest release](https://img.shields.io/github/release/esp8266/Arduino.svg)](https://github.com/esp8266/Arduino/releases/latest/). To use ESP8266 core 2.7.1+ for LittleFS.
+11. [`ArduinoCore-mbed mbed_rp2040, mbed_nano, mbed_portenta core 3.5.4+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino (Use Arduino Board Manager) **Portenta_H7, RP2040-based boards, such as Nano_RP2040_Connect, RASPBERRY_PI_PICO**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest)
+12. [`Earle Philhower's arduino-pico core v2.7.1+`](https://github.com/earlephilhower/arduino-pico) for RP2040-based boards such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, etc. [![GitHub release](https://img.shields.io/github/release/earlephilhower/arduino-pico.svg)](https://github.com/earlephilhower/arduino-pico/releases/latest)
 13. [`Arduino megaAVR core 1.8.7+`](https://github.com/arduino/ArduinoCore-megaavr/releases) for Arduino megaAVR boards such as **Arduino UNO WiFi Rev2, AVR_NANO_EVERY, etc.**
 14. [`Functional-Vlpp library v1.0.2+`](https://github.com/khoih-prog/functional-vlpp) to use server's lambda function. To install. check [![arduino-library-badge](https://www.ardu-badge.com/badge/Functional-Vlpp.svg?)](https://www.ardu-badge.com/Functional-Vlpp)
 15. Depending on which Ethernet card you're using:
-   - [`Ethernet_Generic library v2.7.1+`](https://github.com/khoih-prog/Ethernet_Generic) for W5100, W5200 and W5500/WIZ550io/WIZ850io/USR-ES1 with Wiznet W5500 chip.  [![GitHub release](https://img.shields.io/github/release/khoih-prog/Ethernet_Generic.svg)](https://github.com/khoih-prog/Ethernet_Generic/releases/latest)
+   - [`Ethernet_Generic library v2.8.1+`](https://github.com/khoih-prog/Ethernet_Generic) for W5100, W5200 and W5500/WIZ550io/WIZ850io/USR-ES1 with Wiznet W5500 chip.  [![GitHub release](https://img.shields.io/github/release/khoih-prog/Ethernet_Generic.svg)](https://github.com/khoih-prog/Ethernet_Generic/releases/latest)
    - [`EthernetENC library v2.0.3+`](https://github.com/jandrassy/EthernetENC) for ENC28J60. [![GitHub release](https://img.shields.io/github/release/jandrassy/EthernetENC.svg)](https://github.com/jandrassy/EthernetENC/releases/latest).
    - [`UIPEthernet library v2.0.12+`](https://github.com/UIPEthernet/UIPEthernet) for ENC28J60. [![GitHub release](https://img.shields.io/github/release/UIPEthernet/UIPEthernet.svg)](https://github.com/UIPEthernet/UIPEthernet/releases/latest)
-   - [`NativeEthernet Library version stable111+`](https://github.com/vjmuzik/NativeEthernet) for Teensy 4.1 built-in Ethernet. **From v1.1.0**
-   - [`QNEthernet Library version v0.16.0+`](https://github.com/ssilverman/QNEthernet) for Teensy 4.1 built-in Ethernet. **From v1.1.0**
+   - [`NativeEthernet Library version stable111+`](https://github.com/vjmuzik/NativeEthernet) for Teensy 4.1 built-in Ethernet.
+   - [`QNEthernet Library version v0.17.0+`](https://github.com/ssilverman/QNEthernet) for Teensy 4.1 built-in Ethernet.
 16. Depending on which WiFi you're using: 
    - [`WiFiNINA_Generic library v1.8.15-1+`](https://github.com/khoih-prog/WiFiNINA_Generic) if using WiFiNINA. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiNINA_Generic.svg?)](https://www.ardu-badge.com/WiFiNINA_Generic).
-   - [`ESP_AT_Lib library v1.4.1+`](https://github.com/khoih-prog/ESP_AT_Lib) if using ESP8288/ESP32-AT shields. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/ESP_AT_Lib.svg?)](https://www.ardu-badge.com/ESP_AT_Lib).
-   - [`WiFi101_Generic Library v1.0.0+`](https://github.com/khoih-prog/WiFi101_Generic) to use SAMD MKR1000, etc. boards with WiFi101. [![GitHub release](https://img.shields.io/github/release/khoih-prog/WiFi101_Generic.svg)](https://github.com/khoih-prog/WiFi101_Generic/releases/latest) **New**
+   - [`ESP_AT_Lib library v1.5.1+`](https://github.com/khoih-prog/ESP_AT_Lib) if using ESP8288/ESP32-AT shields. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/ESP_AT_Lib.svg?)](https://www.ardu-badge.com/ESP_AT_Lib).
+   - [`WiFi101_Generic Library v1.0.0+`](https://github.com/khoih-prog/WiFi101_Generic) to use SAMD MKR1000, etc. boards with WiFi101. [![GitHub release](https://img.shields.io/github/release/khoih-prog/WiFi101_Generic.svg)](https://github.com/khoih-prog/WiFi101_Generic/releases/latest) 
    - [`WiFiEspAT library v1.4.1+`](https://github.com/jandrassy/WiFiEspAT) if using ESP8288/ESP32-AT shields. [![GitHub release](https://img.shields.io/github/release/jandrassy/WiFiEspAT.svg)](https://github.com/jandrassy/WiFiEspAT/releases/latest)
-   - [`WiFiMulti_Generic library v1.2.2+`](https://github.com/khoih-prog/WiFiMulti_Generic) to use WiFiMulti function. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiMulti_Generic.svg?)](https://www.ardu-badge.com/WiFiMulti_Generic). **New**
+   - [`WiFiMulti_Generic library v1.2.2+`](https://github.com/khoih-prog/WiFiMulti_Generic) to use WiFiMulti function. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiMulti_Generic.svg?)](https://www.ardu-badge.com/WiFiMulti_Generic). 
 
 ---
 ---
@@ -759,22 +762,22 @@ Please have a look at [**ESP_WiFiManager Issue 39: Not able to read analog port 
 
 #### 2. ESP32 ADCs functions
 
-- ADC1 controls ADC function for pins **GPIO32-GPIO39**
-- ADC2 controls ADC function for pins **GPIO0, 2, 4, 12-15, 25-27**
+- `ADC1` controls ADC function for pins **GPIO32-GPIO39**
+- `ADC2` controls ADC function for pins **GPIO0, 2, 4, 12-15, 25-27**
 
 #### 3.. ESP32 WiFi uses ADC2 for WiFi functions
 
 Look in file [**adc_common.c**](https://github.com/espressif/esp-idf/blob/master/components/driver/adc_common.c#L61)
 
-> In ADC2, there're two locks used for different cases:
+> In `ADC2`, there're two locks used for different cases:
 > 1. lock shared with app and Wi-Fi:
 >    ESP32:
->         When Wi-Fi using the ADC2, we assume it will never stop, so app checks the lock and returns immediately if failed.
+>         When Wi-Fi using the `ADC2`, we assume it will never stop, so app checks the lock and returns immediately if failed.
 >    ESP32S2:
 >         The controller's control over the ADC is determined by the arbiter. There is no need to control by lock.
 > 
 > 2. lock shared between tasks:
->    when several tasks sharing the ADC2, we want to guarantee
+>    when several tasks sharing the `ADC2`, we want to guarantee
 >    all the requests will be handled.
 >    Since conversions are short (about 31us), app returns the lock very soon,
 >    we use a spinlock to stand there waiting to do conversions one by one.
@@ -782,10 +785,10 @@ Look in file [**adc_common.c**](https://github.com/espressif/esp-idf/blob/master
 > adc2_spinlock should be acquired first, then adc2_wifi_lock or rtc_spinlock.
 
 
-- In order to use ADC2 for other functions, we have to **acquire complicated firmware locks and very difficult to do**
-- So, it's not advisable to use ADC2 with WiFi/BlueTooth (BT/BLE).
-- Use ADC1, and pins GPIO32-GPIO39
-- If somehow it's a must to use those pins serviced by ADC2 (**GPIO0, 2, 4, 12, 13, 14, 15, 25, 26 and 27**), use the **fix mentioned at the end** of [**ESP_WiFiManager Issue 39: Not able to read analog port when using the autoconnect example**](https://github.com/khoih-prog/ESP_WiFiManager/issues/39) to work with ESP32 WiFi/BlueTooth (BT/BLE).
+- In order to use `ADC2` for other functions, we have to **acquire complicated firmware locks and very difficult to do**
+- So, it's not advisable to use `ADC2` with WiFi/BlueTooth (BT/BLE).
+- Use `ADC1`, and pins **GPIO32-GPIO39**
+- If somehow it's a must to use those pins serviced by `ADC2` (**GPIO0, 2, 4, 12, 13, 14, 15, 25, 26 and 27**), use the **fix mentioned at the end** of [**ESP_WiFiManager Issue 39: Not able to read analog port when using the autoconnect example**](https://github.com/khoih-prog/ESP_WiFiManager/issues/39) to work with ESP32 WiFi/BlueTooth (BT/BLE)
 
 
 ---
@@ -885,18 +888,18 @@ For example, EthernetLarge library
 
 ```cpp
 #if defined(__IMXRT1062__)
-    // For Teensy 4.1/4.0
-    #if defined(ARDUINO_TEENSY41)
-      #define BOARD_TYPE      "TEENSY 4.1"
-      // Use true for NativeEthernet Library, false if using other Ethernet libraries
-      #define USE_NATIVE_ETHERNET     true
-      #define USE_QN_ETHERNET         false
-    #elif defined(ARDUINO_TEENSY40)
-      #define BOARD_TYPE      "TEENSY 4.0"
-    #else
-      #define BOARD_TYPE      "TEENSY 4.x"
-    #endif      
-  #elif defined(__MK66FX1M0__)
+  // For Teensy 4.1/4.0
+  #if defined(ARDUINO_TEENSY41)
+    #define BOARD_TYPE      "TEENSY 4.1"
+    // Use true for NativeEthernet Library, false if using other Ethernet libraries
+    #define USE_NATIVE_ETHERNET     true
+    #define USE_QN_ETHERNET         false
+  #elif defined(ARDUINO_TEENSY40)
+    #define BOARD_TYPE      "TEENSY 4.0"
+  #else
+    #define BOARD_TYPE      "TEENSY 4.x"
+  #endif      
+#elif defined(__MK66FX1M0__)
   ....
 ```
 
@@ -990,18 +993,17 @@ To avoid using the default but not-working Ethernet library of ESP8266, rename t
 These pins are tested OK with ESP8266 and W5x00
 
 ```cpp
-  // For ESP8266
-  // Pin                D0(GPIO16)    D1(GPIO5)    D2(GPIO4)    D3(GPIO0)    D4(GPIO2)    D8
-  // Ethernet           0                 X            X            X            X        0
-  // Ethernet2          X                 X            X            X            X        0
-  // Ethernet3          X                 X            X            X            X        0
-  // EthernetLarge      X                 X            X            X            X        0
-  // Ethernet_ESP8266   0                 0            0            0            0        0
-  // D2 is safe to used for Ethernet, Ethernet2, Ethernet3, EthernetLarge libs
-  // Must use library patch for Ethernet, EthernetLarge libraries
-  //Ethernet.setCsPin (USE_THIS_SS_PIN);
-  Ethernet.init (USE_THIS_SS_PIN);
-
+// For ESP8266
+// Pin                D0(GPIO16)    D1(GPIO5)    D2(GPIO4)    D3(GPIO0)    D4(GPIO2)    D8
+// Ethernet           0                 X            X            X            X        0
+// Ethernet2          X                 X            X            X            X        0
+// Ethernet3          X                 X            X            X            X        0
+// EthernetLarge      X                 X            X            X            X        0
+// Ethernet_ESP8266   0                 0            0            0            0        0
+// D2 is safe to used for Ethernet, Ethernet2, Ethernet3, EthernetLarge libs
+// Must use library patch for Ethernet, EthernetLarge libraries
+//Ethernet.setCsPin (USE_THIS_SS_PIN);
+Ethernet.init (USE_THIS_SS_PIN);
 ```
 
 #### 4. How to increase W5x00 TX/RX buffer
@@ -1015,13 +1017,13 @@ These pins are tested OK with ESP8266 and W5x00
 - For **Ethernet3** library only,  use as follows
 
 ```cpp
-  // Use  MAX_SOCK_NUM = 4 for 4K, 2 for 8K, 1 for 16K RX/TX buffer
-  #ifndef ETHERNET3_MAX_SOCK_NUM
-    #define ETHERNET3_MAX_SOCK_NUM      4
-  #endif
-  
-  Ethernet.setCsPin (USE_THIS_SS_PIN);
-  Ethernet.init (ETHERNET3_MAX_SOCK_NUM);
+// Use  MAX_SOCK_NUM = 4 for 4K, 2 for 8K, 1 for 16K RX/TX buffer
+#ifndef ETHERNET3_MAX_SOCK_NUM
+  #define ETHERNET3_MAX_SOCK_NUM      4
+#endif
+
+Ethernet.setCsPin (USE_THIS_SS_PIN);
+Ethernet.init (ETHERNET3_MAX_SOCK_NUM);
 ```
 
 ### 5. How to adjust sendContent_P() and send_P() buffer size
@@ -1378,7 +1380,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```cpp
 Starting FTPClient_DownloadFile on TEENSY 4.0 with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.4.0
+FTPCLIENT_GENERIC v1.5.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -1456,7 +1458,7 @@ The following is debug terminal output when running example [FTPClient_UploadIma
 
 ```cpp
 Starting FTPClient_UploadImage on Nano RP2040 Connect with WiFiNINA using WiFiNINA_Generic Library
-FTPCLIENT_GENERIC v1.4.0
+FTPCLIENT_GENERIC v1.5.0
 Connecting WiFi
 IP address: 192.168.2.117
 [FTP] Connecting to:  192.168.2.241
@@ -1523,7 +1525,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```cpp
 Starting FTPClient_DownloadFile on PORTENTA_H7_M7 with Ethernet using Portenta_Ethernet Library
-FTPCLIENT_GENERIC v1.4.0
+FTPCLIENT_GENERIC v1.5.0
 [EWS] ======== USE_PORTENTA_H7_ETHERNET ========
 Using mac index = 13
 Connected! IP address: 192.168.2.123
@@ -1622,7 +1624,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```cpp
 Starting FTPClient_UploadImage on MBED RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.4.0
+FTPCLIENT_GENERIC v1.5.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 19
@@ -1708,7 +1710,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```cpp
 Starting FTPClient_DownloadFile on NUCLEO_L552ZE_Q with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.4.0
+FTPCLIENT_GENERIC v1.5.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -1824,7 +1826,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```cpp
 Starting FTPClient_DownloadFile_STM32_LAN8742A on NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
-FTPCLIENT_GENERIC v1.4.0
+FTPCLIENT_GENERIC v1.5.0
 EthernetWebServer_STM32 v1.5.0
 Connected! IP address: 192.168.2.124
 [FTP] Connecting to:  192.168.2.241
@@ -1923,7 +1925,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```cpp
 Starting FTPClient_DownloadFile on ITSYBITSY_M4 with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.4.0
+FTPCLIENT_GENERIC v1.5.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 25
@@ -2038,7 +2040,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```cpp
 Starting FTPClient_UploadImage on NRF52840_FEATHER with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.4.0
+FTPCLIENT_GENERIC v1.5.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 25
@@ -2125,7 +2127,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```cpp
 Starting FTPClient_DownloadFile on SAMD_NANO_33_IOT with WiFiNINA using WiFiNINA_Generic Library
-FTPCLIENT_GENERIC v1.4.0
+FTPCLIENT_GENERIC v1.5.0
 Connecting WiFi
 IP address: 192.168.2.118
 [FTP] Connecting to:  192.168.2.241
@@ -2225,7 +2227,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```cpp
 Starting FTPClient_DownloadFile on ESP32S3_DEV with ESP WiFi using WiFi Library
-FTPCLIENT_GENERIC v1.4.0
+FTPCLIENT_GENERIC v1.5.0
 Connecting WiFi
 .........
 IP address: 192.168.2.115
@@ -2324,7 +2326,7 @@ The following is debug terminal output when running example [FTPClient_UploadIma
 
 ```cpp
 Starting FTPClient_UploadImage on TEENSY 4.1 with NativeEthernet
-FTPCLIENT_GENERIC v1.4.0
+FTPCLIENT_GENERIC v1.5.0
 [EWS] ======== USE_NATIVE_ETHERNET ========
 [EWS] =====================================
 Using mac index = 6
@@ -2381,7 +2383,7 @@ The following is debug terminal output and directory listing after running examp
 
 ```cpp
 Starting FTPClient_UploadImage on TEENSY 4.1 with QNEthernet
-FTPCLIENT_GENERIC v1.4.0
+FTPCLIENT_GENERIC v1.5.0
 [EWS] =========== USE_QN_ETHERNET ===========
 Initialize Ethernet using static IP => IP Address = 192.168.2.222
 [FTP] Connecting to:  192.168.2.112
@@ -2451,7 +2453,7 @@ The following is debug terminal output when running example [FTPClient_DownloadF
 
 ```cpp
 Starting FTPClient_DownloadFile on ESP32_DEV with W5x00 using Ethernet_Generic Library on SPI0/SPI
-FTPCLIENT_GENERIC v1.4.0
+FTPCLIENT_GENERIC v1.5.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 23
@@ -2522,8 +2524,72 @@ helloworld.txt
 octocat.jpg
 CloseConnection
 [FTP] Connection closed
-
 ```
+
+
+---
+
+#### 14. FTPClient_DownloadFile on RASPBERRY_PI_PICO_W with RP2040W CYW43439 WiFi
+
+The following is debug terminal output when running example [FTPClient_DownloadFile](examples/WiFi/FTPClient_DownloadFile) on `RASPBERRY_PI_PICO_W` with CYW43439 WiFi using `arduino-pico` core
+
+
+```cpp
+Starting FTPClient_DownloadFile on RASPBERRY_PI_PICO_W with RP2040W CYW43439 WiFi
+FTPCLIENT_GENERIC v1.5.0
+Connecting WiFi, SSID = HueNet
+IP address: 192.168.2.128
+[FTP] Connecting to:  192.168.2.112
+[FTP] Command connected
+[FTP] Send USER =  ftp_test
+[FTP] Send PASSWORD =  ftp_test
+[FTP] Send CWD
+Creating new file helloworld.txt
+[FTP] Send TYPE Type A
+[FTP] Send PASV
+[FTP] outBuf = 227 Entering Passive Mode (192,168,2,112,151,205).
+[FTP] Data port:  38861
+[FTP] _dataAddress:  192.168.2.112 , Data port:  38861
+[FTP] Data connection established
+[FTP] Send STOR
+[FTP] Write File
+[FTP] Close File
+[FTP] Send TYPE Type A
+[FTP] Send PASV
+[FTP] outBuf = 227 Entering Passive Mode (192,168,2,112,230,216).
+[FTP] Data port:  59096
+[FTP] _dataAddress:  192.168.2.112 , Data port:  59096
+[FTP] Data connection established
+[FTP] Send APPE
+[FTP] Write File
+[FTP] Close File
+[FTP] Send TYPE Type A
+[FTP] Send PASV
+[FTP] outBuf = 227 Entering Passive Mode (192,168,2,112,97,129).
+[FTP] Data port:  24961
+[FTP] _dataAddress:  192.168.2.112 , Data port:  24961
+[FTP] Data connection established
+[FTP] Send RETR
+[FTP] Result:  150 Opening ASCII mode data connection for helloworld.txt (75 bytes).
+226 Transfer complete.
+The file content is: Hi, I'm a new ASCII file created @ millis = 9205
+Added text @ millis = 9755
+[FTP] Send TYPE Type A
+[FTP] Send PASV
+[FTP] outBuf = 227 Entering Passive Mode (192,168,2,112,215,148).
+[FTP] Data port:  55188
+[FTP] _dataAddress:  192.168.2.112 , Data port:  55188
+[FTP] Data connection established
+[FTP] Send LIST
+[FTP] Result:  150 Here comes the directory listing.
+226 Directory send OK.
+hello_world.txt
+helloworld.txt
+octocat.jpg
+CloseConnection
+[FTP] Connection closed
+```
+
 ---
 ---
 
@@ -2596,7 +2662,7 @@ Submit issues to: [FTPClient_Generic issues](https://github.com/khoih-prog/FTPCl
 30. Fix uploading issue of large files for **WiFi, QNEthernet**
 31. Add support to ESP32 using Ethernet `W5x00` or `ENC28J60` with [`Ethernet_Generic`](https://github.com/khoih-prog/Ethernet_Generic) or [`EthernetENC`](https://github.com/jandrassy/EthernetENC) library
 32. Add astyle using `allman` style. Restyle the library
-
+33. Add support to `RP2040W` with `CYW43439` WiFi using `arduino-pico` core
 
 ---
 ---
@@ -2607,11 +2673,13 @@ Many thanks for everyone for bug reporting, new feature suggesting, testing and 
 
 1. Based on and modified from the [Leonardo Bispo's ESP32_FTPClient](https://github.com/ldab/ESP32_FTPClient)
 2. Thanks to [KvarTechnologies](https://github.com/KvarTechnologies) to report issue [unable to compile to DOIT esp32 DEV KIT #4](https://github.com/khoih-prog/FTPClient_Generic/issues/4) leading to the new version v1.4.0 to add support to ESP32 using Ethernet `W5x00` or `ENC28J60`
+3. Thanks to [Mirko](https://github.com/MirkoAusFFM) to make PR [Update FTPClient_Generic_Impl.h #7](https://github.com/khoih-prog/FTPClient_Generic/issues/7)
 
 <table>
   <tr>
     <td align="center"><a href="https://github.com/ldab"><img src="https://github.com/ldab.png" width="100px;" alt="ldab"/><br /><sub><b>⭐️ Leonardo Bispo</b></sub></a><br /></td>
     <td align="center"><a href="https://github.com/KvarTechnologies"><img src="https://github.com/KvarTechnologies.png" width="100px;" alt="KvarTechnologies"/><br /><sub><b>KvarTechnologies</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/MirkoAusFFM"><img src="https://github.com/MirkoAusFFM.png" width="100px;" alt="MirkoAusFFM"/><br /><sub><b>Mirko</b></sub></a><br /></td>
   </tr> 
 </table>
 
@@ -2620,6 +2688,7 @@ Many thanks for everyone for bug reporting, new feature suggesting, testing and 
 ### Contributing
 
 If you want to contribute to this project:
+
 - Report bugs and errors
 - Ask for enhancements
 - Create issues and pull requests

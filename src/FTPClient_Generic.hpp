@@ -9,8 +9,8 @@
     
   Built by Khoi Hoang https://github.com/khoih-prog/FTPClient_Generic
   
-  Version: 1.4.0
-    
+  Version: 1.5.0
+
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
   1.0.0   K Hoang      11/05/2022 Initial porting and coding to support many more boards, using WiFi or Ethernet
@@ -19,6 +19,7 @@
   1.2.1   K Hoang      14/05/2022 Auto detect server response type in PASV mode
   1.3.0   K Hoang      16/05/2022 Fix uploading issue of large files for WiFi, QNEthernet
   1.4.0   K Hoang      05/11/2022 Add support to ESP32/ESP8266 using Ethernet W5x00 or ENC28J60
+  1.5.0   K Hoang      20/01/2023 Add support to RP2040W using `arduino-pico` core
  *****************************************************************************************************************************/
 
 #pragma once
