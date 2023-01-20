@@ -113,7 +113,7 @@
   * [11. FTPClient_UploadImage on TEENSY 4.1 with NativeEthernet](#11-FTPClient_UploadImage-on-TEENSY-41-with-NativeEthernet)
   * [12. FTPClient_UploadImage on TEENSY 4.1 with QNEthernet](#12-FTPClient_UploadImage-on-TEENSY-41-with-QNEthernet)
   * [13. FTPClient_DownloadFile on ESP32_DEV with W5x00 using Ethernet_Generic Library](#13-FTPClient_DownloadFile-on-ESP32_DEV-with-W5x00-using-Ethernet_Generic-Library)
-  * [14. FTPClient_DownloadFile on RASPBERRY_PI_PICO_W with RP2040W CYW43439 WiFi](#14-FTPClient_DownloadFile-on-RASPBERRY_PI_PICO_W-with-RP2040W-CYW43439 WiFi)
+  * [14. FTPClient_DownloadFile on RASPBERRY_PI_PICO_W with RP2040W CYW43439 WiFi](#14-FTPClient_DownloadFile-on-RASPBERRY_PI_PICO_W-with-RP2040W-CYW43439-WiFi)
 * [Debug](#debug)
 * [Troubleshooting](#troubleshooting)
 * [Issues](#issues)
