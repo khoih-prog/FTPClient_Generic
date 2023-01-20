@@ -20,69 +20,79 @@
 #define _WIFININA_LOGLEVEL_         3
 #define _FTP_LOGLEVEL_              4
 
+//////////////////////////////////
+
 #if ( defined(ARDUINO_PORTENTA_H7_M7) || defined(ARDUINO_PORTENTA_H7_M4) )
 
-#if defined(BOARD_NAME)
-  #undef BOARD_NAME
-#endif
-
-#if defined(CORE_CM7)
-  #warning Using Portenta H7 M7 core
-  #define BOARD_NAME            "PORTENTA_H7_M7"
-#else
-  #warning Using Portenta H7 M4 core
-  #define BOARD_NAME            "PORTENTA_H7_M4"
-#endif
-
-#define USE_WIFI_PORTENTA_H7  true
-
-#define USE_WIFI_NINA         false
-
-// To use the default WiFi library here
-#define USE_WIFI_CUSTOM       false
+  #if defined(BOARD_NAME)
+    #undef BOARD_NAME
+  #endif
+  
+  #if defined(CORE_CM7)
+    #warning Using Portenta H7 M7 core
+    #define BOARD_NAME            "PORTENTA_H7_M7"
+  #else
+    #warning Using Portenta H7 M4 core
+    #define BOARD_NAME            "PORTENTA_H7_M4"
+  #endif
+  
+  #define USE_WIFI_PORTENTA_H7  true
+  
+  #define USE_WIFI_NINA         false
+  
+  // To use the default WiFi library here
+  #define USE_WIFI_CUSTOM       false
 
 #elif (ESP32)
 
-#define USE_WIFI_NINA         false
-
-// To use the default WiFi library here
-#define USE_WIFI_CUSTOM       false
+  #define USE_WIFI_NINA         false
+  
+  // To use the default WiFi library here
+  #define USE_WIFI_CUSTOM       false
 
 #elif (ESP8266)
 
-#define USE_WIFI_NINA         false
-
-// To use the default WiFi library here
-#define USE_WIFI_CUSTOM       true
+  #define USE_WIFI_NINA         false
+  
+  // To use the default WiFi library here
+  #define USE_WIFI_CUSTOM       true
 
 #elif ( defined(ARDUINO_SAMD_MKR1000)  || defined(ARDUINO_SAMD_MKRWIFI1010) )
 
-#define USE_WIFI_NINA         false
-#define USE_WIFI101           true
-#define USE_WIFI_CUSTOM       false
+  #define USE_WIFI_NINA         false
+  #define USE_WIFI101           true
+  #define USE_WIFI_CUSTOM       false
 
 #elif ( defined(ARDUINO_NANO_RP2040_CONNECT) || defined(ARDUINO_SAMD_NANO_33_IOT) )
 
-#define USE_WIFI_NINA         true
-#define USE_WIFI101           false
-#define USE_WIFI_CUSTOM       false
+  #define USE_WIFI_NINA         true
+  #define USE_WIFI101           false
+  #define USE_WIFI_CUSTOM       false
+
+#elif defined(ARDUINO_RASPBERRY_PI_PICO_W)
+
+  #define USE_WIFI_NINA         false
+  #define USE_WIFI101           false
+  #define USE_WIFI_CUSTOM       false
 
 #elif ( defined(__AVR_ATmega4809__) || defined(ARDUINO_AVR_UNO_WIFI_REV2) || defined(ARDUINO_AVR_NANO_EVERY) || \
       defined(ARDUINO_AVR_ATmega4809) || defined(ARDUINO_AVR_ATmega4808) || defined(ARDUINO_AVR_ATmega3209) || \
       defined(ARDUINO_AVR_ATmega3208) || defined(ARDUINO_AVR_ATmega1609) || defined(ARDUINO_AVR_ATmega1608) || \
       defined(ARDUINO_AVR_ATmega809) || defined(ARDUINO_AVR_ATmega808) )
 
-#error Not supported. Lack of memory for megaAVR
-
+  #error Not supported. Lack of memory for megaAVR
+  
 #else
 
-#define USE_WIFI_NINA         true
-#define USE_WIFI101           false
-
-// If not USE_WIFI_NINA, you can USE_WIFI_CUSTOM, then include the custom WiFi library here
-#define USE_WIFI_CUSTOM       false
+  #define USE_WIFI_NINA         true
+  #define USE_WIFI101           false
+  
+  // If not USE_WIFI_NINA, you can USE_WIFI_CUSTOM, then include the custom WiFi library here
+  #define USE_WIFI_CUSTOM       false
 
 #endif
+
+//////////////////////////////////
 
 #if USE_WIFI_NINA
 
@@ -99,10 +109,14 @@
   #endif
 #endif
 
+//////////////////////////////////
+
 #if WIFI_USING_ESP_AT
   #define EspSerial       Serial1
   #error WIFI_USING_ESP_AT is not supported for AdvancedWebServer
 #endif
+
+//////////////////////////////////
 
 #if USE_WIFI_PORTENTA_H7
   #warning Using Portenta H7 WiFi
@@ -116,6 +130,9 @@
 #elif (ESP32 || ESP8266)
   #warning Using ESP WiFi with WiFi Library
   #define SHIELD_TYPE           "ESP WiFi using WiFi Library"
+#elif defined(ARDUINO_RASPBERRY_PI_PICO_W)
+  #warning Using RP2040W CYW43439 WiFi
+  #define SHIELD_TYPE           "RP2040W CYW43439 WiFi"  
 #elif USE_WIFI_CUSTOM
   #warning Using Custom WiFi using Custom WiFi Library
   #define SHIELD_TYPE           "Custom WiFi using Custom WiFi Library"
@@ -123,13 +140,15 @@
   #define SHIELD_TYPE           "Unknown WiFi shield/Library"
 #endif
 
+//////////////////////////////////
+
 #if ( defined(NRF52840_FEATHER) || defined(NRF52832_FEATHER) || defined(NRF52_SERIES) || defined(ARDUINO_NRF52_ADAFRUIT) || \
         defined(NRF52840_FEATHER_SENSE) || defined(NRF52840_ITSYBITSY) || defined(NRF52840_CIRCUITPLAY) || defined(NRF52840_CLUE) || \
         defined(NRF52840_METRO) || defined(NRF52840_PCA10056) || defined(PARTICLE_XENON) || defined(NINA_B302_ublox) || defined(NINA_B112_ublox) )
-#if defined(WIFI_USE_NRF528XX)
-  #undef WIFI_USE_NRF528XX
-#endif
-#define WIFI_USE_NRF528XX          true
+  #if defined(WIFI_USE_NRF528XX)
+    #undef WIFI_USE_NRF528XX
+  #endif
+  #define WIFI_USE_NRF528XX          true
 #endif
 
 #if    ( defined(ARDUINO_SAMD_ZERO) || defined(ARDUINO_SAMD_MKR1000) || defined(ARDUINO_SAMD_MKRWIFI1010) \
@@ -137,10 +156,10 @@
       || defined(ARDUINO_SAMD_MKRGSM1400) || defined(ARDUINO_SAMD_MKRNB1500) || defined(ARDUINO_SAMD_MKRVIDOR4000) || defined(__SAMD21G18A__) \
       || defined(ARDUINO_SAMD_CIRCUITPLAYGROUND_EXPRESS) || defined(__SAMD21E18A__) || defined(__SAMD51__) || defined(__SAMD51J20A__) || defined(__SAMD51J19A__) \
       || defined(__SAMD51G19A__) || defined(__SAMD51P19A__) || defined(__SAMD21G18A__) )
-#if defined(WIFI_USE_SAMD)
-  #undef WIFI_USE_SAMD
-#endif
-#define WIFI_USE_SAMD      true
+  #if defined(WIFI_USE_SAMD)
+    #undef WIFI_USE_SAMD
+  #endif
+  #define WIFI_USE_SAMD      true
 #endif
 
 #if ( defined(ARDUINO_SAM_DUE) || defined(__SAM3X8E__) )
@@ -154,10 +173,10 @@
 #if ( defined(STM32F0) || defined(STM32F1) || defined(STM32F2) || defined(STM32F3)  ||defined(STM32F4) || defined(STM32F7) || \
        defined(STM32L0) || defined(STM32L1) || defined(STM32L4) || defined(STM32H7)  ||defined(STM32G0) || defined(STM32G4) || \
        defined(STM32WB) || defined(STM32MP1) ) && ! ( defined(ARDUINO_PORTENTA_H7_M7) || defined(ARDUINO_PORTENTA_H7_M4) )
-#if defined(WIFI_USE_STM32)
-  #undef WIFI_USE_STM32
-#endif
-#define WIFI_USE_STM32      true
+  #if defined(WIFI_USE_STM32)
+    #undef WIFI_USE_STM32
+  #endif
+  #define WIFI_USE_STM32      true
 #endif
 
 #ifdef CORE_TEENSY
