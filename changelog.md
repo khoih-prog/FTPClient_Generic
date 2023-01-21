@@ -17,6 +17,7 @@
 
 
 * [Changelog](#changelog)
+  * [Releases v1.6.0](#releases-v160)
   * [Releases v1.5.0](#releases-v150)
   * [Releases v1.4.0](#releases-v140)
   * [Releases v1.3.0](#releases-v130)
@@ -29,6 +30,10 @@
 ---
 
 ## Changelog
+
+#### Releases v1.6.0
+
+1. Add support to WIZNet `W6100` using [`Ethernet_Generic`](https://github.com/khoih-prog/Ethernet_Generic) library
 
 #### Releases v1.5.0
 
