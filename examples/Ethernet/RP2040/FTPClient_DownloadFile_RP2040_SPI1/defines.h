@@ -113,9 +113,9 @@
 #include "Ethernet_Generic.h"
 
 #if defined(ETHERNET_LARGE_BUFFERS)
-  #define SHIELD_TYPE           "W5x00 using Ethernet_Generic Library with Large Buffer"
+  #define SHIELD_TYPE           "W5x00/W6100 using Ethernet_Generic Library with Large Buffer"
 #else
-  #define SHIELD_TYPE           "W5x00 using Ethernet_Generic Library"
+  #define SHIELD_TYPE           "W5x00/W6100 using Ethernet_Generic Library"
 #endif
 
 #include <EthernetWebServer.h>

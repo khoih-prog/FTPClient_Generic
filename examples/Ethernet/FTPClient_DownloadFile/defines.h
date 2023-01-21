@@ -347,7 +347,7 @@
 #include <SPI.h>
 
 // Use true  for ENC28J60 and UIPEthernet library (https://github.com/UIPEthernet/UIPEthernet)
-// Use false for W5x00 and Ethernetx library      (https://www.arduino.cc/en/Reference/Ethernet)
+// Use false for W5x00/W6100 and Ethernetx library      (https://www.arduino.cc/en/Reference/Ethernet)
 
 #define USE_UIP_ETHERNET   false
 
@@ -361,9 +361,9 @@
 //#define USE_THIS_SS_PIN   22  //21  //5 //4 //2 //15
 
 // Only one if the following to be true
-#define USE_ETHERNET_GENERIC  false
+#define USE_ETHERNET_GENERIC  true
 #define USE_ETHERNET_ESP8266  false
-#define USE_ETHERNET_ENC      true
+#define USE_ETHERNET_ENC      false
 #define USE_CUSTOM_ETHERNET   false
 
 ////////////////////////////
@@ -388,9 +388,9 @@
 #elif USE_ETHERNET_GENERIC
 
   #if USING_SPI2
-    #define SHIELD_TYPE           "W5x00 using Ethernet_Generic Library on SPI1"
+    #define SHIELD_TYPE           "W5x00/W6100 using Ethernet_Generic Library on SPI1"
   #else
-    #define SHIELD_TYPE           "W5x00 using Ethernet_Generic Library on SPI0/SPI"
+    #define SHIELD_TYPE           "W5x00/W6100 using Ethernet_Generic Library on SPI0/SPI"
   #endif
 
   #define ETHERNET_LARGE_BUFFERS
@@ -420,12 +420,12 @@
   #define USE_ETHERNET_GENERIC   true
   #include "Ethernet_Generic.h"
   #warning Using default Ethernet_Generic lib
-  #define SHIELD_TYPE           "W5x00 using default Ethernet_Generic Library"
+  #define SHIELD_TYPE           "W5x00/W6100 using default Ethernet_Generic Library"
 #endif
 
 // Ethernet_Shield_W5200, EtherCard, EtherSia not supported
 // Select just 1 of the following #include if uncomment #define USE_CUSTOM_ETHERNET
-// Otherwise, standard Ethernet library will be used for W5x00
+// Otherwise, standard Ethernet library will be used for W5x00/W6100
 
 ////////////////////////////
 
